@@ -38,6 +38,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 body {
     background: #618264 !important;
+    overflow-x: hidden !important;
 }
 
 .float__right {
@@ -94,6 +95,51 @@ body {
     padding: 14px 16px !important;
     text-decoration: none !important;
     -webkit-text-fill-color : #618264 !important;
+}
+
+.animated-text {
+    text-align: center !important;
+    animation: slide-in 2s ease-in-out 1;
+}
+
+.animated-hr {
+    width: 100% !important;
+    margin: 0 auto !important;
+    border: 1px solid #D0E7D2 !important;
+    animation: slide-in-2 2s linear infinite;
+}
+
+@keyframes slide-in-2 {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.animation-overview .box {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    margin: 1.5rem;
+}
+
+.header__text {
+    font-size: 32px !important;
+    font-weight: bolder !important;
+    text-align: center !important;
+    padding: 8px 12px !important;
 }
 
 .navbar__container {

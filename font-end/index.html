@@ -7,10 +7,18 @@
     <title>SurveySafari</title>
 
     <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/shoelace-autoloader.js"></script>
+    
 </head>
 <body>
     <header class="header" id="header">
 
+        <br>
+        <hr class="animated-hr">
+        <h1 class="animated-text" style="font-family: jersey-sp; font-weight: bolder; font-size: 64px;">SurveySafari</h1>
+        <hr class="animated-hr">
+        <p class="header__text" id="typer"></p>
     </header>
     <div class="navbar">
         <ul class="navbar__container">
@@ -30,7 +38,7 @@
         </ul>
     </div>
     <!--grid-3x3-gap-->
-    <!--<h1>Hello</h1>
+    <h1>Hello</h1>
     <h3>Sticky grid-3x3-gap Navigation Bar Example</h3>
     <p>The navbar will <strong>stick</strong> to the top when you reach its scroll position.</p>
     <p><strong>Note:</strong> Internet Explorer do not support sticky positioning and Safari requires a -webkit- prefix.</p>
@@ -55,6 +63,29 @@
     <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
     <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
     <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>-->
+    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var text = "Everyone Wins: Fun for Respondents, Quality Data for Creators";
+            var index = 0;
+            var speed = 100; // typing speed in milliseconds
+            var h1Element = document.querySelector('.animated-text');
+            var animationDuration = parseFloat(getComputedStyle(h1Element).animationDuration) * 1000;
+            
+            function typeText() {
+                if (index < text.length) {
+                    document.getElementById("typer").textContent += text.charAt(index);
+                    index++;
+                    setTimeout(typeText, speed);
+                }
+            }
+
+            setTimeout(function() {
+                // Call the function to play the typer animation
+                typeText();
+            }, animationDuration);
+        });
+
+    </script>
 </body>
 </html>
