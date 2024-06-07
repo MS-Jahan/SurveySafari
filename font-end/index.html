@@ -12,58 +12,127 @@
     
 </head>
 <body>
-    <header class="header" id="header">
+    <sl-drawer label="Drawer" placement="top" class="drawer-placement-top">
+        This drawer slides in from the top.
+        <sl-button slot="footer" variant="primary">Close</sl-button>
+    </sl-drawer>
+    <main>
+        <header class="header" id="header">
+            <hr class="animated-hr">
+            <h1 class="animated-text" style="font-family: jersey-sp; font-weight: bolder; font-size: 64px;">SurveySafari</h1>
+            <hr class="animated-hr">
+            <p class="header__text" id="typer"></p>
+        </header>
+    
+        <div class="navbar">
+            <ul class="navbar__container">
+                <li class="brand__text"><a href="#header">SurveySafari</a></li>
+                <li class="navbar__container__item"><a href="#features">Features</a></li>
+                <li class="navbar__container__item"><a href="#security">Security</a></li>
+                <li class="navbar__container__item active__item"><a href="#pricing">Pricing</a></li>
+                <div class="humburger float__right" id="humburger">
+                    <button class="nav_drawer_active">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </button>
+                </div>
+                <li class="navbar__container__item float__right"><a href="about.asp">Log in</a></li>
+                <li class="navbar__container__item float__right"><a href="about.asp">Sign up</a></li>
+            </ul>
+        </div>
+    
+        <section id="features" class="index__section">
+            <h2>Features</h2>
+            <p>Here are some of the amazing features of SurveySafari:</p>
+            <ul>
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+            </ul>
+        </section>
+    
+        <section id="security" class="index__section">
+            <h2>Security</h2>
+            <p>Your data is safe and secure with SurveySafari. We take the following measures to protect your information:</p>
+            <ul>
+                <li>Security measure 1</li>
+                <li>Security measure 2</li>
+                <li>Security measure 3</li>
+            </ul>
+        </section>
+    
+        <section id="pricing" class="index__section">
+            <h2>Pricing</h2>
+            <p>Choose the plan that suits your needs:</p>
+            <ul>
+                <li>Basic Plan</li>
+                <li>Standard Plan</li>
+                <li>Premium Plan</li>
+            </ul>
+        </section>
+    </main>
+    <script>
+        const drawer = document.querySelector('.drawer-placement-top');
+        const openButton = document.querySelector('.humburger');
+        const closeButton = drawer.querySelector('sl-button[variant="primary"]');
+      
+        openButton.addEventListener('click', () => drawer.show());
+        closeButton.addEventListener('click', () => drawer.hide());
+    </script>
+    <script>
+        // Smooth scroll to section
+        document.querySelectorAll('.navbar__container__item a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                window.scrollTo({
+                    top: target.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
 
-        <br>
-        <hr class="animated-hr">
-        <h1 class="animated-text" style="font-family: jersey-sp; font-weight: bolder; font-size: 64px;">SurveySafari</h1>
-        <hr class="animated-hr">
-        <p class="header__text" id="typer"></p>
-    </header>
-    <div class="navbar">
-        <ul class="navbar__container">
-            <li class="brand__text"><a href="#">SurveySafari</a></li>
-            <li class="navbar__container__item"><a href="default.asp">Overview</a></li>
-            <li class="navbar__container__item"><a href="news.asp">Features</a></li>
-            <li class="navbar__container__item active__item"><a href="contact.asp">Pricing</a></li>
-            <div class="humburger float__right">
-                <button class="nav_drawer_active">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </button>
-            </div>
-            <li class="navbar__container__item float__right"><a href="about.asp">Log in</a></li>
-            <li class="navbar__container__item float__right"><a href="about.asp">Sign up</a></li>
-        </ul>
-    </div>
-    <!--grid-3x3-gap-->
-    <h1>Hello</h1>
-    <h3>Sticky grid-3x3-gap Navigation Bar Example</h3>
-    <p>The navbar will <strong>stick</strong> to the top when you reach its scroll position.</p>
-    <p><strong>Note:</strong> Internet Explorer do not support sticky positioning and Safari requires a -webkit- prefix.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-    <p>Some text to enable scrolling. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        // Add active class to clicked nav item
+        document.querySelectorAll('.navbar__container__item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelector('.navbar__container__item.active__item').classList.remove('active__item');
+                this.classList.add('active__item');
+            });
+        });
+
+        document.querySelector('.brand__text a').addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            window.scrollTo({
+                top: target.offsetTop,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add active class to nav item when scrolling to section
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.index__section');
+            const navbarItems = document.querySelectorAll('.navbar__container__item');
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (window.pageYOffset >= sectionTop - sectionHeight / 2) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navbarItems.forEach(item => {
+                item.classList.remove('active__item');
+                if (item.querySelector('a').getAttribute('href').substring(1) === currentSection) {
+                    item.classList.add('active__item');
+                }
+            });
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var text = "Everyone Wins: Fun for Respondents, Quality Data for Creators";
