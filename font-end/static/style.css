@@ -43,7 +43,6 @@ body {
 
 .index__section {
     height: 85vh;
-    background-color: #79AC78;
     border-radius: 50px;
     margin: 5%;
     padding: 5%;
@@ -108,9 +107,11 @@ body {
 }
 
 .animated-hr {
+    background-color: #D0E7D2  !important;
+    height: 4px !important;
     width: 100% !important;
     margin: 0 auto !important;
-    border: 1px solid #D0E7D2 !important;
+    border: 1px solid #D0E7D2  !important;
     animation: slide-in-2 2s linear infinite;
 }
 
@@ -133,7 +134,7 @@ body {
 }
 
 .header__text {
-    font-size: 32px !important;
+    font-size: 28px !important;
     font-weight: bolder !important;
     text-align: center !important;
     padding: 8px 12px !important;
