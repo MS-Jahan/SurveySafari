@@ -1,0 +1,78 @@
+sl-button::part(base) {
+    background-color: #79AC78 !important; /* Background color */
+    color: #D0E7D2 !important; /* Text color */
+    border-radius: 50px !important; /* Border radius */
+    border: 2px solid #D0E7D2 !important; /* Border color */
+    font-family: "silkscreen" !important; /* Font family */
+    font-size: 20px !important; /* Font size */
+}
+
+sl-button::part(base):hover {
+    background-color: #618264 !important; /* Background color on hover */
+    color: #fff !important; /* Text color on hover */
+    border: 2px solid #fff !important; /* Border color on hover */
+}
+
+sl-button::part(base):active {
+    background-color: #495C51 !important; /* Background color on active */
+    color: #fff !important; /* Text color on active */
+    border: 2px solid #fff !important; /* Border color on active */
+}
+
+sl-drawer::part(panel) {
+    background-color: #495C51 !important; /* Text color */
+    font-family: "silkscreen" !important; /* Font family */
+    font-size: 20px !important; /* Font size */
+}
+
+/* Custom styles for Shoelace drawer close button */
+sl-drawer::part(close-button) {
+    color: #D0E7D2 !important; /* Text color */
+    font-size: 20px !important; /* Font size */
+    padding: 5px 10px !important; /* Padding */
+}
+
+sl-drawer::part(close-button):hover {
+    color: #618264 !important; /* Background color on hover */
+}
+
+sl-drawer::part(close-button):active {
+    background-color: #495C51 !important; /* Background color on active */
+    color: #fff !important; /* Text color on active */
+}
+
+.card-header {
+    width: 320px;
+    max-width: auto;
+    -webkit-text-fill-color: #79AC78;
+}
+
+.card-header::part(header) {
+    background-color: #D0E7D2;
+}
+
+.card-header::part(body) {
+    height: 100px;
+    background-color: #D0E7D2;
+}
+
+.card-header [slot='header'] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.card-header h3 {
+    margin: 0;
+}
+
+.card-header sl-icon-button::part(base) {
+    color: #618264 !important;
+    font-size: var(--sl-font-size-large);
+}
+
+.card-header sl-icon-button::part(base):hover {
+    color: #79AC78 !important;
+}
