@@ -12,12 +12,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listener for mouseover event
     botcharButton.addEventListener('mouseover', () => {
+        setTextToBotchar("Hello, I'm Botchar. How can I help you today?");
         // Change the image source when hovering over the button
         botcharImg.src = 'static/assets/botchar2.png';
     });
 
     // Add event listener for mouseout event
     botcharButton.addEventListener('mouseout', () => {
+        setTextToBotchar("...");
         // Change the image source back to the original when not hovering
         botcharImg.src = 'static/assets/botchar1.png';
     });
@@ -33,12 +35,18 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+let currentActive = null;
 window.setTextToBotchar = function(text) {
     const botcharText = document.getElementById('botchar-text');
     botcharText.textContent = '';
 
     let index = 0;
     const typingEffect = setInterval(() => {
+        if (currentActive !== typingEffect && currentActive !== null) {
+            clearInterval(typingEffect);
+            return;
+        }
+
         botcharText.textContent += text[index];
         index++;
 
@@ -49,4 +57,6 @@ window.setTextToBotchar = function(text) {
             }
         }
     }, 50);
+    
+    currentActive = typingEffect;
 }
