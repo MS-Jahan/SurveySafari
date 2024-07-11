@@ -59,7 +59,7 @@ transition: 0.4s, background-position 0s;
 color: #fff;
 }
 
-img {
+.img-hover {
     --b: 8px; /* border thickness */
     --c: #0000 25%, #79AC78 0; /* define the color here */
     padding: 10px;
@@ -74,7 +74,7 @@ img {
     cursor: pointer;
 }
   
-img:hover {
+.img-hover:hover {
     background-size: 51% 51%;
 }
 
