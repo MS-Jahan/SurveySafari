@@ -127,3 +127,8 @@ color: #fff;
     background-color: #D0E7D2 !important; /* Add your desired background color */
     /* Add any other styles you want to apply on hover */
 }
+
+.tag {
+    border-radius: 10px;
+    background-color: #618264;
+}
