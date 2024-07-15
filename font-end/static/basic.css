@@ -137,3 +137,44 @@ color: #fff;
     border-radius: 10px;
     background-color: #79AC78;
 }
+
+.rank-card {
+    background-color: #79AC78;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rank-card.rank {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.rank-card.username {
+    font-size: 18px;
+}
+
+.rank-table {
+    background-color: #79AC78;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: x-large;
+}
+
+.rank-table th {
+    background-color: #198754;
+}
+
+.rank-table tr {
+    background-color: #79AC78;
+}
+
+.rank-table td {
+    background-color: #79AC78;
+}
+
+.nav-link.active {
+    background-color: #198754 !important;
+    border: none !important;
+}
