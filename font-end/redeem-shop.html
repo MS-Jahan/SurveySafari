@@ -279,6 +279,31 @@
         </div>
     </main>
 
+    <!-- Redeem Confirmation Modal -->
+    <div class="modal fade" id="redeemConfirmationModal" tabindex="-1" aria-labelledby="redeemConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #79AC78;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="redeemConfirmationModalLabel">Redeem Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="" id="redeemProductImage" class="img-fluid mb-3" alt="Product Image" style="max-height: 256px;">
+                        <h5 id="redeemProductTitle"></h5>
+                        <p>Price: <i class="bi bi-coin"></i> <span id="redeemProductPrice"></span></p>
+                        <p>Your remaining coins: <i class="bi bi-coin"></i> <span id="remainingCoins"></span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="confirmRedeemButton">Confirm Redeem</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <footer class="d-flex flex-wrap justify-content-between py-4 border-top">
         <div class="col-md-4 d-flex">
           <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
@@ -296,6 +321,51 @@
 
     <!-- <script src="static/js/botchar.js"></script>
     <script src="static/js/sl-cutom.js"></script> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Assuming userCoins is the number of coins the user currently has
+            let userCoins = 500; // Example value, replace this with the actual value from your server or application state
+    
+            // Add event listener to all redeem buttons
+            const redeemButtons = document.querySelectorAll('.btn-success');
+            redeemButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const itemCard = this.closest('.item-card');
+                    const itemTitle = itemCard.querySelector('.card-title').innerText;
+                    const itemPrice = parseInt(itemCard.getAttribute('data-price'), 10);
+                    const itemImageSrc = itemCard.querySelector('.card-img-top').getAttribute('src');
+    
+                    // Set the product details in the modal
+                    document.getElementById('redeemProductTitle').innerText = itemTitle;
+                    document.getElementById('redeemProductPrice').innerText = itemPrice;
+                    document.getElementById('redeemProductImage').setAttribute('src', itemImageSrc);
+    
+                    // Calculate remaining coins after redeem
+                    const remainingCoins = userCoins - itemPrice;
+                    document.getElementById('remainingCoins').innerText = remainingCoins;
+    
+                    // Show the modal
+                    const redeemModal = new bootstrap.Modal(document.getElementById('redeemConfirmationModal'));
+                    redeemModal.show();
+    
+                    // Handle confirm redeem button click
+                    document.getElementById('confirmRedeemButton').addEventListener('click', function () {
+                        if (remainingCoins >= 0) {
+                            // Update user coins
+                            userCoins = remainingCoins;
+                            alert('Redemption successful!');
+                        } else {
+                            alert('You do not have enough coins to redeem this item.');
+                        }
+    
+                        // Hide the modal
+                        redeemModal.hide();
+                    }, { once: true }); // Ensure the event listener is only added once
+                });
+            });
+        });
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('search-item');
