@@ -178,3 +178,42 @@ color: #fff;
     background-color: #198754 !important;
     border: none !important;
 }
+:root {
+    --border: 10px;
+    --color1: #8cff28;
+    --color2: #00a547;
+    --from: 17deg;
+    --distance: 57%;
+}
+
+.img-wrap {
+    position: relative;
+    padding: 30px;
+}
+
+.img-wrap::after {
+    content: '';
+    border-radius: 999px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: conic-gradient(
+      from var(--from),
+      var(--color1),
+      var(--color2) var(--distance),
+      transparent var(--distance)
+    );
+    -webkit-mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - var(--border)),
+      #fff calc(100% - var(--border) + 1px)
+    );
+    mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - var(--border)),
+      #fff calc(100% - var(--border) + 1px)
+    );
+  }
