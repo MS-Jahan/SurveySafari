@@ -7,8 +7,8 @@ import java.util.List;
 @Table(name = "explorers")
 public class Explorer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
     private String explorerRank;
     private String title;
     private int point;

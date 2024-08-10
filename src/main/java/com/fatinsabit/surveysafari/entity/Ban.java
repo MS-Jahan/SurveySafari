@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 @Table(name = "bans")
 public class Ban {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

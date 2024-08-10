@@ -7,6 +7,7 @@ import java.util.List;
 @Table(name = "authors")
 public class Author {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String company;
     private int coin;

@@ -61,6 +61,16 @@ public class AuthController {
             return ResponseEntity.badRequest().body("User type cannot be null or empty");
         }
 
+        // check if name is empty
+        if (user.getName() == null || user.getName().isEmpty()) {
+            return ResponseEntity.badRequest().body("Name cannot be empty");
+        }
+
+        // check if email is empty
+        if (user.getEmail() == null || user.getEmail().isEmpty()) {
+            return ResponseEntity.badRequest().body("Email cannot be empty");
+        }
+
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -83,8 +93,11 @@ public class AuthController {
 
                 case "admin":
                     Admin admin = new Admin();
-                    // Populate Admin fields from user or request data if needed
-                    admin = adminRepository.save(admin);
+                    // Optionally, populate Admin fields if needed
+                    admin = adminRepository.save(admin); // Ensure the Admin entity has valid data if required
+                    if (admin.getId() == null) {
+                        return ResponseEntity.badRequest().body("Failed to save Admin entity.");
+                    }
                     user.setEntityId(admin.getId());
                     user.setAdmin(admin);
                     break;

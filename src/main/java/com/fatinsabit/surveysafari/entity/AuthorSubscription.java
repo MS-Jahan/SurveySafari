@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 @Table(name = "author_subscriptions")
 public class AuthorSubscription {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 @Table(name = "surveys")
 public class Survey {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
