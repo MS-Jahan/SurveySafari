@@ -35,4 +35,8 @@ public class JwtUtil {
             return false;
         }
     }
+
+    public String extractUsername(String token) {
+        return getUsernameFromToken(token);
+    }
 }
