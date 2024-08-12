@@ -76,6 +76,10 @@
                 <div class="card-body py-5 px-md-5">
                   <h3 class="py-1 text-center">Welcome back to SurveySafari</h3>
                   <hr class="text-success">
+
+                  <!-- Message Container -->
+                  <div id="messageContainer" class="alert" role="alert" style="display: none;"></div>
+
                   <form>
                     <!-- Email input -->
                     <div class="form-outline mb-4">
@@ -107,7 +111,7 @@
         
                     <!-- Submit button -->
                     <div class="text-center">
-                      <button type="submit" class="btn btn-success btn-block mb-2" style="-webkit-text-fill-color: #D0E7D2;">
+                      <button onclick="login(event)" type="submit" class="btn btn-success btn-block mb-2" style="-webkit-text-fill-color: #D0E7D2;">
                         Sign in
                       </button>
                   </div>
@@ -148,5 +152,6 @@
     <!-- <script src="static/js/botchar.js"></script>
     <script src="static/js/sl-cutom.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/static/js/auth.js"></script>
   </body>
 </html>
