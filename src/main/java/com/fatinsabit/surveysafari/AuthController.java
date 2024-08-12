@@ -93,7 +93,6 @@ public class AuthController {
 
                 case "admin":
                     Admin admin = new Admin();
-                    // Optionally, populate Admin fields if needed
                     admin = adminRepository.save(admin); // Ensure the Admin entity has valid data if required
                     if (admin.getId() == null) {
                         return ResponseEntity.badRequest().body("Failed to save Admin entity.");
@@ -116,7 +115,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginUser) {
-        User user = userRepository.findByUsername(loginUser.getUsername());
+        User user = userRepository.findByEmail(loginUser.getEmail());
         if (user != null && passwordEncoder.matches(loginUser.getPassword(), user.getPassword())) {
             String token = jwtUtil.generateToken(user.getUsername());
             return ResponseEntity.ok().header("Set-Cookie", "token=" + token + "; HttpOnly").body("{\"username\":\"" + user.getUsername() + "\"}");

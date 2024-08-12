@@ -3,7 +3,8 @@ package com.fatinsabit.surveysafari.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "admins")
+// @DiscriminatorValue("admin")
+@Table(name = "admin")
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

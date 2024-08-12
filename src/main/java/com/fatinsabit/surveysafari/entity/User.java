@@ -1,57 +1,50 @@
 package com.fatinsabit.surveysafari.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.persistence.*;
-import javax.validation.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // make usertype required
-    @Column(name = "user_type", nullable = false)
-    @NotEmpty(message = "Username is required")
+    @Column(name = "user_type", nullable = false, insertable = false, updatable = false)
     private String userType;
 
-    @Column(name = "entity_id")
+    @Column(name = "entity_id", nullable = false, unique = true)
     private Long entityId;
 
-    // make name required
     @Column(name = "name", nullable = false)
     @NotEmpty(message = "Name is required")
     private String name;
-    // make email required
+
     @Column(name = "email", nullable = false)
     @NotEmpty(message = "Email is required")
     private String email;
-    // make username required
+
     @Column(name = "username", nullable = false)
     @NotEmpty(message = "Username is required")
     private String username;
-    // make password required
+
     @Column(name = "password", nullable = false)
     @NotEmpty(message = "Password is required")
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "entity_id", insertable = false, updatable = false)
+    // Add fields for Explorer, Author, and Admin
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "explorer_id", referencedColumnName = "id")
     private Explorer explorer;
 
-    @ManyToOne
-    @JoinColumn(name = "entity_id", insertable = false, updatable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
-    @ManyToOne
-    @JoinColumn(name = "entity_id", insertable = false, updatable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "admin_id", referencedColumnName = "id")
     private Admin admin;
 
     // Getters and setters
@@ -63,29 +56,8 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
     public String getUserType() {
         return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
     }
 
     public Long getEntityId() {
@@ -112,28 +84,20 @@ public class User {
         this.email = email;
     }
 
-    public Explorer getExplorer() {
-        return explorer;
+    public String getUsername() {
+        return username;
     }
 
-    public void setExplorer(Explorer explorer) {
-        this.explorer = explorer;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Author getAuthor() {
-        return author;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -145,10 +109,19 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
-                ", explorer=" + explorer +
-                ", author=" + author +
-                ", admin=" + admin +
                 '}';
     }
 
+    public void setExplorer(Explorer explorer) {
+        this.explorer = explorer;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 }
+
