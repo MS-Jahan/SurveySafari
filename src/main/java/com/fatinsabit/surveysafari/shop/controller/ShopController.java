@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("api/shop/")
+@RequestMapping("api/shop")
 public class ShopController {
     private final ShopService shopService;
 
