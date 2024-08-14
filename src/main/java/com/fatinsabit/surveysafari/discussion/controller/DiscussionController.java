@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/discussion")
 public class DiscussionController {
     private final DiscussionService discussionService;
 
