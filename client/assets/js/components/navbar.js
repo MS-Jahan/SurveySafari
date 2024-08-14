@@ -1,8 +1,10 @@
 // assets/js/components/navbar.js
 
-function createNavbar(blocks, anonymous, index=false, restPass=false) {
+function createNavbar(blocks, anonymous, index, restPass) {
     const navbar = document.createElement('nav');
-    navbar.className = "navbar navbar-expand-lg nav";
+
+    if (anonymous) navbar.className = "navbar navbar-expand-lg nav";
+    else navbar.className = "navbar nav fixed-top";
 
     navbar.innerHTML = `
         <div class="container-fluid">
@@ -15,10 +17,10 @@ function createNavbar(blocks, anonymous, index=false, restPass=false) {
                     SurveySafari
                 </a>
             `}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             ${anonymous ? `
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     ${index ? `
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -48,11 +50,17 @@ function createNavbar(blocks, anonymous, index=false, restPass=false) {
                 </div>
             ` : `
                 ${blocks ? `
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="background-color: #79AC78;">
-                        <div class="offcanvas-header">
-                            <h4 class="offcanvas-title" id="offcanvasDarkNavbarLabel">${blocks.navText}</h4>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+        <i class="bi bi-menu-button h2 p-1 m-1"></i>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar"
+        aria-labelledby="offcanvasDarkNavbarLabel" style="background-color: #79AC78;">
+        <div class="offcanvas-header">
+          <h4 class="offcanvas-title" id="offcanvasDarkNavbarLabel">${blocks.navText}</h4>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                 ${blocks.navItems.map((item) => `
@@ -77,9 +85,9 @@ function createNavbar(blocks, anonymous, index=false, restPass=false) {
     return navbar;
 }
 
-function setUpNavbar(blocks, anonymous) {
+function setUpNavbar(blocks, anonymous, index=false, restPass=false) {
     const navbar = document.getElementById('navbar');
-    navbar.appendChild(createNavbar(blocks, anonymous));
+    navbar.appendChild(createNavbar(blocks, anonymous, index, restPass));
 }
 
 export default setUpNavbar;
