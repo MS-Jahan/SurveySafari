@@ -9,7 +9,15 @@ import {
     setUpAuthorDashboard,
     setUpAuthorSurveyArchive,
     setUpAuthorSurvey,
-    setUpAuthorUpgradeSubscription
+    setUpAuthorUpgradeSubscription,
+    setUpExplorerHome,
+    setUpExplorerProfile,
+    setExplorerSurveyHome,
+    setUpExplorerLeaderboard,
+    setUpExplorerRedeemShop,
+    setUpCommunityDiscussion,
+    setUpDiscussion,
+
 } from './index.js';
 
 function initApp() {
@@ -27,6 +35,16 @@ function initApp() {
         case 'author_survey_archive': setUpAuthorSurveyArchive(); break;
         case 'author_survey': setUpAuthorSurvey(); break;
         case 'author_upgrade_subscription': setUpAuthorUpgradeSubscription(); break;
+        // explorer pages
+        case 'explorer_home': setUpExplorerHome(); break;
+        case 'explorer_profile': setUpExplorerProfile(); break;
+        case 'explorer_survey_home': setExplorerSurveyHome(); break;
+        case 'explorer_leaderboard': setUpExplorerLeaderboard(); break;
+        case 'explorer_redeem_shop': setUpExplorerRedeemShop(); break;
+        // common pages
+        case 'community_discussion': setUpCommunityDiscussion(); break;
+        case 'discussion': setUpDiscussion(); break;
+        // Unknown page !
         default: console.warn('Unknown page:', page);
     }
 }
