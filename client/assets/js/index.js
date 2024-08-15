@@ -185,6 +185,13 @@ function setUpDiscussion() {
     setUpFooter(2);
 }
 
+function setUpCreateDiscussion() {
+    console.log('Loading create discussion page ...')
+
+    setUpNavbar(explorerNavBlocks, false);
+    setUpFooter(2);
+}
+
 export { 
     setUpIndex,
     setUpLogin,

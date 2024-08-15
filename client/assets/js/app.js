@@ -17,6 +17,7 @@ import {
     setUpExplorerRedeemShop,
     setUpCommunityDiscussion,
     setUpDiscussion,
+    setUpCreateDiscussion
 
 } from './index.js';
 
@@ -44,6 +45,7 @@ function initApp() {
         // common pages
         case 'community_discussion': setUpCommunityDiscussion(); break;
         case 'discussion': setUpDiscussion(); break;
+        case 'create_discussion': setUpCreateDiscussion(); break;
         // Unknown page !
         default: console.warn('Unknown page:', page);
     }
