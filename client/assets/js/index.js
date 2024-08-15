@@ -59,34 +59,14 @@ function setUpAuthorDashboard() {
         homePage: '',
         navText: 'Authors Menu 🧭',
         navItems: [
-            {
-                link: '',
-                icon: 'bi bi-speedometer2',
-                text: 'DashBoard'
-            },
-            {
-                link: 'author_survey_archive.html',
-                icon: 'bi bi-clipboard-data',
-                text: 'Survey Archive'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-chat-square-text',
-                text: 'Community Discussion'
-            },
-            {
-                link: 'author_upgrade_subscription.html',
-                icon: 'bi bi-credit-card-2-back',
-                text: 'Upgrade Subscription'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-box-arrow-in-left',
-                text: 'Sign Out'
-            }
+            { link: '', icon: 'bi bi-speedometer2', text: 'DashBoard' },
+            { link: 'author_survey_archive.html', icon: 'bi bi-clipboard-data', text: 'Survey Archive' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: 'author_upgrade_subscription.html', icon: 'bi bi-credit-card-2-back', text: 'Upgrade Subscription' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
         ]
     }, false);
-    setUpFooter(1);
+    setUpFooter(2);
 }
 
 function setUpAuthorSurveyArchive() {
@@ -96,34 +76,14 @@ function setUpAuthorSurveyArchive() {
         homePage: 'author_dashboard.html',
         navText: 'Authors Menu 🧭',
         navItems: [
-            {
-                link: 'author_dashboard.html',
-                icon: 'bi bi-speedometer2',
-                text: 'DashBoard'
-            },
-            {
-                link: 'author_survey_archive.html',
-                icon: 'bi bi-clipboard-data',
-                text: 'Survey Archive'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-chat-square-text',
-                text: 'Community Discussion'
-            },
-            {
-                link: 'author_upgrade_subscription.html',
-                icon: 'bi bi-credit-card-2-back',
-                text: 'Upgrade Subscription'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-box-arrow-in-left',
-                text: 'Sign Out'
-            }
+            { link: 'author_dashboard.html', icon: 'bi bi-speedometer2', text: 'DashBoard' },
+            { link: '', icon: 'bi bi-clipboard-data', text: 'Survey Archive' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: 'author_upgrade_subscription.html', icon: 'bi bi-credit-card-2-back', text: 'Upgrade Subscription' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
         ]
     }, false);
-    setUpFooter(1);
+    setUpFooter(2);
 }
 
 function setUpAuthorSurvey() {
@@ -133,34 +93,14 @@ function setUpAuthorSurvey() {
         homePage: 'author_dashboard.html',
         navText: 'Authors Menu 🧭',
         navItems: [
-            {
-                link: 'author_dashboard.html',
-                icon: 'bi bi-speedometer2',
-                text: 'DashBoard'
-            },
-            {
-                link: 'author_survey_archive.html',
-                icon: 'bi bi-clipboard-data',
-                text: 'Survey Archive'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-chat-square-text',
-                text: 'Community Discussion'
-            },
-            {
-                link: 'author_upgrade_subscription.html',
-                icon: 'bi bi-credit-card-2-back',
-                text: 'Upgrade Subscription'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-box-arrow-in-left',
-                text: 'Sign Out'
-            }
+            { link: 'author_dashboard.html', icon: 'bi bi-speedometer2', text: 'DashBoard' },
+            { link: 'author_survey_archive.html', icon: 'bi bi-clipboard-data', text: 'Survey Archive' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: 'author_upgrade_subscription.html', icon: 'bi bi-credit-card-2-back', text: 'Upgrade Subscription' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
         ]
     }, false);
-    setUpFooter(1);
+    setUpFooter(2);
 }
 
 function setUpAuthorUpgradeSubscription() {
@@ -170,34 +110,201 @@ function setUpAuthorUpgradeSubscription() {
         homePage: 'author_dashboard.html',
         navText: 'Authors Menu 🧭',
         navItems: [
-            {
-                link: 'author_dashboard.html',
-                icon: 'bi bi-speedometer2',
-                text: 'DashBoard'
-            },
-            {
-                link: 'author_survey_archive.html',
-                icon: 'bi bi-clipboard-data',
-                text: 'Survey Archive'
-            },
-            {
-                link: '',
-                icon: 'bi bi-chat-square-text',
-                text: 'Community Discussion'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-credit-card-2-back',
-                text: 'Upgrade Subscription'
-            },
-            {
-                link: '#',
-                icon: 'bi bi-box-arrow-in-left',
-                text: 'Sign Out'
-            }
+            { link: 'author_dashboard.html', icon: 'bi bi-speedometer2', text: 'DashBoard' },
+            { link: 'author_survey_archive.html', icon: 'bi bi-clipboard-data', text: 'Survey Archive' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '', icon: 'bi bi-credit-card-2-back', text: 'Upgrade Subscription' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
         ]
     }, false);
-    setUpFooter(1);
+    setUpFooter(2);
+}
+
+// Explorer pages
+function setUpExplorerHome() {
+    console.log('Loading explorer home page...');
+
+    setUpNavbar({
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: '', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out'}
+        ]
+    }, false);
+    setUpFooter(2);
+}
+
+function setUpExplorerProfile() {
+    console.log('Loading explorer profile page...');
+
+    setUpNavbar({
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: '', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }, false);
+    setUpFooter(2);
+}
+
+function setExplorerSurveyHome() {
+    console.log('Loading explorer survey home page ...');
+
+    setUpNavbar({
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: '', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }, false);
+    setUpFooter(2);
+}
+
+function setUpExplorerLeaderboard() {
+    console.log("Loding explorer leaderboard page ...")
+
+    setUpNavbar({
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: '', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }, false);
+    setUpFooter(2);
+}
+
+function setUpExplorerRedeemShop() {
+    console.log("Loding explorer redeem shop page ...")
+
+    setUpNavbar({
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: '', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }, false);
+    setUpFooter(2);
+}
+
+function setUpCommunityDiscussion() {
+
+    console.log('Loading community discussion page ...')
+
+    authoNavBlocks = {
+        homePage: 'author_dashboard.html',
+        navText: 'Authors Menu 🧭',
+        navItems: [
+            { link: 'author_dashboard.html', icon: 'bi bi-speedometer2', text: 'DashBoard' },
+            { link: 'author_survey_archive.html', icon: 'bi bi-clipboard-data', text: 'Survey Archive' },
+            { link: '', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: 'author_upgrade_subscription.html', icon: 'bi bi-credit-card-2-back', text: 'Upgrade Subscription' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }
+
+    explorerNavBlocks = {
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: '', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }
+
+    setUpNavbar({
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: '', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }, false);
+    setUpFooter(2);
+}
+
+function setUpDiscussion() {
+    console.log('Loading discussion page ...')
+
+    authoNavBlocks = {
+        homePage: 'author_dashboard.html',
+        navText: 'Authors Menu 🧭',
+        navItems: [
+            { link: 'author_dashboard.html', icon: 'bi bi-speedometer2', text: 'DashBoard' },
+            { link: 'author_survey_archive.html', icon: 'bi bi-clipboard-data', text: 'Survey Archive' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: 'author_upgrade_subscription.html', icon: 'bi bi-credit-card-2-back', text: 'Upgrade Subscription' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }
+
+    explorerNavBlocks = {
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }
+
+    setUpNavbar({
+        homePage: 'explorer_home.html',
+        navText: 'Explorer Menu 🧭',
+        navItems: [
+            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
+            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
+            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
+            { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
+            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
+            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
+            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
+        ]
+    }, false);
+    setUpFooter(2);
 }
 
 export { 
@@ -209,5 +316,12 @@ export {
     setUpAuthorDashboard,
     setUpAuthorSurveyArchive,
     setUpAuthorSurvey,
-    setUpAuthorUpgradeSubscription
+    setUpAuthorUpgradeSubscription,
+    setUpExplorerHome,
+    setUpExplorerProfile,
+    setExplorerSurveyHome,
+    setUpExplorerLeaderboard,
+    setUpExplorerRedeemShop,
+    setUpCommunityDiscussion,
+    setUpDiscussion
 };
