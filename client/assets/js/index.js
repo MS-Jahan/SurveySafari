@@ -2,6 +2,9 @@
 
 import setUpNavbar from './components/navbar.js';
 import setUpFooter from './components/footer.js';
+import { loadExplorerHomeData } from './page/explorer_home.js';
+import { loadExplorerSurveyHomeData } from './page/explorer_survey_home.js';
+import { loadCommunityDiscussionData } from './page/community_discussion.js';
 
 // Annonimus pages
 function setUpIndex() {
@@ -138,6 +141,8 @@ function setUpExplorerHome() {
         ]
     }, false);
     setUpFooter(2);
+
+    loadExplorerHomeData();
 }
 
 function setUpExplorerProfile() {
@@ -176,6 +181,8 @@ function setExplorerSurveyHome() {
         ]
     }, false);
     setUpFooter(2);
+
+    loadExplorerSurveyHomeData();
 }
 
 function setUpExplorerLeaderboard() {
@@ -216,6 +223,7 @@ function setUpExplorerRedeemShop() {
     setUpFooter(2);
 }
 
+// Community Discussion pages
 function setUpCommunityDiscussion() {
 
     console.log('Loading community discussion page ...')
@@ -260,6 +268,8 @@ function setUpCommunityDiscussion() {
         ]
     }, false);
     setUpFooter(2);
+
+    loadCommunityDiscussionData();
 }
 
 function setUpDiscussion() {
