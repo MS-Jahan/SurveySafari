@@ -5,6 +5,7 @@ import setUpFooter from './components/footer.js';
 import { loadExplorerHomeData } from './page/explorer_home.js';
 import { loadExplorerSurveyHomeData } from './page/explorer_survey_home.js';
 import { loadCommunityDiscussionData } from './page/community_discussion.js';
+import { loadExplorerRedeemShopData, setUpRedeemModels, setUprangeFilterWithPagination } from './page/explorer_redeem_shop.js';
 
 // Annonimus pages
 function setUpIndex() {
@@ -221,6 +222,10 @@ function setUpExplorerRedeemShop() {
         ]
     }, false);
     setUpFooter(2);
+
+    loadExplorerRedeemShopData();
+    setUpRedeemModels();
+    setUprangeFilterWithPagination();
 }
 
 // Community Discussion pages
