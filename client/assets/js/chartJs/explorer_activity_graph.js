@@ -1,3 +1,5 @@
+// assets/js/chartJs/explorer_activity_graph.js
+
 let ctx = document.getElementById("weeklyS.DChart").getContext("2d");
 let weeklySDChart = new Chart(ctx, {
     type: "line",
