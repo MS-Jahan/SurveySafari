@@ -220,7 +220,7 @@ function setUpCommunityDiscussion() {
 
     console.log('Loading community discussion page ...')
 
-    authoNavBlocks = {
+    const authoNavBlocks = {
         homePage: 'author_dashboard.html',
         navText: 'Authors Menu 🧭',
         navItems: [
@@ -232,7 +232,7 @@ function setUpCommunityDiscussion() {
         ]
     }
 
-    explorerNavBlocks = {
+    const explorerNavBlocks = {
         homePage: 'explorer_home.html',
         navText: 'Explorer Menu 🧭',
         navItems: [
