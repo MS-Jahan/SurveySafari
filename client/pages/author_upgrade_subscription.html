@@ -9,6 +9,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/basic.css">
+    <link rel="stylesheet" href="../assets/css/author/upgrade_subscription.css">
 </head>
 
 <body id="author_upgrade_subscription">
@@ -16,7 +17,152 @@
 
     <div class="mt-5 pt-5"></div>
 
-    <main></main>
+    <main>
+        <div class="row px-5 py-3">
+            <!-- Left Column (Choose Plan) -->
+            <div class="col-md-6">
+                <div class="px-3 py-1 my-1 rounded" style="background-color: #79AC78;">
+                    <p class="subscription-title">Subscription Plan</p>
+                    <p class="subscription-desc">Unlock instant access to all existing products and daily new releases.
+                    </p>
+                </div>
+                <div class="card mb-3" style="background-color: #79AC78;">
+                    <div class="card-body">
+                        <h5 class="card-title">Choose Plan</h5>
+                        <div class="btn-group mb-3 w-100" role="group">
+                            <input type="radio" class="btn-check" name="plan" id="quarterly" checked>
+                            <label class="btn btn-outline-success" for="quarterly">Quarterly</label>
+                            <input type="radio" class="btn-check" name="plan" id="yearly">
+                            <label class="btn btn-outline-success" for="yearly">Yearly</label>
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="planOptions" id="proPlan">
+                            <label class="form-check-label d-flex justify-content-between" for="proPlan">
+                                <span>Pro Plan</span>
+                                <span>$59.99 / Quarterly</span>
+                            </label>
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="planOptions" id="teamPlan" checked>
+                            <label class="form-check-label d-flex justify-content-between" for="teamPlan">
+                                <span>Team Plan</span>
+                                <span>$189.00 / Quarterly</span>
+                            </label>
+                            <ul class="list-unstyled ms-3 mt-2">
+                                <li>50 downloads per day</li>
+                                <li>Access to all products or bundles</li>
+                                <li>Early access to new/beta release features</li>
+                            </ul>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="planOptions" id="businessPlan">
+                            <label class="form-check-label d-flex justify-content-between" for="businessPlan">
+                                <span>Business Pro</span>
+                                <span>$350.00 / Quarterly</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column (Payment Plan) -->
+            <div class="col-md-6">
+                <div class="payment-plan">
+                    <h5 class="mb-3">Payment Plan</h5>
+                    <div class="payment-method">
+                        <label for="visaCard"
+                            class="form-check-label d-flex justify-content-between align-items-center">
+                            <div>
+                                <input class="form-check-input" type="radio" name="paymentOptions" id="visaCard"
+                                    checked>
+                                <span>Visa Card</span>
+                            </div>
+                            <span>**** 4470</span>
+                        </label>
+                    </div>
+
+                    <div class="payment-method">
+                        <label for="masterCard"
+                            class="form-check-label d-flex justify-content-between align-items-center">
+                            <div>
+                                <input class="form-check-input" type="radio" name="paymentOptions" id="masterCard">
+                                <span>MasterCard</span>
+                            </div>
+                            <span>**** 0900</span>
+                        </label>
+                    </div>
+
+                    <button class="btn btn-dark w-100 mb-3" data-bs-toggle="modal" data-bs-target="#addCardModal">+ Add New Card</button>
+
+                    <div class="discount-section">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>Discount Code</span>
+                            <input type="text" class="form-control" id="discountCode" value="30KCELEB"
+                                style="width: 50%;">
+                            <button class="btn btn-success">Apply</button>
+                        </div>
+                        <div class="mb-3" style="-webkit-text-fill-color: #79AC78;">30% Discount code applied</div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Team Plan</span>
+                            <span>$189.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Discount (30%)</span>
+                            <span>-$63.85</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Total</span>
+                            <span>$126.15</span>
+                        </div>
+                        <div class="text-muted">Next payment will charge 10th of January, 2023</div>
+                    </div>
+
+                    <button class="btn pay-now-btn btn-success">PAY NOW</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Card Modal -->
+    <div class="modal fade" id="addCardModal" tabindex="-1" aria-labelledby="addCardModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #79AC78;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCardModalLabel">Add New Card</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cardExpiry" class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cardCVC" class="form-label">CVC</label>
+                                <input type="text" class="form-control" id="cardCVC" placeholder="123">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardHolderName" class="form-label">Cardholder Name</label>
+                            <input type="text" class="form-control" id="cardHolderName" placeholder="John Doe">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save Card</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer></footer>
 
