@@ -141,28 +141,16 @@ function setExplorerSurveyHome() {
 }
 
 function setUpExplorerLeaderboard() {
-    console.log("Loding explorer leaderboard page ...")
+    console.log("Loding explorer leaderboard page ...");
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
 }
 
 function setUpExplorerRedeemShop() {
-    console.log("Loding explorer redeem shop page ...")
+    console.log("Loding explorer redeem shop page ...");
 
-    setUpNavbar({
-        homePage: 'explorer_home.html',
-        navText: 'Explorer Menu 🧭',
-        navItems: [
-            { link: 'explorer_home.html', icon: 'bi bi-house', text: 'Home' },
-            { link: 'explorer_profile.html', icon: 'bi bi-person-bounding-box', text: 'Profile' },
-            { link: 'explorer_survey_home.html', icon: 'bi bi-clipboard-data', text: 'Surveys' },
-            { link: '', icon: 'bi bi-shop', text: 'Redeem Shop' },
-            { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
-            { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
-            { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
-        ]
-    }, false);
+    setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
 
     loadExplorerRedeemShopData();
@@ -170,10 +158,17 @@ function setUpExplorerRedeemShop() {
     setUprangeFilterWithPagination();
 }
 
+function setExplorerSurveyView() {
+    console.log("Loading explorer survey view page ...");
+    
+    setUpNavbar(explorerNavBlocks, false);
+    setUpFooter(2);
+}
+
 // Community Discussion pages
 function setUpCommunityDiscussion() {
 
-    console.log('Loading community discussion page ...')
+    console.log('Loading community discussion page ...');
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
@@ -182,14 +177,14 @@ function setUpCommunityDiscussion() {
 }
 
 function setUpDiscussion() {
-    console.log('Loading discussion page ...')
+    console.log('Loading discussion page ...');
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
 }
 
 function setUpCreateDiscussion() {
-    console.log('Loading create discussion page ...')
+    console.log('Loading create discussion page ...');
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
@@ -212,5 +207,6 @@ export {
     setUpExplorerRedeemShop,
     setUpCommunityDiscussion,
     setUpDiscussion,
-    setUpCreateDiscussion
+    setUpCreateDiscussion,
+    setExplorerSurveyView
 };
