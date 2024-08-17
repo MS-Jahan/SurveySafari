@@ -18,5 +18,29 @@ public class Trade {
     @JoinColumn(name = "trader_id")
     private Explorer trader;
 
+
     // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public RedeemItem getItem() {
+        return item;
+    }
+
+    public void setItem(RedeemItem item) {
+        this.item = item;
+    }
+
+    public Explorer getTrader() {
+        return trader;
+    }
+
+    public void setTrader(Explorer trader) {
+        this.trader = trader;
+    }
 }

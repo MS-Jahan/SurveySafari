@@ -2,6 +2,8 @@ package com.xpinnovators.backend.survey.entity;
 
 import jakarta.persistence.*;
 
+import javax.validation.constraints.NotBlank;
+
 @Entity
 @Table(name = "responses")
 public class Response {
@@ -17,7 +19,15 @@ public class Response {
     @JoinColumn(name = "attendance_id")
     private Attendance attendance;
 
+    @NotBlank
     private String responseData;
 
-    // Getters and setters
+    // Constructors, getters and setters
+    public String getResponseData() {
+        return responseData;
+    }
+
+    public void setResponseData(String responseData) {
+        this.responseData = responseData;
+    }
 }

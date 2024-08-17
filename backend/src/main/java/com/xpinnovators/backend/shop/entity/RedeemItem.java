@@ -23,4 +23,75 @@ public class RedeemItem {
     private boolean available;
 
     // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public int getCoinCost() {
+        return coinCost;
+    }
+
+    public void setCoinCost(int coinCost) {
+        this.coinCost = coinCost;
+    }
+
+    public Admin getControlledBy() {
+        return controlledBy;
+    }
+
+    public void setControlledBy(Admin controlledBy) {
+        this.controlledBy = controlledBy;
+    }
+
+    public String getItemData() {
+        return itemData;
+    }
+
+    public void setItemData(String itemData) {
+        this.itemData = itemData;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 }

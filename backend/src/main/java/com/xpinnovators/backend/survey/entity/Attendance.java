@@ -21,5 +21,12 @@ public class Attendance {
 
     private Timestamp attendedAt;
 
-    // Getters and setters
+    // Constructors, getters, and setters
+
+    public AttendanceDTO(Attendance attendance) {
+        this.id = attendance.getId();
+        this.surveyId = attendance.getSurvey().getId();
+        this.explorerId = attendance.getExplorer().getId();
+        this.attendedAt = attendance.getAttendedAt();
+    }
 }

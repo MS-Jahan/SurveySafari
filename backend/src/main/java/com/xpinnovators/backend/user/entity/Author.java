@@ -12,6 +12,9 @@ public class Author {
     private int coin;
     private String socialLinks;
 
+    @OneToOne(mappedBy = "author")
+    private User user;
+
     // Getters and setters
 
     public Long getId() {
@@ -44,5 +47,13 @@ public class Author {
 
     public void setSocialLinks(String socialLinks) {
         this.socialLinks = socialLinks;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

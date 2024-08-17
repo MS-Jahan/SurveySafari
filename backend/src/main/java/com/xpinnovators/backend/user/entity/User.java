@@ -123,5 +123,17 @@ public class User {
     public void setAuthor(Author author) {
         this.author = author;
     }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public Explorer getExplorer() {
+        return explorer;
+    }
 }
 

@@ -21,6 +21,7 @@ public class Ban {
     private Admin bannedBy;
 
     private Timestamp bannedAt;
+    private String reason;
 
     // Getters and setters
 }
