@@ -160,7 +160,14 @@ function setUpExplorerRedeemShop() {
 
 function setExplorerSurveyView() {
     console.log("Loading explorer survey view page ...");
-    
+
+    setUpNavbar(explorerNavBlocks, false);
+    setUpFooter(2);
+}
+
+function setExplorerSurvey() {
+    console.log("Loading explorer survey page ...");
+
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
 }
@@ -208,5 +215,6 @@ export {
     setUpCommunityDiscussion,
     setUpDiscussion,
     setUpCreateDiscussion,
-    setExplorerSurveyView
+    setExplorerSurveyView,
+    setExplorerSurvey
 };
