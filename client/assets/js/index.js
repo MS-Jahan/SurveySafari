@@ -7,6 +7,7 @@ import { loadExplorerSurveyHomeData } from './page/explorer_survey_home.js';
 import { loadCommunityDiscussionData } from './page/community_discussion.js';
 import { loadExplorerRedeemShopData, setUpRedeemModels, setUprangeFilterWithPagination } from './page/explorer_redeem_shop.js';
 import { loadAuthorDashboardData } from './page/author_dashboard.js';
+import { loadExplorerSurveyData } from './page/explorer_survey.js';
 
 // FullNavs
 const authorNavBlocks = {
@@ -169,7 +170,9 @@ function setExplorerSurvey() {
     console.log("Loading explorer survey page ...");
 
     setUpNavbar(explorerNavBlocks, false);
-    setUpFooter(2);
+    setUpFooter(0);
+
+    loadExplorerSurveyData();
 }
 
 // Community Discussion pages
