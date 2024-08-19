@@ -8,6 +8,7 @@ import { loadCommunityDiscussionData } from './page/community_discussion.js';
 import { loadExplorerRedeemShopData, setUpRedeemModels, setUprangeFilterWithPagination } from './page/explorer_redeem_shop.js';
 import { loadAuthorDashboardData } from './page/author_dashboard.js';
 import { loadExplorerSurveyData } from './page/explorer_survey.js';
+import { loadAuthorSurveyArchiveData } from './page/author_survey_archive.js';
 
 // FullNavs
 const authorNavBlocks = {
@@ -99,6 +100,8 @@ function setUpAuthorSurveyArchive() {
 
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
+
+    loadAuthorSurveyArchiveData();
 }
 
 function setUpAuthorSurvey() {
