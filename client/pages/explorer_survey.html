@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/basic.css">
     <link rel="stylesheet" href="../assets/css/animation/default.css">
+    <link rel="stylesheet" href="../assets/css/chatAI.css">
     <style>
         .fixed-ratio {
             width: 100%;
             height: 0;
-            padding-top: calc(100% / (1280 / 240)); /* Aspect ratio (240 / 1280) */
+            padding-top: calc(100% / (1280 / 240));
+            /* Aspect ratio (240 / 1280) */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -43,16 +45,19 @@
         </ul>
         <div class="section pb-5 mt-3">
             <div class="container">
-                <div class="card rounded shadow" style="background-color: #79AC78; border-top-left-radius: 20px !important; border-top-right-radius: 20px !important;">
-                    <img class="cap-image-top fixed-ratio" alt="" style="background-image: url('https://via.placeholder.com/1280x720?text=survey banner');">
-                    <div class="card-header">
+                <div class="card rounded shadow"
+                    style="background-color: #79AC78; border-top-left-radius: 20px !important; border-top-right-radius: 20px !important;">
+                    <img class="cap-image-top fixed-ratio" alt=""
+                        style="background-image: url('https://via.placeholder.com/1280x720?text=survey banner');">
+                    <div class="card-header bg-success">
                         <h2 class="text-center text-white card-title">Survey title</h2>
                     </div>
                     <div class="card-body" id="survey-form">
                     </div>
                     <div class="crad-footer">
                         <div class="d-flex justify-content-center mb-3">
-                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Submit">
+                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Submit">
                                 <span class="h3"><i class="bi bi-check2"></i> Submit</span>
                             </button>
                         </div>
@@ -63,6 +68,38 @@
     </main>
 
     <footer></footer>
+
+    <div class="floating-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom">
+        <i class="bi bi-robot"></i>
+    </div>
+
+    <!-- Offcanvas Chatbox -->
+    <div class="offcanvas offcanvas-bottom resizable" tabindex="-1" id="offcanvasBottom"
+        aria-labelledby="offcanvasBottomLabel" style="background-color: #79AC78;">
+        <div class="resizer"></div> <!-- Resizer handle -->
+        <div class="offcanvas-header" style="background-color: #79AC78;">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">AI Chat Box</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" style="background-color: #618264;">
+            <div class="chatbox" id="chatbox">
+                <!-- Messages will appear here -->
+                <div class="message bot">
+                    <div class="content">Hello! How can I help you today?</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="offcanvas-footer m-3" style="background-color: #79AC78;">
+            <div class="chatbox-input d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <input type="text" id="chatbox-input" placeholder="Type a message..." class="flex-grow-1 p-2" style="width: 100%;">
+                <button class="btn btn-success p-2 m-2 mt-md-0 w-100 w-md-auto" type="button" id="chatbox-send" style="max-width: 100px;">
+                    <i class="bi bi-send"></i> Send
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -75,6 +112,6 @@
     <script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
     <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
     <script type="module" src="../assets/js/app.js"></script>
+    <script type="module" src="../assets/js/chatAI/chatAI.js"></script>
 </body>
-
 </html>
