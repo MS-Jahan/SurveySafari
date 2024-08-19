@@ -17,7 +17,9 @@ import {
     setUpExplorerRedeemShop,
     setUpCommunityDiscussion,
     setUpDiscussion,
-    setUpCreateDiscussion
+    setUpCreateDiscussion,
+    setExplorerSurveyView,
+    setExplorerSurvey
 
 } from './index.js';
 
@@ -42,6 +44,8 @@ function initApp() {
         case 'explorer_survey_home': setExplorerSurveyHome(); break;
         case 'explorer_leaderboard': setUpExplorerLeaderboard(); break;
         case 'explorer_redeem_shop': setUpExplorerRedeemShop(); break;
+        case 'explorer_survey_view': setExplorerSurveyView(); break;
+        case 'explorer_survey': setExplorerSurvey(); break;
         // common pages
         case 'community_discussion': setUpCommunityDiscussion(); break;
         case 'discussion': setUpDiscussion(); break;

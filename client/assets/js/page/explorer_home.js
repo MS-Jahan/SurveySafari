@@ -10,7 +10,7 @@ const testSurveyData = [
         tags: ["Health", "Research"],
         coin: 20,
         point: 100,
-        link: "#"
+        link: "explorer_survey_view.html"
     },
     {
         title: "Consumer Buying Behavior Survey",
@@ -18,7 +18,7 @@ const testSurveyData = [
         tags: ["Marketing", "Behavior Analysis", "Research"],
         coin: 5,
         point: 60,
-        link: "#"
+        link: "explorer_survey.html"
     },
     {
         title: "Online Education Effectiveness Survey",
@@ -26,7 +26,7 @@ const testSurveyData = [
         tags: ["Technology", "Society", "User Experience", "Social Apps"],
         coin: 30,
         point: 120,
-        link: "#"
+        link: "explorer_survey_view.html"
     },
 ];
 
@@ -35,31 +35,31 @@ const testPopularItemData = [
         imgLink: "https://via.placeholder.com/50",
         name: "Item 1",
         coin: 10,
-        link: "#"
+        link: "explorer_survey_view.html"
     },
     {
         imgLink: "https://via.placeholder.com/50",
         name: "Item 2",
         coin: 20,
-        link: "#"
+        link: "explorer_survey_view.html"
     },
     {
         imgLink: "https://via.placeholder.com/50",
         name: "Item 3",
         coin: 30,
-        link: "#"
+        link: "explorer_survey_view.html"
     },
     {
         imgLink: "https://via.placeholder.com/50",
         name: "Item 4",
         coin: 40,
-        link: "#"
+        link: "explorer_survey_view.html"
     },
     {
         imgLink: "https://via.placeholder.com/50",
         name: "Item 5",
         coin: 50,
-        link: "#"
+        link: "explorer_survey_view.html"
     },
 ];
 
