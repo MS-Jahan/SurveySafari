@@ -129,11 +129,17 @@ color: #fff;
 }
 
 .tag {
+    font-weight: bolder;
+    text-align: center;
+    font-size: x-small;
     border-radius: 10px;
     background-color: #618264;
 }
 
 .tag-light {
+    font-weight: bolder;
+    text-align: center;
+    font-size: x-small;
     border-radius: 10px;
     background-color: #79AC78;
 }
