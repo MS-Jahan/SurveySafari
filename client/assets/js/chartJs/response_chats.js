@@ -26,11 +26,45 @@ function renderDonutChart(canvasID, chartData) {
                 },
                 title: {
                     display: true,
-                    text: 'Donut Chart'
+                    text: chartData.title
                 }
             }
         }
     });
 }
 
-export { renderDonutChart };
+function renderHBarChart(canvasID, chartData) {
+    if (!canvasID || !chartData) {
+        console.warn("No canvas ID or chart data provided to render horizontal bar chart.");
+        return null;
+    }
+
+    const hBarChart = document.getElementById(`${canvasID}`).getContext('2d');
+    new Chart(hBarChart, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: chartData.datasetLabel,
+                data: chartData.data,
+                backgroundColor: chartData.backgroundColor,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: chartData.title
+                }
+            }
+        }
+    });
+}
+
+export { renderDonutChart, renderHBarChart };
