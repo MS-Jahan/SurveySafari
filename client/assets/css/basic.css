@@ -245,7 +245,7 @@ color: #fff;
     background-color: #198754;
 }
 
-.list-group-item {
+.list-group-item-custom {
     background-color: #618264 !important;
     border: 1px solid #79AC78 !important;
 }

@@ -16,7 +16,7 @@ function createTextFieldResponseSummaryCard(textFieldResponseData) {
         </div>
         <div class="card-body my-3" style="min-height: 250px;">
             <ul class="list-group custom-scrollbar" style="overflow-y: auto; max-height: 400px;">
-                ${textFieldResponseData.responses.map(response => `<li class="list-group-item">${response}</li>`).join("")}
+                ${textFieldResponseData.responses.map(response => `<li class="list-group-item list-group-item-custom">${response}</li>`).join("")}
             </ul>
         </div>
     `;
