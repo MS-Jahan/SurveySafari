@@ -67,4 +67,39 @@ function renderHBarChart(canvasID, chartData) {
     });
 }
 
-export { renderDonutChart, renderHBarChart };
+function renderLineChart(canvasID, chartData) {
+    if (!canvasID || !chartData) {
+        console.warn("No canvas ID or chart data provided to render line chart.");
+        return null;
+    }
+
+    const lineChart = document.getElementById(`${canvasID}`).getContext('2d');
+    new Chart(lineChart, {
+        type: 'line',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: chartData.datasetLabel,
+                data: chartData.data,
+                backgroundColor: '#00a547',
+                borderColor: '#8cff28',
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: chartData.title
+                }
+            }
+        }
+    });
+}
+
+export { renderDonutChart, renderHBarChart, renderLineChart };
