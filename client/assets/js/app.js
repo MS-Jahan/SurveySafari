@@ -19,7 +19,8 @@ import {
     setUpDiscussion,
     setUpCreateDiscussion,
     setExplorerSurveyView,
-    setExplorerSurvey
+    setExplorerSurvey,
+    setUpAuthorSurveyResponses
 
 } from './index.js';
 
@@ -38,6 +39,7 @@ function initApp() {
         case 'author_survey_archive': setUpAuthorSurveyArchive(); break;
         case 'author_survey': setUpAuthorSurvey(); break;
         case 'author_upgrade_subscription': setUpAuthorUpgradeSubscription(); break;
+        case 'author_survey_responses': setUpAuthorSurveyResponses(); break;
         // explorer pages
         case 'explorer_home': setUpExplorerHome(); break;
         case 'explorer_profile': setUpExplorerProfile(); break;
