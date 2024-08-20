@@ -1,4 +1,4 @@
-import renderForm from 'renderForm';
+import renderForm from './renderForm.js';
 
 jQuery(function ($) {
     // Initialize the formBuilder
