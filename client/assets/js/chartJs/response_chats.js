@@ -1,13 +1,19 @@
 // assets/js/chartJs/response_chart.js
 
-function renderDonutChart(canvasID, chartData) {
-    if (!canvasID || !chartData) {
-        console.warn("No canvas ID or chart data provided to render donut chart.");
+function renderDonutChart(canvas, chartData) {
+    if (!canvas || !chartData) {
+        console.warn("No canvas or chart data provided to render donut chart.");
         return null;
     }
 
-    const donutChart = document.getElementById(`${canvasID}`).getContext('2d');
-    new Chart(donutChart, {
+    const donutChartctx = canvas.getContext('2d');
+
+    if (!donutChartctx) {
+        console.warn("No canvas element found to render donut chart.");
+        return null;
+    }
+
+    new Chart(donutChartctx, {
         type: 'doughnut',
         data: {
             labels: chartData.labels,
@@ -27,20 +33,32 @@ function renderDonutChart(canvasID, chartData) {
                 title: {
                     display: true,
                     text: chartData.title
+                },
+                datalabels: {
+                    color: '#000',
+                    formatter: (value, context) => {
+                        const total = context.chart.data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+                        const percentage = ((value / total) * 100).toFixed(2) + '%';
+                        if (percentage === '0.00%') {
+                            return '';
+                        }
+                        return percentage;
+                    }
                 }
-            }
-        }
+            },
+        },
+        plugins: [ChartDataLabels]
     });
 }
 
-function renderHBarChart(canvasID, chartData) {
-    if (!canvasID || !chartData) {
-        console.warn("No canvas ID or chart data provided to render horizontal bar chart.");
+function renderHBarChart(canvas, chartData) {
+    if (!canvas || !chartData) {
+        console.warn("No canvas or chart data provided to render horizontal bar chart.");
         return null;
     }
 
-    const hBarChart = document.getElementById(`${canvasID}`).getContext('2d');
-    new Chart(hBarChart, {
+    const hBarChartctx = canvas.getContext('2d');
+    new Chart(hBarChartctx, {
         type: 'bar',
         data: {
             labels: chartData.labels,
@@ -61,20 +79,35 @@ function renderHBarChart(canvasID, chartData) {
                 title: {
                     display: true,
                     text: chartData.title
+                },
+                datalabels: {
+                    color: '#000',
+                    formatter: (value, context) => {
+                        const total = context.chart.data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+                        const percentage = ((value / total) * 100).toFixed(2) + '%';
+                        
+                        if (percentage === '0.00%') {
+                            return '';
+                        }
+
+                        return percentage;
+                    },
+                    textAlign: 'center',
                 }
             }
-        }
+        },
+        plugins: [ChartDataLabels]
     });
 }
 
-function renderLineChart(canvasID, chartData) {
-    if (!canvasID || !chartData) {
+function renderLineChart(canvas, chartData) {
+    if (!canvas || !chartData) {
         console.warn("No canvas ID or chart data provided to render line chart.");
         return null;
     }
 
-    const lineChart = document.getElementById(`${canvasID}`).getContext('2d');
-    new Chart(lineChart, {
+    const lineChartctx = canvas.getContext('2d');
+    new Chart(lineChartctx, {
         type: 'line',
         data: {
             labels: chartData.labels,
@@ -84,7 +117,7 @@ function renderLineChart(canvasID, chartData) {
                 backgroundColor: '#00a547',
                 borderColor: '#8cff28',
                 borderWidth: 2,
-                fill: false
+                fill: true
             }]
         },
         options: {
@@ -96,6 +129,22 @@ function renderLineChart(canvasID, chartData) {
                 title: {
                     display: true,
                     text: chartData.title
+                }
+            },
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: chartData.xAxisLabel
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: chartData.yAxisLabel
+                    }
                 }
             }
         }
