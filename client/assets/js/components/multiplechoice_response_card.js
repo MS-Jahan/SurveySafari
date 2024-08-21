@@ -22,16 +22,23 @@ function createMultipleChoiceResponseCard(responseData) {
     const responseCardChart = document.createElement('div');
     responseCardChart.className = 'card-body my-3 text-start';
     responseCardChart.style.minHeight = '250px';
-    responseCardChart.innerHTML = `
-        <canvas class="mx-lg-5" id="donutChart-${responseData.id}" style="max-height: 300px;"></canvas>
-    `;
-
+    
+    // Create canvas as a variable
+    const canvas = document.createElement('canvas');
+    canvas.id = `donutChart-${responseData.id}`;
+    canvas.style.maxHeight = '300px';
+    canvas.className = 'mx-lg-5';
+    
+    // Append the canvas to the card body
+    responseCardChart.appendChild(canvas);
     responseCard.appendChild(responseCardHeader);
     responseCard.appendChild(responseCardChart);
 
-    renderDonutChart(`donutChart-${responseData.id}`, responseData.chartData);
+    // Now render the chart using the canvas element
+    renderDonutChart(canvas, responseData.chartData);
 
     return responseCard;
 }
+
 
 export { createMultipleChoiceResponseCard };

@@ -22,14 +22,18 @@ function createCheckBoxResponseCard(responseData) {
     const responseCardChart = document.createElement('div');
     responseCardChart.className = 'card-body my-3 text-start';
     responseCardChart.style.minHeight = '250px';
-    responseCardChart.innerHTML = `
-        <canvas class="mx-lg-5" id="hBarChart-${responseData.id}" style="max-height: 300px;"></canvas>
-    `;
 
+    // Create canvas as a variable
+    const canvas = document.createElement('canvas');
+    canvas.id = `hBarChart-${responseData.id}`;
+    canvas.style.maxHeight = '300px';
+    canvas.className = 'mx-lg-5';
+
+    responseCardChart.appendChild(canvas);
     responseCard.appendChild(responseCardHeader);
     responseCard.appendChild(responseCardChart);
 
-    renderHBarChart(`hBarChart-${responseData.id}`, responseData.chartData);
+    renderHBarChart(canvas, responseData.chartData);
 
     return responseCard;
 }
