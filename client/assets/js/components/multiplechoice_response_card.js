@@ -1,8 +1,13 @@
 // assets/js/components/multiplechoice_response_card.js
 
-import { renderDonutChart } from '../chartJs/response_chart.js';
+import { renderDonutChart } from '../chartJs/response_chats.js';
 
 function createMultipleChoiceResponseCard(responseData) {
+    if (!responseData) {
+        console.warn('No data provided to create multiple choice response card.');
+        return null;
+    }
+    
     const responseCard = document.createElement('div');
     responseCard.className = 'card mb-3';
     responseCard.style.backgroundColor = '#79AC78';

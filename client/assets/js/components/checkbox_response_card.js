@@ -1,8 +1,13 @@
 // assets/js/components/checkbox_response_card.js
 
-import { renderHBarChart } from '../chartJs/response_chart.js';
+import { renderHBarChart } from '../chartJs/response_chats.js';
 
 function createCheckBoxResponseCard(responseData) {
+    if (!responseData) {
+        console.warn('No data provided to create checkbox response card.');
+        return null;
+    }
+
     const responseCard = document.createElement('div');
     responseCard.className = 'card mb-3';
     responseCard.style.backgroundColor = '#79AC78';
