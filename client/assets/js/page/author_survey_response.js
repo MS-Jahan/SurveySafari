@@ -442,11 +442,7 @@ const testSurveyResponseSummary = {
             }
         }
     ]
-}
-
-const testSurveyResponseByQuestion = {
-
-}
+};
 
 const testSurveyResponseByUser = {
 
@@ -579,10 +575,6 @@ function __loadAuthorSurveyResponseSummary() {
     });
 }
 
-function __loadAuthorSurveyResponseByQuestion() {
-    // todo: implement this
-}
-
 function __loadAuthorSurveyResponseByUser() {
     // todo: implement this
 }
@@ -593,11 +585,6 @@ function __summaryResBtnClickHandler() {
     __loadAuthorSurveyResponseSummary();
 }
 
-function __questionResBtnClickHandler() {
-    __showDiv('question');
-    __loadAuthorSurveyResponseByQuestion();
-}
-
 function __individualResBtnClickHandler() {
     __showDiv('individual');
     __loadAuthorSurveyResponseByUser();
@@ -605,14 +592,10 @@ function __individualResBtnClickHandler() {
 
 function loadAuthorSurveyResponseData() {
     const summaryResBtn = document.getElementById('summary_res_btn');
-    const questionResBtn = document.getElementById('question_res_btn');
     const individualResBtn = document.getElementById('individual_res_btn');
 
     if (summaryResBtn) {
         summaryResBtn.addEventListener('click', __summaryResBtnClickHandler);
-    }
-    if (questionResBtn) {
-        questionResBtn.addEventListener('click', __questionResBtnClickHandler);
     }
     if (individualResBtn) {
         individualResBtn.addEventListener('click', __individualResBtnClickHandler);

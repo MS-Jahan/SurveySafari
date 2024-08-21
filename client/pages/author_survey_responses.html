@@ -38,65 +38,34 @@
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h2 class="text-start" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 title="Total Responses"><i class="bi bi-people-fill"></i> #10</h2>
-                            <a href="#" class="btn btn-sm btn-success" data-bs-toggle="tooltip"
+                            <a href="#" class="btn btn-sm btn-success d-flex" data-bs-toggle="tooltip"
                                 data-bs-placement="bottom" title="View in Spreadsheet"><i
                                     class="bi bi-file-earmark-spreadsheet-fill"></i> <span
-                                    class="d-none d-md-flex d-lg-flex">Google Sheet</span></a>
+                                    class="d-none d-md-flex d-lg-flex px-2">Google Sheet</span></a>
                         </div>
                         <div class="card-body row gy-2">
                             <div class="col-md-4 col-lg-4 col-xs-12">
-                                <a href="#" class="btn btn-success w-100" id="summary_res_btn"> Summary </a>
+                                <a href="#" class="btn btn-success w-100" id="summary_res_btn"><i class="bi bi-file-medical"></i> Summary </a>
                             </div>
                             <div class="col-md-4 col-lg-4 col-xs-12">
-                                <a href="#" class="btn btn-success w-100" id="question_res_btn"> Question</a>
+                                <a href="#" class="btn btn-success w-100" id="individual_res_btn"><i class="bi bi-person-lines-fill"></i> Individual</a>
                             </div>
                             <div class="col-md-4 col-lg-4 col-xs-12">
-                                <a href="#" class="btn btn-success w-100" id="individual_res_btn"> Individual</a>
+                                <div class="btn-group">
+                                    <a class="btn btn-md px-lg-5" style="background-color: #618264;" data-bs-toggle="tooltip"
+                                    data-bs-placement="bottom" title="Download"><i class="bi bi-cloud-download-fill"></i></a>
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                                    <label class="btn btn-outline-success d-flex" for="btnradio2">Summary<i class="bi bi-filetype-pdf d-none d-lg-flex"></i> </label>
+                                  
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked>
+                                    <label class="btn btn-outline-success d-flex" for="btnradio3">Responses <i class="bi bi-filetype-csv d-none d-lg-flex"></i></label>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer text-muted py-3">
                             <div id="summary" class="footer-content">
                                 <div class="text-center mx-5">
                                     <select class="form-select" id="select_question_summary"></select>
-                                </div>
-                            </div>
-                            <div id="question" class="footer-content d-none">
-                                <!-- Content for Question -->
-                                <div class="row gy-2 justify-content-center align-items-center">
-                                    <!-- Dropdown -->
-                                    <div class="col-12 col-sm-8 col-md-6 col-lg-7 mb-2 mb-md-0">
-                                        <select class="form-select">
-                                            <option selected>Why are you wanting to join us?</option>
-                                            <!-- Add more options here -->
-                                        </select>
-                                    </div>
-
-                                    <!-- Pagination -->
-                                    <div class="col-12 col-sm-4 col-md-4 col-lg-3">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination justify-content-center mb-0">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <span class="page-link">11</span>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <span class="page-link">of</span>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <span class="page-link">11</span>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
                                 </div>
                             </div>
                             <div id="individual" class="footer-content d-none">
@@ -133,9 +102,6 @@
             </div>
             <hr>
             <div class="summary_response_container pt-3" id="summary"></div>
-            <div class="question_response_container pt-3 d-none" id="question">
-                <p>Question Cards will be here</p>
-            </div>
             <div class="individual_response_container pt-3 d-none" id="individual">
                 <p>Individual Cards will be here</p>
             </div>
