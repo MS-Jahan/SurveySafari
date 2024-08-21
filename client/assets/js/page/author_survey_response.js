@@ -592,9 +592,29 @@ function __individualResBtnClickHandler() {
     __loadAuthorSurveyResponseByUser();
 }
 
+function __handleSummaryResponseDownload() {} // Todo: Implement this function
+
+function __handleIndividualResponseDownload() {} // Todo: Implement this function
+
 function loadAuthorSurveyResponseData() {
     const summaryResBtn = document.getElementById('summary_res_btn');
     const individualResBtn = document.getElementById('individual_res_btn');
+    const downloadBtn = document.getElementById('file_download_btn');
+    
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function() {
+            const fileType = document.querySelector('input[name="file_type"]:checked').value;
+            console.log(fileType);
+            if (fileType === 'csv') {
+                console.log("Downloading CSV file...");
+                __handleIndividualResponseDownload();
+            }
+            else if (fileType === 'pdf') {
+                console.log("Downloading PDF file...");
+                __handleSummaryResponseDownload();
+            }
+        });
+    }
 
     if (summaryResBtn) {
         summaryResBtn.addEventListener('click', __summaryResBtnClickHandler);
