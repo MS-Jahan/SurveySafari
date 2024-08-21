@@ -520,6 +520,8 @@ function __setQuestionSummaryFilter() {
 
 function __loadAuthorSurveyResponseSummary() {
     const summaryResContainer = document.getElementsByClassName('summary_response_container')[0];
+    summaryResContainer.innerHTML = '';
+
     if (!summaryResContainer) {
         console.warn("No summary response container found.");
         return null;
@@ -597,6 +599,7 @@ function loadAuthorSurveyResponseData() {
     if (summaryResBtn) {
         summaryResBtn.addEventListener('click', __summaryResBtnClickHandler);
     }
+
     if (individualResBtn) {
         individualResBtn.addEventListener('click', __individualResBtnClickHandler);
     }
