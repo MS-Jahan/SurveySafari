@@ -270,7 +270,7 @@ const testSurveyResponseSummary = {
         },
         {
             question: "If yes, please describe the performance issues you encountered.",
-            serial: 12,
+            serial: 11,
             quantity: 1,
             responses: [
                 "I experienced some lag in the processing speed of YOLO when detecting multiple faces simultaneously."
@@ -278,7 +278,7 @@ const testSurveyResponseSummary = {
         },
         {
             question: "Any additional comments or suggestions?",
-            serial: 14,
+            serial: 13,
             quantity: 2,
             responses: [
                 "Overall, I am satisfied with the performance of YOLO and would recommend it to others.",
@@ -320,7 +320,7 @@ const testSurveyResponseSummary = {
         {
             id: 2,
             question: "Would you recommend YOLO for face detection in other web applications?",
-            serial: 13,
+            serial: 12,
             quantity: 3,
             chartData: {
                 title: "Recommendation Status",
@@ -417,7 +417,7 @@ const testSurveyResponseSummary = {
         {
             id: 6,
             serial: 4,
-            question: "Please upload the relevant documents.",
+            question: "Upload Profile Picture",
             quantity: 10,
             responses: {
                 "JPG": [
@@ -450,6 +450,76 @@ const testSurveyResponseByQuestion = {
 
 const testSurveyResponseByUser = {
 
+}
+
+function __showDiv(divId) {
+    // Hide all sections by adding the d-none class
+    document.querySelectorAll('.footer-content').forEach(function (div) {
+        div.classList.add('d-none');
+    });
+
+    // Show the selected div section by removing the d-none class
+    const selectedDiv = document.getElementById(divId);
+    if (selectedDiv) {
+        selectedDiv.classList.remove('d-none');
+    }
+
+    // Hide all response containers by adding the d-none class
+    document.querySelectorAll('.summary_response_container, .question_response_container, .individual_response_container').forEach(function (container) {
+        container.classList.add('d-none');
+    });
+
+    // Show the specific response container by removing the d-none class
+    const selectedContainer = document.querySelector(`.${divId}_response_container`);
+    if (selectedContainer) {
+        selectedContainer.classList.remove('d-none');
+    }
+}
+
+function __setQuestionSummaryFilter() {
+    const filter = document.getElementById('select_question_summary');
+
+    if (!filter) {
+        console.warn("No question summary filter found.");
+        return;
+    }
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = 'all';
+    defaultOption.text = 'All Questions';
+    filter.appendChild(defaultOption);
+    defaultOption.selected = true;
+
+    let serial = 1;
+    testSurveyForm.forEach((field) => {
+        if (field.type === 'header' || field.type === 'paragraph') {
+            return;
+        }
+
+        const option = document.createElement('option');
+        option.value = `${field["label"]}-${serial}`;
+        option.text = field.label;
+        filter.appendChild(option);
+        serial++;
+    });
+
+    filter.addEventListener('change', function (event) {
+        const selectedValue = event.target.value.toLowerCase();
+        const responseCards = document.querySelectorAll('.response-card');
+
+        responseCards.forEach((card) => {
+            const cardId = card.id.toLowerCase();
+
+            if (selectedValue === 'all') {
+                card.classList.remove('d-none');
+            }
+            else if (cardId === selectedValue) {
+                card.classList.remove('d-none');
+            } else {
+                card.classList.add('d-none');
+            }
+        });
+    });
 }
 
 function __loadAuthorSurveyResponseSummary() {
@@ -519,6 +589,7 @@ function __loadAuthorSurveyResponseByUser() {
 
 function __summaryResBtnClickHandler() {
     __showDiv('summary');
+    __setQuestionSummaryFilter();
     __loadAuthorSurveyResponseSummary();
 }
 
@@ -530,30 +601,6 @@ function __questionResBtnClickHandler() {
 function __individualResBtnClickHandler() {
     __showDiv('individual');
     __loadAuthorSurveyResponseByUser();
-}
-
-function __showDiv(divId) {
-    // Hide all sections by adding the d-none class
-    document.querySelectorAll('.footer-content').forEach(function (div) {
-        div.classList.add('d-none');
-    });
-
-    // Show the selected div section by removing the d-none class
-    const selectedDiv = document.getElementById(divId);
-    if (selectedDiv) {
-        selectedDiv.classList.remove('d-none');
-    }
-
-    // Hide all response containers by adding the d-none class
-    document.querySelectorAll('.summary_response_container, .question_response_container, .individual_response_container').forEach(function (container) {
-        container.classList.add('d-none');
-    });
-
-    // Show the specific response container by removing the d-none class
-    const selectedContainer = document.querySelector(`.${divId}_response_container`);
-    if (selectedContainer) {
-        selectedContainer.classList.remove('d-none');
-    }
 }
 
 function loadAuthorSurveyResponseData() {
