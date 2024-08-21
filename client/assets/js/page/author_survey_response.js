@@ -4,6 +4,8 @@ import { createTextFieldResponseSummaryCard } from '../components/textfield_resp
 import { createMultipleChoiceResponseCard } from '../components/multiplechoice_response_card.js';
 import { createCheckBoxResponseCard } from '../components/checkbox_response_card.js';
 import { createNonUniqueResponseCard } from '../components/non_unique_response_card.js';
+import { createFileResponseSummaryCard } from '../components/file_response_card.js';
+import { createSelectResponseCard } from '../components/select_response_card.js';
 
 const testSurveyForm = [
     {
@@ -282,6 +284,16 @@ const testSurveyResponseSummary = {
                 "Overall, I am satisfied with the performance of YOLO and would recommend it to others.",
                 "It would be helpful to have more tutorials and guides on optimizing YOLO for different use cases."
             ]
+        },
+        {
+            question: "Date of Birth",
+            serial: 5,
+            quantity: 3,
+            responses: [
+                "1990-01-01",
+                "1985-05-12",
+                "1978-09-30"
+            ]
         }
     ],
     "radio-group-responses": [
@@ -357,6 +369,8 @@ const testSurveyResponseSummary = {
                     "Easy integration",
                     "Lightweight model"
                 ],
+                xAxisLabel: "Responses",
+                yAxisLabel: "Feature",
                 data: [3, 3, 1, 0],
                 backgroundColor: [
                     "#ff33f9",
@@ -364,6 +378,22 @@ const testSurveyResponseSummary = {
                     "#f9ff41",
                     "#41ff44"
                 ]
+            }
+        }
+    ],
+    "select-responses": [
+        {
+            id: 4,
+            question: "How would you rate the accuracy of YOLO in face detection?",
+            serial: 7,
+            quantity: 3,
+            chartData: {
+                title: "Accuracy Rating",
+                xAxisLabel: "Rating",
+                yAxisLabel: "Responses",
+                labels: ["Excellent", "Very Good", "Good", "Fair", "Poor"],
+                datasetLabel: "Accuracy Rating",
+                data: [0, 1, 3, 1, 0],
             }
         }
     ],
@@ -382,6 +412,35 @@ const testSurveyResponseSummary = {
                 data: [0, 5, 2, 6, 2, 8, 1, 5, 10, 9, 8, 7, 6, 0, 0, 0, 0],
             }
         },
+    ],
+    "file-responses": [
+        {
+            id: 6,
+            serial: 7,
+            question: "Please upload the relevant documents.",
+            quantity: 10,
+            responses: {
+                "JPG": [
+                    { name: "image1.jpg", url: "/path/to/image1.jpg" },
+                    { name: "image2.jpg", url: "/path/to/image2.jpg" }
+                ],
+                "PNG": [
+                    { name: "image1.png", url: "/path/to/image1.jpg" },
+                    { name: "image2.png", url: "/path/to/image2.jpg" },
+                    { name: "image3.png", url: "/path/to/image3.jpg" },
+                    { name: "image4.png", url: "/path/to/image4.jpg" },
+                    { name: "image5.png", url: "/path/to/image5.jpg" },
+                    { name: "image6.png", url: "/path/to/image6.jpg" },
+                    { name: "image7.png", url: "/path/to/image7.jpg" },
+                    { name: "image8.png", url: "/path/to/image8.jpg" },
+                ],
+                "PDF": [
+                    { name: "file1.pdf", url: "/path/to/file1.pdf" },
+                    { name: "file2.pdf", url: "/path/to/file2.pdf" }
+                ],
+                // Add more file types as needed
+            }
+        }
     ]
 }
 
@@ -429,6 +488,19 @@ function __loadAuthorSurveyResponseSummary() {
             responseCards[serial - 1] = createNonUniqueResponseCard(nuResponse);
         });
     }
+    if (testSurveyResponseSummary['file-responses']) {
+        testSurveyResponseSummary['file-responses'].forEach((fileResponse) => {
+            const serial = fileResponse.serial;
+            responseCards[serial - 1] = createFileResponseSummaryCard(fileResponse);
+            console.log(responseCards[serial - 1]);
+        });
+    }
+    if (testSurveyResponseSummary['select-responses']) {
+        testSurveyResponseSummary['select-responses'].forEach((selectResponse) => {
+            const serial = selectResponse.serial;
+            responseCards[serial - 1] = createSelectResponseCard(selectResponse);
+        });
+    }
 
     responseCards.forEach((card) => {
         if (card) {
@@ -438,11 +510,11 @@ function __loadAuthorSurveyResponseSummary() {
 }
 
 function __loadAuthorSurveyResponseByQuestion() {
-
+    // todo: implement this
 }
 
 function __loadAuthorSurveyResponseByUser() {
-
+    // todo: implement this
 }
 
 function __summaryResBtnClickHandler() {

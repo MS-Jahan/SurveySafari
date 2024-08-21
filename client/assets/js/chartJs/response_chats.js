@@ -94,6 +94,87 @@ function renderHBarChart(canvas, chartData) {
                     },
                     textAlign: 'center',
                 }
+            },
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: chartData.xAxisLabel
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: chartData.yAxisLabel
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
+
+function renderBarChart(canvas, chartData) {
+    if (!canvas || !chartData) {
+        console.warn("No canvas or chart data provided to render horizontal bar chart.");
+        return null;
+    }
+
+    const barChartctx = canvas.getContext('2d');
+    new Chart(barChartctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: chartData.datasetLabel,
+                data: chartData.data,
+                backgroundColor: chartData.backgroundColor,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'x',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: chartData.title
+                },
+                datalabels: {
+                    color: '#000',
+                    formatter: (value, context) => {
+                        const total = context.chart.data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+                        const percentage = ((value / total) * 100).toFixed(2) + '%';
+                        
+                        if (percentage === '0.00%') {
+                            return '';
+                        }
+
+                        return percentage;
+                    },
+                    textAlign: 'center',
+                }
+            },
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: chartData.xAxisLabel
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: chartData.yAxisLabel
+                    }
+                }
             }
         },
         plugins: [ChartDataLabels]
@@ -151,4 +232,4 @@ function renderLineChart(canvas, chartData) {
     });
 }
 
-export { renderDonutChart, renderHBarChart, renderLineChart };
+export { renderDonutChart, renderHBarChart, renderLineChart, renderBarChart };

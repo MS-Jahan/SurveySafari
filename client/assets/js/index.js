@@ -9,6 +9,7 @@ import { loadExplorerRedeemShopData, setUpRedeemModels, setUprangeFilterWithPagi
 import { loadAuthorDashboardData } from './page/author_dashboard.js';
 import { loadExplorerSurveyData } from './page/explorer_survey.js';
 import { loadAuthorSurveyArchiveData } from './page/author_survey_archive.js';
+import { loadAuthorSurveyResponseData } from './page/author_survey_response.js';
 
 // FullNavs
 const authorNavBlocks = {
@@ -123,7 +124,8 @@ function setUpAuthorSurveyResponses() {
 
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
-
+    
+    loadAuthorSurveyResponseData();
 }
 
 // Explorer pages

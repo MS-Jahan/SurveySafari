@@ -31,23 +31,27 @@
     <div class="mt-5 pt-5"></div>
 
     <main>
-        <div class="container-fluid px-5">
+        <div class="container-fluid px-5 mb-5">
             <div class="row">
                 <div class="col-12">
                     <div class="card text-center" style="background-color: #79AC78;">
                         <div class="card-header d-flex align-items-center justify-content-between">
-                            <h2 class="text-start" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Total Responses"><i class="bi bi-people-fill"></i> #10</h2>
-                            <a href="#" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View in Spreadsheet"><i class="bi bi-file-earmark-spreadsheet-fill"></i> <span class="d-none d-md-flex d-lg-flex">Google Sheet</span></a>
+                            <h2 class="text-start" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="Total Responses"><i class="bi bi-people-fill"></i> #10</h2>
+                            <a href="#" class="btn btn-sm btn-success" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="View in Spreadsheet"><i
+                                    class="bi bi-file-earmark-spreadsheet-fill"></i> <span
+                                    class="d-none d-md-flex d-lg-flex">Google Sheet</span></a>
                         </div>
                         <div class="card-body row gy-2">
                             <div class="col-md-4 col-lg-4 col-xs-12">
-                                <a href="#" class="btn btn-success w-100" onclick="showDiv('summary')"> Summary </a>
+                                <a href="#" class="btn btn-success w-100" id="summary_res_btn"> Summary </a>
                             </div>
                             <div class="col-md-4 col-lg-4 col-xs-12">
-                                <a href="#" class="btn btn-success w-100" onclick="showDiv('question')"> Question</a>
+                                <a href="#" class="btn btn-success w-100" id="question_res_btn"> Question</a>
                             </div>
                             <div class="col-md-4 col-lg-4 col-xs-12">
-                                <a href="#" class="btn btn-success w-100" onclick="showDiv('individual')"> Individual</a>
+                                <a href="#" class="btn btn-success w-100" id="individual_res_btn"> Individual</a>
                             </div>
                         </div>
                         <div class="card-footer text-muted py-3">
@@ -70,7 +74,7 @@
                                             <!-- Add more options here -->
                                         </select>
                                     </div>
-                            
+
                                     <!-- Pagination -->
                                     <div class="col-12 col-sm-4 col-md-4 col-lg-3">
                                         <nav aria-label="Page navigation">
@@ -131,13 +135,67 @@
                     </div>
                 </div>
             </div>
-            <div class="response_container" id="summary">
-                <p>Summary Cards will be here</p>
+            <hr>
+            <div class="summary_response_container pt-3" id="summary">
+                <!-- <div class="card mb-3" style="background-color: #79AC78;">
+                    <div class="card-header">
+                      <h4>Question: For text-field, email, link, text-area type questions</h4>
+                      <h6>Responses: #10</h6>
+                    </div>
+                    <div class="card-body my-3" style="min-height: 250px;">
+                        <ul class="list-group custom-scrollbar" style="overflow-y: auto; max-height: 400px;">
+                            <li class="list-group-item list-group-item-custom">An active item </li>
+                            <li class="list-group-item list-group-item-custom">A second item</li>
+                            <li class="list-group-item list-group-item-custom">A third item</li>
+                            <li class="list-group-item list-group-item-custom">A fourth item</li>
+                            <li class="list-group-item list-group-item-custom">And a fifth one</li>
+                            <li class="list-group-item list-group-item-custom">A third item</li>
+                            <li class="list-group-item list-group-item-custom">A third item</li>
+                            <li class="list-group-item list-group-item-custom">A fourth item</li>
+                            <li class="list-group-item list-group-item-custom">And a fifth one</li>
+                            <li class="list-group-item list-group-item-custom">A third item</li>
+                            <li class="list-group-item list-group-item-custom">A third item</li>
+                            <li class="list-group-item list-group-item-custom">A fourth item</li>
+                            <li class="list-group-item list-group-item-custom">And a fifth one</li>
+                            <li class="list-group-item list-group-item-custom">A third item</li>
+                            <li class="list-group-item list-group-item-custom">A third item</li>
+                            <li class="list-group-item list-group-item-custom">A fourth item</li>
+                            <li class="list-group-item list-group-item-custom">And a fifth one</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card mb-3" style="background-color: #79AC78;">
+                    <div class="card-header">
+                      <h4>Question: For Radio Button Multichoice questions</h4>
+                      <h6>Responses: #10</h6>
+                    </div>
+                    <div class="card-body my-3 text-start" style="min-height: 250px;">
+                        <canvas class="mx-lg-5" id="donutChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+                <div class="card mb-3" style="background-color: #79AC78;">
+                    <div class="card-header">
+                      <h4>Question: For MuliCheck CheckBox questions</h4>
+                      <h6>Responses: #10</h6>
+                    </div>
+                    <div class="card-body my-3 text-start" style="min-height: 250px;">
+                        <canvas class="mx-lg-5" id="hBarChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+                <div class="card mb-3" style="background-color: #79AC78;">
+                    <div class="card-header">
+                      <h4>Question: For Non unique Responses</h4>
+                      <h6>Responses: #10</h6>
+                    </div>
+                    <div class="card-body my-3 text-start" style="min-height: 250px;">
+                        <canvas class="mx-lg-5" id="lineChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div> -->
             </div>
-            <div class="response_container d-none" id="question">
+            <div class="question_response_container pt-3 d-none" id="question">
                 <p>Question Cards will be here</p>
             </div>
-            <div class="response_container d-none" id="individual">
+            <div class="individual_response_container pt-3 d-none" id="individual">
                 <p>Individual Cards will be here</p>
             </div>
         </div>
@@ -185,26 +243,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script type="module" src="../assets/js/app.js"></script>
     <script type="module" src="../assets/js/chatAI/chatAI.js"></script>
     <script type="module" src="../assets/js/utility/tooltip.js"></script>
-    <script>
-        function showDiv(divId) {
-            // Hide all divs
-            document.querySelectorAll('.footer-content').forEach(function(div) {
-                div.classList.add('d-none');
-            });
-
-            document.querySelectorAll('.response_container').forEach(function(div) {
-                div.classList.add('d-none');
-            });
-    
-            // Show the selected div
-            document.querySelectorAll('#' + divId).forEach(function(div) {
-                div.classList.remove('d-none');
-            });
-        }
-    </script>
 </body>
 
 </html>
