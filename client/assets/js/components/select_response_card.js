@@ -10,6 +10,7 @@ function createSelectResponseCard(responseData) {
 
     const responseCard = document.createElement('div');
     responseCard.className = 'card mb-3';
+    responseCard.id = `${responseData.question}-${responseData.serial}`;
     responseCard.style.backgroundColor = '#79AC78';
 
     const responseCardHeader = document.createElement('div');

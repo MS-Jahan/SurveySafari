@@ -8,6 +8,7 @@ function createFileResponseSummaryCard(fileResponseData) {
 
     const fileResponseCard = document.createElement("div");
     fileResponseCard.className = "card mb-3";
+    fileResponseCard.id = `${fileResponseData.question}-${fileResponseData.serial}`;
     fileResponseCard.style.backgroundColor = "#79AC78";
 
     const fileResponseCardHeader = `

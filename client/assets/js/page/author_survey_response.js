@@ -251,7 +251,7 @@ const testSurveyResponseSummary = {
         },
         {
             question: "Your Feedback on YOLO",
-            serial: 6,
+            serial: 5,
             quantity: 3,
             responses: [
                 "YOLO has proven to be a reliable face detection tool, but it could benefit from more efficient processing times.",
@@ -262,7 +262,7 @@ const testSurveyResponseSummary = {
         {
             question: "What challenges did you face while integrating YOLO into your web application?",
             quantity: 2,
-            serial: 9,
+            serial: 8,
             responses: [
                 "I encountered some issues with the compatibility of YOLO with my existing codebase.",
                 "The documentation for integrating YOLO was not very clear, which made the process more challenging."
@@ -287,7 +287,7 @@ const testSurveyResponseSummary = {
         },
         {
             question: "Date of Birth",
-            serial: 5,
+            serial: 3,
             quantity: 3,
             responses: [
                 "1990-01-01",
@@ -338,7 +338,7 @@ const testSurveyResponseSummary = {
         {
             id: 4,
             question: "Did you face any performance issues with YOLO?",
-            serial: 11,
+            serial: 10,
             quantity: 3,
             chartData: {
                 title: "Performance Issues",
@@ -358,7 +358,7 @@ const testSurveyResponseSummary = {
         {
             id: 3,
             question: "Which features of YOLO do you find most useful?",
-            serial: 8,
+            serial: 7,
             quantity: 3,
             chartData: {
                 datasetLabel: "Feature Preferences",
@@ -385,7 +385,7 @@ const testSurveyResponseSummary = {
         {
             id: 4,
             question: "How would you rate the accuracy of YOLO in face detection?",
-            serial: 7,
+            serial: 6,
             quantity: 3,
             chartData: {
                 title: "Accuracy Rating",
@@ -402,7 +402,7 @@ const testSurveyResponseSummary = {
             id: 5,
             question: "How many hours did it take you to integrate YOLO into your project?",
             quantity: 3,
-            serial: 10,
+            serial: 9,
             chartData: {
                 title: "Integration Hours",
                 xAxisLabel: "Hours",
@@ -416,7 +416,7 @@ const testSurveyResponseSummary = {
     "file-responses": [
         {
             id: 6,
-            serial: 7,
+            serial: 4,
             question: "Please upload the relevant documents.",
             quantity: 10,
             responses: {

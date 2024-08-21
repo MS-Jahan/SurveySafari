@@ -9,6 +9,7 @@ function createTextFieldResponseSummaryCard(textFieldResponseData) {
     var textFieldResponseCard = document.createElement("div");
     textFieldResponseCard.className = "card mb-3";
     textFieldResponseCard.style.backgroundColor = "#79AC78";
+    textFieldResponseCard.id = `${textFieldResponseData.question}-${textFieldResponseData.serial}`;
     textFieldResponseCard.innerHTML = `
         <div class="card-header">
             <h4>Question: ${textFieldResponseData.question}</h4>
