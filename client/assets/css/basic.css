@@ -34,6 +34,19 @@ body::-webkit-scrollbar-thumb:hover {
     background-color: #198754;
 }
 
+body::-webkit-scrollbar-button {
+    width: 10px;
+    height: 10px;
+}
+
+body::-webkit-scrollbar-button:vertical:start:decrement {
+    background-image: url('./scrollbar/down-arrow.svg') !important;
+}
+
+body::-webkit-scrollbar-button:vertical:end:increment {
+    background-image: url('./scrollbar/up-arrow.svg') !important;
+}
+
 body {
     background: #618264 !important;
     overflow-x: hidden !important;
@@ -245,6 +258,14 @@ color: #fff;
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: #198754;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button:vertical:start:decrement {
+    background-image: url('./scrollbar/down-arrow.svg') !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button:vertical:end:increment {
+    background-image: url('./scrollbar/up-arrow.svg') !important;
 }
 
 .list-group-item-custom {
