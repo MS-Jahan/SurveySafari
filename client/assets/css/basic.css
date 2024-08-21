@@ -19,17 +19,19 @@
 }
 
 body::-webkit-scrollbar {
-    height: 2vh;
-    width: 5px;
-    display: none;
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #5e635e;
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: #D0E7D2;
+    background-color: #79AC78;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-    background-color: #79AC78;
+    background-color: #198754;
 }
 
 body {
