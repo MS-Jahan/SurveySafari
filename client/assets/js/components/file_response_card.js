@@ -7,7 +7,7 @@ function createFileResponseSummaryCard(fileResponseData) {
     }
 
     const fileResponseCard = document.createElement("div");
-    fileResponseCard.className = "card mb-3";
+    fileResponseCard.className = "card mb-3 response-card";
     fileResponseCard.id = `${fileResponseData.question}-${fileResponseData.serial}`;
     fileResponseCard.style.backgroundColor = "#79AC78";
 
@@ -47,7 +47,7 @@ function createFileResponseSummaryCard(fileResponseData) {
             <ul class="nav nav-tabs" id="fileTabs" role="tablist">
                 ${tabs}
             </ul>
-            <div class="tab-content mt-3" style="max-height: 300px; overflow-y: auto;">
+            <div class="tab-content mt-3 custom-scrollbar" style="max-height: 300px; overflow-y: auto;">
                 ${tabContents}
             </div>
             <button class="btn btn-success mt-3" id="downloadAllFiles">Download All Files</button>

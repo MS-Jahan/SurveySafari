@@ -7,7 +7,7 @@ function createTextFieldResponseSummaryCard(textFieldResponseData) {
     }
 
     var textFieldResponseCard = document.createElement("div");
-    textFieldResponseCard.className = "card mb-3";
+    textFieldResponseCard.className = "card mb-3 response-card";
     textFieldResponseCard.style.backgroundColor = "#79AC78";
     textFieldResponseCard.id = `${textFieldResponseData.question}-${textFieldResponseData.serial}`;
     textFieldResponseCard.innerHTML = `

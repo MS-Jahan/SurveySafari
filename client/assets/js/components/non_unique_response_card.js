@@ -9,7 +9,7 @@ function createNonUniqueResponseCard(responseData) {
     }
     
     const responseCard = document.createElement('div');
-    responseCard.className = 'card mb-3';
+    responseCard.className = 'card mb-3 response-card';
     responseCard.id = `${responseData.question}-${responseData.serial}`;
     responseCard.style.backgroundColor = '#79AC78';
 
