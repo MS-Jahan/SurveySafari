@@ -9,6 +9,8 @@ import { loadExplorerRedeemShopData, setUpRedeemModels, setUprangeFilterWithPagi
 import { loadAuthorDashboardData } from './page/author_dashboard.js';
 import { loadExplorerSurveyData } from './page/explorer_survey.js';
 import { loadAuthorSurveyArchiveData } from './page/author_survey_archive.js';
+import { loadAuthorSurveyResponseData } from './page/author_survey_response.js';
+
 
 // FullNavs
 const authorNavBlocks = {
@@ -118,6 +120,15 @@ function setUpAuthorUpgradeSubscription() {
     setUpFooter(2);
 }
 
+function setUpAuthorSurveyResponses() {
+    console.log('Loading author survey responses page...');
+
+    setUpNavbar(authorNavBlocks, false);
+    setUpFooter(2);
+    
+    loadAuthorSurveyResponseData();
+}
+
 // Explorer pages
 function setUpExplorerHome() {
     console.log('Loading explorer home page...');
@@ -222,5 +233,6 @@ export {
     setUpDiscussion,
     setUpCreateDiscussion,
     setExplorerSurveyView,
-    setExplorerSurvey
+    setExplorerSurvey,
+    setUpAuthorSurveyResponses
 };
