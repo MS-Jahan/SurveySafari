@@ -55,7 +55,7 @@
                                     <a class="btn btn-md px-lg-5" style="background-color: #618264;" data-bs-toggle="tooltip"
                                     data-bs-placement="bottom" title="Download" id="file_download_btn"><i class="bi bi-cloud-download-fill"></i></a>
                                     <input type="radio" class="btn-check" name="file_type" id="btnradio2" autocomplete="off" value="pdf">
-                                    <label class="btn btn-outline-success d-flex" for="btnradio2">Summary<i class="bi bi-filetype-pdf d-none d-lg-flex"></i></label>
+                                    <label class="btn btn-outline-success d-flex" for="btnradio2">S.ary<i class="bi bi-filetype-pdf d-flex"></i></label>
                                   
                                     <input type="radio" class="btn-check" name="file_type" id="btnradio3" autocomplete="off" value="csv" checked>
                                     <label class="btn btn-outline-success d-flex" for="btnradio3">Res<i class="bi bi-filetype-csv d-flex"></i></label>
@@ -72,23 +72,23 @@
                                 <!-- Pagination -->
                                 <div class="text-center">
                                     <nav aria-label="Page navigation">
-                                        <ul class="pagination justify-content-center mb-0">
+                                        <ul class="pagination justify-content-center mb-0" id="individual_response_pagination">
                                             <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
+                                                <a class="page-link bg-success" href="#" aria-label="Previous" id="prev_btn">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
                                             <li class="page-item disabled">
-                                                <span class="page-link">11</span>
+                                                <span class="page-link px-lg-5" style="background-color: #618264;" id="current_res_idx">11</span>
                                             </li>
                                             <li class="page-item disabled">
-                                                <span class="page-link">of</span>
+                                                <span class="page-link" style="background-color: #618264;">of</span>
                                             </li>
                                             <li class="page-item disabled">
-                                                <span class="page-link">11</span>
+                                                <span class="page-link px-lg-5" style="background-color: #618264;" id="total_res_count">11</span>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
+                                                <a class="page-link bg-success" href="#" aria-label="Next" id="next_btn">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
@@ -103,7 +103,11 @@
             <hr>
             <div class="summary_response_container pt-3" id="summary"></div>
             <div class="individual_response_container pt-3 d-none" id="individual">
-                <p>Individual Cards will be here</p>
+                <div class="card p-3" style="background-color: #79AC78; min-height: 620px;">
+                    <div class="card-body" id="survey-form">
+
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -152,6 +156,10 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+    <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
     <script type="module" src="../assets/js/app.js"></script>
     <script type="module" src="../assets/js/chatAI/chatAI.js"></script>
     <script type="module" src="../assets/js/utility/tooltip.js"></script>
