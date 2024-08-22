@@ -2,7 +2,6 @@
 
 function renderForm(container_id, formData) {
     if (formData && Object.keys(formData).length > 2) {
-        console.log(formData);
         $(`#${container_id}`).formRender({
             formData: formData
         });
