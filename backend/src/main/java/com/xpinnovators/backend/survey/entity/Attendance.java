@@ -23,10 +23,31 @@ public class Attendance {
 
     // Constructors, getters, and setters
 
-    public AttendanceDTO(Attendance attendance) {
-        this.id = attendance.getId();
-        this.surveyId = attendance.getSurvey().getId();
-        this.explorerId = attendance.getExplorer().getId();
-        this.attendedAt = attendance.getAttendedAt();
+    public Long getId() {
+        return id;
+    }
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public Explorer getExplorer() {
+        return explorer;
+    }
+
+    public Timestamp getAttendedAt() {
+        return attendedAt;
+    }
+
+    public void setExplorer(Explorer explorer) {
+        this.explorer = explorer;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
+
+    public void setAttendedAt(Timestamp timestamp) {
+        this.attendedAt = timestamp;
     }
 }

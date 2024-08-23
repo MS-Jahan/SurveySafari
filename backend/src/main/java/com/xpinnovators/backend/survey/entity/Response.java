@@ -30,4 +30,12 @@ public class Response {
     public void setResponseData(String responseData) {
         this.responseData = responseData;
     }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
 }

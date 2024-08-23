@@ -5,6 +5,7 @@ import com.xpinnovators.backend.exception.ResourceNotFoundException;
 import com.xpinnovators.backend.user.dto.ExplorerDTO;
 import com.xpinnovators.backend.user.dto.UserDTO;
 import com.xpinnovators.backend.user.entity.User;
+import com.xpinnovators.backend.user.repository.ExplorerRepository;
 import com.xpinnovators.backend.user.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +18,11 @@ import java.util.function.Function;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ExplorerRepository explorerRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, ExplorerRepository explorerRepository) {
         this.userRepository = userRepository;
+        this.explorerRepository = explorerRepository;
     }
 
     public Page<UserDTO> getAllUsers(Pageable pageable) {
