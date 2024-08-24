@@ -1,4 +1,5 @@
 // assets/js/profileItems/dline_card.js
+
 import createDefaultCard from "./default_card.js";
 
 function createDlineCard(profileData) {
@@ -15,7 +16,7 @@ function createDlineCard(profileData) {
 
     const card = createDefaultCard(profileData);
 
-    card.getElementsByClassName("card-body")[0].classList.add("dline");
+    card.classList.add("dline");
     
     return card;
 }
