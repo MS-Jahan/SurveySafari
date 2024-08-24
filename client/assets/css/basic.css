@@ -371,3 +371,7 @@ color: #fff;
     opacity: 1;
     visibility: visible;
 }
+
+.ql-toolbar {
+    background-color: #198754 !important;
+}
