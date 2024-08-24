@@ -18,7 +18,7 @@ function __loadExplorerItems() {
 }
 
 function loadExplorerProfile() {
-    var attachedProfileCard = "DLineCard";
+    var attachedProfileCard = "CloudCard";
     var testProfileData = {
         userName: "Jone Doe",
         profileImgUrl: "https://bootdey.com/img/Content/avatar/avatar7.png",
