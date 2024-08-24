@@ -20,11 +20,6 @@ function createSignOutModal(link) {
             .modal-header {
                 border-bottom: none;
             }
-
-            .modal-body img {
-                width: 50px;
-                height: 50px;
-            }
         </style>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
