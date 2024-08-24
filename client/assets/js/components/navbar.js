@@ -73,6 +73,14 @@ function createNavbar(blocks, anonymous, index, restPass) {
                                         </a>
                                     </li>
                                 `).join('')}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="" aria-current="page" data-bs-toggle="modal" data-bs-target="#signOutModal"">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                        <span class="px-3">
+                                            Sign Out
+                                        </span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>

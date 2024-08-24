@@ -2,6 +2,7 @@
 
 import setUpNavbar from './components/navbar.js';
 import setUpFooter from './components/footer.js';
+import setUpSignOutModal from './components/sign_out_modal.js';
 import { loadExplorerHomeData } from './page/explorer_home.js';
 import { loadExplorerSurveyHomeData } from './page/explorer_survey_home.js';
 import { loadCommunityDiscussionData } from './page/community_discussion.js';
@@ -22,7 +23,6 @@ const authorNavBlocks = {
         { link: 'author_survey_archive.html', icon: 'bi bi-clipboard-data', text: 'Survey Archive' },
         { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
         { link: 'author_upgrade_subscription.html', icon: 'bi bi-credit-card-2-back', text: 'Upgrade Subscription' },
-        { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
     ]
 }
 
@@ -36,8 +36,12 @@ const explorerNavBlocks = {
         { link: 'explorer_redeem_shop.html', icon: 'bi bi-shop', text: 'Redeem Shop' },
         { link: 'explorer_leaderboard.html', icon: 'bi bi-sort-numeric-up', text: 'Leader Board' },
         { link: 'community_discussion.html', icon: 'bi bi-chat-square-text', text: 'Community Discussion' },
-        { link: '#', icon: 'bi bi-box-arrow-in-left', text: 'Sign Out' }
     ]
+}
+
+const signOutLink = {
+    "explorer": "#",
+    "author": "#"
 }
 
 // Annonimus pages
@@ -94,6 +98,7 @@ function setUpAuthorDashboard() {
 
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["author"]);
 
     loadAuthorDashboardData();
 }
@@ -103,6 +108,7 @@ function setUpAuthorSurveyArchive() {
 
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["author"]);
 
     loadAuthorSurveyArchiveData();
 }
@@ -112,6 +118,7 @@ function setUpAuthorSurvey() {
 
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["author"]);
 }
 
 function setUpAuthorUpgradeSubscription() {
@@ -119,6 +126,7 @@ function setUpAuthorUpgradeSubscription() {
 
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["author"]);
 }
 
 function setUpAuthorSurveyResponses() {
@@ -126,6 +134,7 @@ function setUpAuthorSurveyResponses() {
 
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["author"]);
     
     loadAuthorSurveyResponseData();
 }
@@ -136,6 +145,7 @@ function setUpExplorerHome() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 
     loadExplorerHomeData();
 }
@@ -145,6 +155,7 @@ function setUpExplorerProfile() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 
     loadExplorerProfile();
 }
@@ -154,6 +165,7 @@ function setExplorerSurveyHome() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 
     loadExplorerSurveyHomeData();
 }
@@ -163,6 +175,7 @@ function setUpExplorerLeaderboard() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 }
 
 function setUpExplorerRedeemShop() {
@@ -170,6 +183,7 @@ function setUpExplorerRedeemShop() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 
     loadExplorerRedeemShopData();
     setUpRedeemModels();
@@ -181,6 +195,7 @@ function setExplorerSurveyView() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 }
 
 function setExplorerSurvey() {
@@ -188,6 +203,7 @@ function setExplorerSurvey() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(0);
+    setUpSignOutModal(signOutLink["explorer"]);
 
     loadExplorerSurveyData();
 }
@@ -199,6 +215,7 @@ function setUpCommunityDiscussion() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 
     loadCommunityDiscussionData();
 }
@@ -208,6 +225,7 @@ function setUpDiscussion() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 }
 
 function setUpCreateDiscussion() {
@@ -215,6 +233,7 @@ function setUpCreateDiscussion() {
 
     setUpNavbar(explorerNavBlocks, false);
     setUpFooter(2);
+    setUpSignOutModal(signOutLink["explorer"]);
 }
 
 export { 
