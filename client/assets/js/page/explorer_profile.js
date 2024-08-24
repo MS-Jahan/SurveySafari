@@ -74,7 +74,6 @@ function __loadExplorerItems(profileData, attachedProfileCard) {
 
     textExplorerItems.forEach(element => {
         var item = createExplorerItemCard(element);
-        console.log(item);
         var attachBtn = item.querySelector("#attach_btn");
         var detachBtn = item.querySelector("#detach_btn");
 
