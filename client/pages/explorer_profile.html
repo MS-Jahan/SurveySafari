@@ -20,39 +20,16 @@
         <div class="container pt-3">
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
-                    <div class="card" style="background-color: #79AC78;">
-                        <div class="card-header" style="-webkit-text-fill-color: #618264;">
-                            <div class="row">
-                                <div class="col-10">
-                                    <h3>Profile</h3>
-                                </div>
-                                <div class="col-2">
-                                    <a href="#" class="btn"><i class="bi bi-pencil-square h4"
-                                            style="-webkit-text-fill-color: #618264;"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <div id="wrap" class="img-wrap">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                                        class="rounded-circle" width="150">
-                                </div>
-                                <div class="mt-3">
-                                    <h4>John Doe</h4>
-                                    <p class="text-secondary mb-1">Full Stack Developer</p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="profile_card_container"></div>
                     <div class="card mt-3 rounded" style="background-color: #79AC78;">
-                        <div class="card-header">
-                            <h5 class="text-success"><i class="bi bi-clipboard2-pulse mb-0 text-success"></i> Status</h5>
-                        </div>                        
+                        <div class="card-header" style="-webkit-text-fill-color: #618264;">
+                            <h3 class="text-success"><i class="bi bi-clipboard2-pulse mb-0 text-success"></i> Status
+                            </h3>
+                        </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <h5 class="text-success"><i class="bi bi-bar-chart-steps h4 text-success"></i> Rank:</h5>
+                                <h5 class="text-success"><i class="bi bi-bar-chart-steps h4 text-success"></i> Rank:
+                                </h5>
                                 <h5> 000</h5>
                             </div>
                             <hr class="my-1">
@@ -70,12 +47,8 @@
                     <div class="card mt-3" style="background-color: #79AC78;">
                         <div class="card-header" style="-webkit-text-fill-color: #618264;">
                             <div class="row">
-                                <div class="col-10">
-                                    <h4>Social Links</h4>
-                                </div>
-                                <div class="col-2">
-                                    <a href="#" class="btn"><i class="bi bi-pencil-square h5"
-                                            style="-webkit-text-fill-color: #618264;"></i></a>
+                                <div class="col-12">
+                                    <h3><i class="bi bi-globe"></i> Social Links</h3>
                                 </div>
                             </div>
                         </div>
@@ -114,11 +87,7 @@
                         <div class="card-header" style="-webkit-text-fill-color: #618264;">
                             <div class="row">
                                 <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
-                                    <h3>Personal Information</h3>
-                                </div>
-                                <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-                                    <a href="#" class="btn"><i class="bi bi-pencil-square h4"
-                                            style="-webkit-text-fill-color: #618264;"></i></a>
+                                    <h3><i class="bi bi-person-vcard"></i> Personal Information</h3>
                                 </div>
                             </div>
                         </div>
@@ -178,9 +147,9 @@
                     <div class="row gutters-sm">
                         <div class="col-12">
                             <div class="card mb-3" style="background-color: #79AC78;">
-                                <div class="card-header">
-                                    <h5 class="mb-0 text-success"><i class="bi bi-activity text-success"></i> Recent
-                                        Activities</h5>
+                                <div class="card-header" style="-webkit-text-fill-color: #618264;">
+                                    <h3 class="mb-0"><i class="bi bi-activity"></i> Recent
+                                        Activities</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -220,9 +189,9 @@
                     <div class="row gutters-sm">
                         <div class="col-sm-12 mb-3">
                             <div class="card h-100" style="background-color: #79AC78;">
-                                <div class="card-header">
-                                    <h5 class="mb-0 text-success"><i class="bi bi-pie-chart-fill text-success"></i>
-                                        Statistics</h5>
+                                <div class="card-header" style="-webkit-text-fill-color: #618264;">
+                                    <h3 class="mb-0"><i class="bi bi-pie-chart-fill"></i>
+                                        Statistics</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -249,6 +218,281 @@
 
     <footer></footer>
 
+    <div class="fab-container">
+        <button class="fab-main bg-success">
+            <i class="bi bi-plus-circle-dotted"></i>
+        </button>
+        <div class="fab-options">
+            <button class="fab-option" data-bs-toggle="modal" data-bs-target="#itemsCollectionModal"><i
+                    class="bi bi-box-seam-fill"></i></button>
+            <button class="fab-option" data-bs-toggle="modal" data-bs-target="#editModal"><i
+                    class="bi bi-pencil-square"></i></button>
+        </div>
+    </div>
+
+    <!-- edit modal -->
+    <div class="modal fade modal-fullscreen-sm-down" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.4);">
+                <div class="modal-header" style="background-color: rgba(0, 0, 0, 0.6);">
+                    <h4 class="form-label rounded p-1 bg-success"><i class="bi bi-pencil-square"></i> Edit Profile & Info</h4>
+                    <button type="button" class="btn-close bg-success mb-1" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container custom-scrollbar">
+                    <form id="editProfileForm">
+                        <!-- Profile Picture -->
+                        <div class="mb-3 text-center">
+                            <div class="py-3">
+                                <img id="profilePicturePreview" src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    alt="Profile Picture" class="img-fluid rounded-circle mb-3"
+                                    style="max-width: 150px;">
+                            </div>
+                            <label for="profilePicture" class="form-label">Choose Profile Picture</label>
+                            <input class="form-control" type="file" id="profilePicture" accept="image/*"
+                                onchange="previewProfilePicture(event)">
+                        </div>
+
+                        <!-- Quote -->
+                        <div class="mb-3">
+                            <label for="userQuote" class="form-label">Quote</label>
+                            <textarea class="form-control" id="userQuote" rows="3"
+                                placeholder="Write something about yourself..."></textarea>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                        </div>
+
+                        <!-- Full Name -->
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="First name">
+                            </div>
+                            <div class="col">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Last name">
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="Enter your address">
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="mb-3">
+                            <label for="socialLinks" class="form-label">Social Links</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control mb-2" id="handleName1"
+                                        placeholder="Website Handle">
+                                </div>
+                                <div class="col-6">
+                                    <input type="url" class="form-control mb-2" id="socialLink1"
+                                        placeholder="Personal Website">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control mb-2" id="handleName2"
+                                        placeholder="Github Handle">
+                                </div>
+                                <div class="col-6">
+                                    <input type="url" class="form-control mb-2" id="socialLink2" placeholder="Github">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control mb-2" id="handleName3"
+                                        placeholder="Twitter Handle">
+                                </div>
+                                <div class="col-6">
+                                    <input type="url" class="form-control mb-2" id="socialLink3" placeholder="Twitter">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control mb-2" id="handleName4"
+                                        placeholder="Insta Handle">
+                                </div>
+                                <div class="col-6">
+                                    <input type="url" class="form-control mb-2" id="socialLink4"
+                                        placeholder="Instagram">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control mb-2" id="handleName5"
+                                        placeholder="FB Handle">
+                                </div>
+                                <div class="col-6">
+                                    <input type="url" class="form-control" id="socialLink5" placeholder="Facebook">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Change Password -->
+                        <hr>
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="currentPassword"
+                                placeholder="Enter your current password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="newPassword"
+                                placeholder="Enter your new password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirmNewPassword"
+                                placeholder="Confirm your new password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="background-color: rgba(0, 0, 0, 0.6);">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="saveProfileChanges">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Item Collection modal -->
+    <div class="modal fade modal-fullscreen-sm-down" id="itemsCollectionModal" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="itemsCollectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.4);">
+                <div class="modal-header" style="background-color: rgba(0, 0, 0, 0.6);">
+                    <h5 class="modal-title text-light" id="itemsCollectionModalLabel">Items Collection</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body custom-scrollbar">
+                    <div class="container">
+                        <div class="row g-3" id="itemsContainer">
+                            <!-- Sample Item Cards -->
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="card h-100 shadow-sm border-0 rounded">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="Item 1">
+                                    <div class="card-body d-flex flex-column p-3 rounded" style="background-color: #619760;">
+                                        <h6 class="card-title text-center text-light">Item 1</h6>
+                                        <div class="d-grid gap-2 mt-auto">
+                                            <button class="btn btn-outline-success attach-btn">Attach</button>
+                                            <button class="btn btn-outline-secondary detach-btn">Detach</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: rgba(0, 0, 0, 0.6);">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -258,6 +502,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
     <script type="module" src="../assets/js/chartJs/explorer_activity_graph.js"></script>
     <script type="module" src="../assets/js/app.js"></script>
+    <script>
+        function previewProfilePicture(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('profilePicturePreview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </body>
 
 </html>
