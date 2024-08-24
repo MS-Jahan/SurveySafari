@@ -58,6 +58,20 @@ function __loadExplorerItems(profileData, attachedProfileCard) {
         }
     ];
 
+    function __update_button_state(excludeBtns) {
+        let btns = Array.from(itemContainer.getElementsByTagName('button'));
+
+        btns.forEach(btn => {
+            if (!excludeBtns.includes(btn)) {
+                if (btn.id === "attach_btn") {
+                    btn.disabled = false;
+                } else {
+                    btn.disabled = true;
+                }
+            }
+        });
+    }
+
     textExplorerItems.forEach(element => {
         var item = createExplorerItemCard(element);
         console.log(item);
@@ -68,19 +82,23 @@ function __loadExplorerItems(profileData, attachedProfileCard) {
         detachBtn.disabled = !attachBtn.disabled;
 
         attachBtn.addEventListener("click", function() {
+            attachedProfileCard = attachBtn.value;
             __attachProfileCard(profileData, attachBtn.value);
 
             attachBtn.disabled = !attachBtn.disabled;
             detachBtn.disabled = !attachBtn.disabled;
             itemContainerModal.querySelector('.btn-close').click();
+            __update_button_state([attachBtn, detachBtn]);
         });
 
         detachBtn.addEventListener("click", function() {
+            attachedProfileCard = "DefaultCard";
             __attachProfileCard(profileData, "DefaultCard");
 
             detachBtn.disabled = !detachBtn.disabled;
             attachBtn.disabled = !detachBtn.disabled;
             itemContainerModal.querySelector('.btn-close').click();
+            __update_button_state([attachBtn, detachBtn]);
         });
 
         itemContainer.appendChild(item);
