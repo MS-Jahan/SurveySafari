@@ -1,16 +1,6 @@
 @font-face {
-    font-family: "jersey-sp";
-    src: url('Jersey10-Regular.ttf');
-}
-
-@font-face {
     font-family: "silkscreen";
     src: url('Silkscreen-Regular.ttf');
-}
-
-@font-face {
-    font-family: "silkscreen-bold";
-    src: url('Silkscreen-Bold.ttf');
 }
 
 * {
