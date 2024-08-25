@@ -221,14 +221,18 @@
     <footer></footer>
 
     <div class="fab-container">
-        <button class="fab-main bg-success">
+        <button class="fab-main bg-success" data-bs-toggle="tooltip" data-bs-placement="left" title="expand">
             <i class="bi bi-plus-circle-dotted"></i>
         </button>
         <div class="fab-options">
-            <button class="fab-option" data-bs-toggle="modal" data-bs-target="#itemsCollectionModal"><i
+            <div data-bs-toggle="tooltip" data-bs-placement="left" title="items">
+                <button class="fab-option" data-bs-toggle="modal" data-bs-target="#itemsCollectionModal"><i
                     class="bi bi-box-seam-fill"></i></button>
-            <button class="fab-option" data-bs-toggle="modal" data-bs-target="#editModal"><i
+            </div>
+            <div data-bs-toggle="tooltip" data-bs-placement="left" title="edit">
+                <button class="fab-option" data-bs-toggle="modal" data-bs-target="#editModal"><i
                     class="bi bi-pencil-square"></i></button>
+            </div>
         </div>
     </div>
 
@@ -406,6 +410,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
     <script type="module" src="../assets/js/chartJs/explorer_activity_graph.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script type="module" src="../assets/js/utility/tooltip.js"></script>
     <script type="module" src="../assets/js/app.js"></script>
     <script>
         function previewProfilePicture(event) {
