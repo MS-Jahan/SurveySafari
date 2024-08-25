@@ -14,6 +14,7 @@ import { loadAuthorSurveyResponseData } from './page/author_survey_response.js';
 import { loadExplorerProfile } from "./page/explorer_profile.js";
 
 
+
 // FullNavs
 const authorNavBlocks = {
     homePage: 'author_dashboard.html',
@@ -135,6 +136,15 @@ function setUpAuthorSurveyResponses() {
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
     setUpSignOutModal(signOutLink["author"]);
+    
+    loadAuthorSurveyResponseData();
+}
+
+function setUpAuthorSurveyResponses() {
+    console.log('Loading author survey responses page...');
+
+    setUpNavbar(authorNavBlocks, false);
+    setUpFooter(2);
     
     loadAuthorSurveyResponseData();
 }
