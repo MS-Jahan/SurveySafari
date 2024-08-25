@@ -36,6 +36,10 @@ public class JwtUtil {
         }
     }
 
+    public String getExpirationDateFromToken(String token) {
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getExpiration().toString();
+    }
+
     public String extractUsername(String token) {
         return getUsernameFromToken(token);
     }

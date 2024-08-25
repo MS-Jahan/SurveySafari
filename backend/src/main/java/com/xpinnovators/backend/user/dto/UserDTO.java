@@ -4,7 +4,11 @@ import com.xpinnovators.backend.user.entity.Admin;
 import com.xpinnovators.backend.user.entity.Author;
 import com.xpinnovators.backend.user.entity.Explorer;
 import com.xpinnovators.backend.user.entity.User;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UserDTO {
     private Long id;
     private String userType;
@@ -12,6 +16,8 @@ public class UserDTO {
     private String name;
     private String email;
     private String username;
+    private ExplorerDTO explorer;
+    private AuthorDTO author;
     // ... other fields (explorer, author, admin DTOs)
 
     // Constructors, Getters, Setters
@@ -23,6 +29,8 @@ public class UserDTO {
         this.name = user.getName();
         this.email = user.getEmail();
         this.username = user.getUsername();
+        this.explorer = user.getExplorer() != null ? new ExplorerDTO(user.getExplorer()) : null;
+        this.author = user.getAuthor() != null ? new AuthorDTO(user.getAuthor()) : null;
         // ... (map other fields as needed)
     }
 
@@ -39,7 +47,4 @@ public class UserDTO {
         return user;
     }
 
-    public String getName() {
-        return name;
-    }
 }

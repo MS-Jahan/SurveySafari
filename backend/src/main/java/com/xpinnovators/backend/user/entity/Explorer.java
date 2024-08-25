@@ -1,9 +1,11 @@
 package com.xpinnovators.backend.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "explorers")
+// @DiscriminatorValue("explorer")
+@Table(name = "explorer")
 public class Explorer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +17,7 @@ public class Explorer {
     private String institute;
     private String socialLinks;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "explorer")
     private User user;
 

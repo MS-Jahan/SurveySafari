@@ -1,17 +1,20 @@
 package com.xpinnovators.backend.discussion.dto;
 
 import com.xpinnovators.backend.discussion.entity.Discussion;
+import java.util.List;
 
 public class DiscussionDTO {
     private Long id;
     private String title;
     private String content;
+    private List<String> tags;
 
     // Constructor to convert Discussion entity to DiscussionDTO
     public DiscussionDTO(Discussion discussion) {
         this.id = discussion.getId();
         this.title = discussion.getTitle();
         this.content = discussion.getContent();
+
         // Add other fields as needed
     }
 
@@ -38,5 +41,13 @@ public class DiscussionDTO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }

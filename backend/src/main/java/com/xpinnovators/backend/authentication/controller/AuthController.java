@@ -1,6 +1,7 @@
 package com.xpinnovators.backend.authentication.controller;
 
 import com.xpinnovators.backend.authentication.service.JwtUtil;
+import com.xpinnovators.backend.user.dto.UserDTO;
 import com.xpinnovators.backend.user.entity.Admin;
 import com.xpinnovators.backend.user.entity.Author;
 import com.xpinnovators.backend.user.entity.Explorer;
@@ -53,6 +54,10 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Username already exists");
         }
 
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            return ResponseEntity.badRequest().body("Email already exists");
+        }
+
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
             return ResponseEntity.badRequest().body("Password cannot be empty");
         }
@@ -92,21 +97,21 @@ public class AuthController {
                     user.setAuthor(author);
                     break;
 
-                case "admin":
-                    Admin admin = new Admin();
-                    admin = adminRepository.save(admin); // Ensure the Admin entity has valid data if required
-                    if (admin.getId() == null) {
-                        return ResponseEntity.badRequest().body("Failed to save Admin entity.");
-                    }
-                    user.setEntityId(admin.getId());
-                    user.setAdmin(admin);
-                    break;
+//                case "admin":
+//                    Admin admin = new Admin();
+//                    admin = adminRepository.save(admin); // Ensure the Admin entity has valid data if required
+//                    if (admin.getId() == null) {
+//                        return ResponseEntity.badRequest().body("Failed to save Admin entity.");
+//                    }
+//                    user.setEntityId(admin.getId());
+//                    user.setAdmin(admin);
+//                    break;
 
                 default:
                     return ResponseEntity.badRequest().body("Invalid user type");
             }
-
-            User savedUser = userRepository.save(user);
+            user.setUserType(userType.toLowerCase());
+            userRepository.save(user);
             return ResponseEntity.ok("User registered successfully");
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +124,10 @@ public class AuthController {
         User user = userRepository.findByEmail(loginUser.getEmail());
         if (user != null && passwordEncoder.matches(loginUser.getPassword(), user.getPassword())) {
             String token = jwtUtil.generateToken(user.getUsername());
-            return ResponseEntity.ok().header("Set-Cookie", "token=" + token + "; HttpOnly").body("{\"username\":\"" + user.getUsername() + "\"}");
+            // return all user info except password in the body and set the token in the cookie
+            user.setPassword(null);
+            return ResponseEntity.ok().header("Set-Cookie", "token=" + token + "; Path=/; Expires=Thu, 01 Jan 2099 00:00:00 GMT; HttpOnly; SameSite=None; Secure").body(user);
+            //  HttpOnly; Path=/; SameSite=None; Secure
         }
         return ResponseEntity.badRequest().body("Invalid username or password");
     }
@@ -129,7 +137,7 @@ public class AuthController {
         String username = jwtUtil.extractUsername(token);
         User user = userRepository.findByUsername(username);
         if (user != null) {
-            user.setPassword(null); // Remove password before returning
+            user.setPassword(null); // Remove password before returning user info
             return ResponseEntity.ok(user);
         }
         return ResponseEntity.badRequest().body("User not found");
