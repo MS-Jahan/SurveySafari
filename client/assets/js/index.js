@@ -140,15 +140,6 @@ function setUpAuthorSurveyResponses() {
     loadAuthorSurveyResponseData();
 }
 
-function setUpAuthorSurveyResponses() {
-    console.log('Loading author survey responses page...');
-
-    setUpNavbar(authorNavBlocks, false);
-    setUpFooter(2);
-    
-    loadAuthorSurveyResponseData();
-}
-
 // Explorer pages
 function setUpExplorerHome() {
     console.log('Loading explorer home page...');
