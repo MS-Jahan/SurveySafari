@@ -449,3 +449,41 @@ main {
 
     /* Adjust the bounce height */
 }
+
+.ql-editor {
+    -webkit-text-fill-color: #5e635e !important;
+}
+
+input {
+    -webkit-text-fill-color: #5e635e !important;
+}
+
+textarea {
+    -webkit-text-fill-color: #5e635e !important;
+}
+
+option {
+    -webkit-text-fill-color: #5e635e !important;
+}
+
+/* For selected checkboxes */
+input[type="checkbox"] {
+    accent-color: #198754 !important;
+    border-color: #619760 !important;
+}
+
+/* For selected radio buttons */
+input[type="radio"] {
+    accent-color: #198754 !important;
+    border-color: #619760 !important;
+}
+
+option:checked {
+    background-color: #198754 !important;
+}
+option:current {
+    background-color: #198754 !important;
+}
+option:hover {
+    background-color: #198754 !important;
+}
