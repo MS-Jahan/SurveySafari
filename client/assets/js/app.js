@@ -29,8 +29,12 @@ import setFont from './font/fonts.js';
 function initApp() {
     const page = document.body.id;
 
-    if (!(page in ['index', 'login', 'signup', 'forgot_password', 'reset_password'])) {
-        setFont('default'); // get user font from database;
+
+
+    if (['index', 'login', 'signup', 'forgot_password', 'reset_password'].includes(page)) {
+        console.log('Setting default font');
+    } else {
+        setFont('default'); // Set user selected font
     }
     
     switch (page) {
