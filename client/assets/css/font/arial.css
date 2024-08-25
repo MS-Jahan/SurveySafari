@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Arial";
+    src: local("Arial"), local("Arial-Regular");
+}
+
+* {
+    font-family: "Arial", sans-serif !important;
+    color: #D0E7D2 !important;
+}
