@@ -13,16 +13,32 @@
 </head>
 
 <body id="author_survey">
+    <div id="loading-screen">
+        <div class="loading-container">
+            <p>
+                <span class="emoji">🎉</span>
+                <span class="emoji">🚀</span>
+                <span class="emoji">✨</span>
+            </p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+                <p>......................................................</p>
+            </div>
+        </div>
+    </div>
+
     <div id="navbar"></div>
+    
     <div class="mt-5 pt-5"></div>
+
     <main>
         <div class="container-fluid px-5">
-            <div class="row pt-2">
-                <div class="col-lg-6 col-md-6 col-sm-8">
+            <div class="row pt-2 gy-2">
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
                     <h2 class="text-right"><i class="bi bi-bookmark h2"></i> Untitled</h2>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-4">
-                    <div class="d-flex justify-content-end gap-1">
+                <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                    <div class="d-flex justify-content-center justify-content-md-end justify-content-lg-end gap-1">
                         <a href="explorer_survey_view.html" type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             title="Preview" style="background-color: #79AC78;">
                             <i class="bi bi-eye-fill h3"></i>
@@ -44,10 +60,11 @@
                             data-bs-placement="bottom" title="Responses" style="background-color: #79AC78;">
                             <i class="bi bi-clipboard-check-fill h3"></i>
                         </a>
-                        <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            title="Settings" style="background-color: #79AC78;">
-                            <i class="bi bi-gear-wide-connected h3"></i>
-                        </button>
+                        <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Settings">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#surveySettingsModal" style="background-color: #79AC78;">
+                                <i class="bi bi-gear-wide-connected h3"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,8 +141,53 @@
             </div>
         </div>
     </main>
+    
     <div class="py-4"></div>
+
     <footer></footer>
+
+    <div class="modal fade" id="surveySettingsModal" tabindex="-1" aria-labelledby="surveySettingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #618264;">
+                <div class="modal-header border-0" style="background-color: #79AC78;">
+                    <h4 class="modal-title text-white" id="surveySettingsModalLabel"><i class="bi bi-gear-wide-connected"></i> Survey Settings</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Survey Settings Card -->
+                            <div class="col-12">
+                                <div class="mb-4">
+                                    <label for="googleSheetLink" class="form-label text-white"><i class="bi bi-link-45deg"></i> Google Sheet Link</label>
+                                    <input type="url" class="form-control" id="googleSheetLink" placeholder="Enter Google Sheet Link">
+                                </div>
+                                <div class="mb-4 d-flex align-items-center justify-content-between">
+                                    <label class="form-check-label text-white" for="receiveResponses"><i class="bi bi-envelope"></i> Receive Responses</label>
+                                    <input class="form-check-input form-check-input-lg" type="checkbox" id="receiveResponses" checked>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="shareableLink" class="form-label text-white"><i class="bi bi-share-fill"></i> Shareable Link</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="shareableLink" placeholder="https://example.com/survey-link" value="#" readonly>
+                                        <button type="button" class="btn btn-outline-light" id="copyLinkBtn" style="border-radius: 0 10px 10px 0;">Copy</button>
+                                    </div>
+                                </div>
+                                <div class="mb-4 d-flex align-items-center justify-content-between">
+                                    <label class="form-check-label text-white" for="togglePrivacy"><i class="bi bi-shield-lock"></i> Make Private</label>
+                                    <input class="form-check-input form-check-input-lg" type="checkbox" id="togglePrivacy" checked>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-danger me-2" style="border-radius: 10px;"><i class="bi bi-trash"></i> Delete Survey</button>
+                                    <button type="button" class="btn btn-success" style="border-radius: 10px;"><i class="bi bi-save"></i> Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -140,6 +202,27 @@
     <script type="module" src="../assets/js/utility/tooltip.js"></script>
     <script type="module" src="../assets/js/formBuilder/authorSurvey.js"></script>
     <script type="module" src="../assets/js/app.js"></script>
+    <script>
+        document.getElementById('copyLinkBtn').addEventListener('click', function() {
+            const shareableLink = document.getElementById('shareableLink');
+        
+            // Check if the shareable link has a value
+            if (shareableLink.value) {
+                // Select the text in the input field
+                shareableLink.select();
+                shareableLink.setSelectionRange(0, 99999); // For mobile devices
+        
+                // Copy the text to the clipboard
+                navigator.clipboard.writeText(shareableLink.value).then(function() {
+                    alert('Link copied to clipboard!');
+                }).catch(function(err) {
+                    console.error('Failed to copy: ', err);
+                });
+            } else {
+                alert('No link available to copy.');
+            }
+        });
+    </script>
 </body>
 
 </html>

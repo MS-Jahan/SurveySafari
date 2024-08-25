@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Times New Roman";
+    src: local("Times New Roman"), local("TimesNewRoman-Regular");
+}
+
+* {
+    font-family: "Times New Roman", serif !important;
+    color: #D0E7D2 !important;
+}

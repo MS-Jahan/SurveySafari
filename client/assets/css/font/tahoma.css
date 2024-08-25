@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Tahoma";
+    src: local("Tahoma"), local("Tahoma-Regular");
+}
+
+* {
+    font-family: "Tahoma", sans-serif !important;
+    color: #D0E7D2 !important;
+}

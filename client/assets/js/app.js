@@ -24,8 +24,18 @@ import {
 
 } from './index.js';
 
+import setFont from './font/fonts.js';
+
 function initApp() {
     const page = document.body.id;
+
+
+
+    if (['index', 'login', 'signup', 'forgot_password', 'reset_password'].includes(page)) {
+        console.log('Setting default font');
+    } else {
+        setFont('default'); // Set user selected font
+    }
     
     switch (page) {
         // annonimus pages
