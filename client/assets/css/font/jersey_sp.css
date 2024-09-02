@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "jersey-sp";
+    src: url('Jersey10-Regular.ttf') format('truetype');
+}
+
+* {
+    font-family: "jersey-sp" !important;
+    color: #D0E7D2 !important;
+}

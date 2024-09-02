@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "silkscreen";
+    src: url('Silkscreen-Regular.ttf');
+}
+
+* {
+    font-family: "silkscreen" !important;
+    color: #D0E7D2 !important;
+}

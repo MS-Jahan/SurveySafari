@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Courier New";
+    src: local("Courier New"), local("CourierNew-Regular");
+}
+
+* {
+    font-family: "Courier New", monospace !important;
+    color: #D0E7D2 !important;
+}
