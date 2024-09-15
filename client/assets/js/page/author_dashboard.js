@@ -61,6 +61,14 @@ function __loadPublicSurveys() {
 
 function __setProfileData(){
     fetchProfileData().then(data => {
+        // check if data is json type
+        try {
+            data = JSON.parse(data);
+        } catch (e) {
+            console.error("Invalid data received from server");
+            return;
+        }
+
         // fullname
         document.querySelector("h5.author_fullname").textContent = data.name;
         document.querySelector("input.author_fullname").value = data.username;

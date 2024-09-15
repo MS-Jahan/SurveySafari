@@ -161,7 +161,7 @@ function signup(e) {
 }
 
 async function logout() {
-    // fetch profile data from /api/auth/user and return
+    // fetch logout from /api/auth/logout and redirect to login page
     return fetch(`${API_HOST}/api/auth/logout`, {
         method: 'POST',
         headers: {
@@ -170,19 +170,20 @@ async function logout() {
         credentials: 'include'
     }).then(response => {
         if (response.status === 200) {
-            return response.json();
+            // return response.json();
+            console.log("Logged out successfully");
         } else {
             return response.text().then(text => {
                 console.log(text);
                 if (text.trim() == "") {
                     text = "An error occurred logging out.";                     
                 }
-                setTimeout(() => {
-                    window.location.href = '/pages/login.html';
-                }, 3000);
                 // showFormMessage(text, 'error');
             });
         }
+        // setTimeout(() => {
+            window.location.href = '/pages/login.html';
+        // }, 3000);
     }).catch(error => {
         console.error('Error:', error);
         // showFormMessage('An error occurred during login.', 'error');
@@ -201,18 +202,19 @@ async function fetchProfileData() {
         if (response.status === 200) {
             return response.json();
         } else {
+            logout();
             return response.text().then(text => {
                 console.log(text);
                 if (text.trim() == "") {
                     text = "An error occurred authenticating user. Logging out.";                     
                 }
-                logout();
                 // showFormMessage(text, 'error');
             });
         }
     }).catch(error => {
         console.error('Error:', error);
         // showFormMessage('An error occurred during login.', 'error');
+        logout();
     });
 }
 
