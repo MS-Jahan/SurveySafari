@@ -28,7 +28,7 @@ public class SurveyController {
     }
 
     // Create a new survey (Author only)
-    @PostMapping
+    @PostMapping("/create")
     @PreAuthorize("hasRole('AUTHOR')")
     public ResponseEntity<SurveyDTO> createSurvey(@Valid @RequestBody SurveyDTO surveyDTO, Authentication authentication) {
         SurveyDTO createdSurvey = surveyService.createSurvey(surveyDTO, authentication);
@@ -36,7 +36,7 @@ public class SurveyController {
     }
 
     // Get all surveys (with pagination)
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Page<SurveyDTO>> getAllSurveys(Pageable pageable) {
         Page<SurveyDTO> surveys = surveyService.getAllSurveys(pageable);
         return ResponseEntity.ok(surveys);

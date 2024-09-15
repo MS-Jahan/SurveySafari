@@ -132,6 +132,11 @@ public class AuthController {
         return ResponseEntity.badRequest().body("Invalid username or password");
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        return ResponseEntity.ok().header("Set-Cookie", "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT").body("Logged out successfully");
+    }
+
     @GetMapping("/user")
     public ResponseEntity<?> getUser(@CookieValue("token") String token) {
         String username = jwtUtil.extractUsername(token);

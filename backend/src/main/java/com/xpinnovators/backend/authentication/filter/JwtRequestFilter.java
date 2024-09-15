@@ -1,6 +1,8 @@
 package com.xpinnovators.backend.authentication.filter;
 
 import com.xpinnovators.backend.authentication.service.JwtUtil;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -43,7 +45,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         // If JWT is present, extract the username
         if (jwt != null) {
-            username = jwtUtil.getUsernameFromToken(jwt);
+            try {
+                username = jwtUtil.getUsernameFromToken(jwt);
+            } catch (ExpiredJwtException e) {
+                // Handle expired JWT
+                clearJwtCookie(response);
+                response.sendError(HttpServletResponse.SC_MOVED_TEMPORARILY, "/pages/login.html");
+                return;
+            } catch (JwtException e) {
+                // Handle invalid JWT
+                clearJwtCookie(response);
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JWT Token");
+                return;
+            }
         }
 
         // Validate the token and set authentication context
@@ -57,5 +71,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         chain.doFilter(request, response);
+    }
+
+    // Method to clear the JWT cookie
+    private void clearJwtCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setAttribute("SameSite", "None");
+        response.addCookie(cookie);
     }
 }
