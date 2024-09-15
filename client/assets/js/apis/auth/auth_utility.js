@@ -181,9 +181,9 @@ async function logout() {
                 // showFormMessage(text, 'error');
             });
         }
-        // setTimeout(() => {
+        setTimeout(() => {
             window.location.href = '/pages/login.html';
-        // }, 3000);
+         }, 3000);
     }).catch(error => {
         console.error('Error:', error);
         // showFormMessage('An error occurred during login.', 'error');
@@ -218,4 +218,4 @@ async function fetchProfileData() {
     });
 }
 
-export { login, signup, fetchProfileData };
+export { login, signup, fetchProfileData, logout };

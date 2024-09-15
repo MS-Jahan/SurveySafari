@@ -1,4 +1,5 @@
 // assets/js/components/sign_out_modal.js
+import { logout } from '../apis/auth/auth_utility.js';
 
 function createSignOutModal(link) {
     const modal = document.createElement('div');
@@ -49,10 +50,12 @@ function setUpSignOutModal(link) {
     const signOutButton = document.querySelector('#signout_btn');
     signOutButton.addEventListener('click', async () => {
         try {
-            const response = await fetch(link);
-            if (response.status === 200) {
-                window.location.href = 'login.html';
-            }
+            // const response = await fetch(link);
+            // logout();
+            // if (response.status === 200) {
+            //     window.location.href = 'login.html';
+            // }
+            logout();
         } catch (error) {
             console.error(error);
         }

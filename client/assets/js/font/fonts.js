@@ -37,7 +37,11 @@ function setFont(font) {
     }
 
     // Show the loading screen
-    showLoadingScreen();
+    try{
+        showLoadingScreen();
+    } catch(e){
+        console.log("Loading screen not found");
+    }
 
     const newFontLink = fonts[font]();
     newFontLink.onload = () => {

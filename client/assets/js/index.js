@@ -12,6 +12,7 @@ import { loadExplorerSurveyData } from './page/explorer_survey.js';
 import { loadAuthorSurveyArchiveData } from './page/author_survey_archive.js';
 import { loadAuthorSurveyResponseData } from './page/author_survey_response.js';
 import { loadExplorerProfile } from "./page/explorer_profile.js";
+import { logout } from './apis/auth/auth_utility.js';
 
 
 
@@ -41,8 +42,8 @@ const explorerNavBlocks = {
 }
 
 const signOutLink = {
-    "explorer": "#",
-    "author": "#"
+    "explorer": `${window.API_HOST}/auth/logout`,
+    "author": `${window.API_HOST}/auth/logout`,
 }
 
 // Annonimus pages
@@ -65,6 +66,12 @@ function setUpLogin() {
     }, true);
     setUpFooter(0);
 }
+
+function setUpLogout() {
+    console.log('Logging out...');
+    logout();
+}
+
 
 function setUpSignup() {
     console.log('Loading signup page...');
@@ -240,6 +247,7 @@ function setUpCreateDiscussion() {
 export { 
     setUpIndex,
     setUpLogin,
+    setUpLogout,
     setUpSignup,
     setUpForgotPassword,
     setUpResetPassword,

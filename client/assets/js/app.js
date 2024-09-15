@@ -3,6 +3,7 @@
 import {
     setUpIndex,
     setUpLogin,
+    setUpLogout,
     setUpSignup,
     setUpForgotPassword,
     setUpResetPassword,
@@ -43,6 +44,7 @@ function initApp() {
         // annonimus pages
         case 'index': setUpIndex(); break;
         case 'login': setUpLogin(); break;
+        case 'logout': setUpLogout(); break;
         case 'signup': setUpSignup(); break;
         case 'forgot_password': setUpForgotPassword(); break;
         case 'reset_password': setUpResetPassword(); break;
