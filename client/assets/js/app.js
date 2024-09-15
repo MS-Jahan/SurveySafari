@@ -26,6 +26,8 @@ import {
 
 import setFont from './font/fonts.js';
 
+window.API_HOST = 'http://localhost:8080';
+
 function initApp() {
     const page = document.body.id;
 

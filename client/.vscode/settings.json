@@ -1,0 +1,11 @@
+{   
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.root": "/",
+    // "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.https": {
+        "enable": true, //set it true to enable the feature.  
+        "cert": "D:\\Projects\\JavaFest\\Survey-Safari-Client\\client\\.vscode\\.local-ssl\\localhost.pem", //full path of the certificate  
+        "key": "D:\\Projects\\JavaFest\\Survey-Safari-Client\\client\\.vscode\\.local-ssl\\localhost-key.pem", //full path of the private key  
+        "passphrase": "123" //passphrase for the private key
+    }
+}

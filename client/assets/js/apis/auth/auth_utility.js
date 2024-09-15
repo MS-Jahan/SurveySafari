@@ -1,7 +1,5 @@
 // assets/js/apis/auth/login.js
 
-const API_HOST = 'http://localhost:8080';
-
 // validate email
 function validateEmail(email) {
     let re = /\S+@\S+\.\S+/;
@@ -59,14 +57,18 @@ function login(e) {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(data)
     }).then(response => {
         if (response.status === 200) {
-            response.text().then(text => {
-                console.log(text);
-                // localStorage.setItem("token", data.token);
-                // localStorage.setItem("user", JSON.stringify(data.user));
-                window.location.href = "dashboard.html";
+            response.json().then(data => {
+                console.log(data);
+                // get userType
+                let userType = data.userType;
+
+                setTimeout(() => {
+                    window.location.href = userType === 'author' ? '/pages/author_dashboard.html' : '/pages/explorer_home.html';
+                }, 3000);
             });
         } else {
             response.text().then(text => {
@@ -75,11 +77,13 @@ function login(e) {
                     text = "An error occurred during login.";
                 }
                 showFormMessage(text, 'error');
+                logout();
             });
         }
     }).catch(error => {
         console.error('Error:', error);
         showFormMessage('An error occurred during login.', 'error');
+        logout();
     });
 }
 
@@ -93,7 +97,14 @@ function signup(e) {
     const email = document.getElementById('form3Example3').value.trim();
     const password = document.getElementById('form3Example4').value;
     const confirmPassword = document.getElementById('form3Example6').value;
-    const role = document.querySelector('input[name="inlineRadioOptions"]:checked').value;
+    let role = "";
+    try{
+        role = document.querySelector('input[name="userType"]:checked').value;
+    } catch(e){
+        showFormMessage('Please select a role', 'error');
+        return;
+    }
+    
 
     // Password matching validation
     if (password !== confirmPassword) {
@@ -106,6 +117,13 @@ function signup(e) {
         showFormMessage('Please enter a valid email address', 'error');
         return;
     }
+
+    // Check if any of the fields are empty
+    if (firstName === "" || lastName === "" || username === "" || email === "" || password === "" || confirmPassword === "" || role === "") {
+        showFormMessage('Please fill in all fields', 'error');
+        return;
+    }
+
 
     let data = {
         name: `${firstName} ${lastName}`,  // Full name
@@ -142,4 +160,60 @@ function signup(e) {
     });
 }
 
-export { login, signup };
+async function logout() {
+    // fetch profile data from /api/auth/user and return
+    return fetch(`${API_HOST}/api/auth/logout`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            return response.text().then(text => {
+                console.log(text);
+                if (text.trim() == "") {
+                    text = "An error occurred logging out.";                     
+                }
+                setTimeout(() => {
+                    window.location.href = '/pages/login.html';
+                }, 3000);
+                // showFormMessage(text, 'error');
+            });
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        // showFormMessage('An error occurred during login.', 'error');
+    });
+}
+
+async function fetchProfileData() {
+    // fetch profile data from /api/auth/user and return
+    return fetch(`${API_HOST}/api/auth/user`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            return response.text().then(text => {
+                console.log(text);
+                if (text.trim() == "") {
+                    text = "An error occurred authenticating user. Logging out.";                     
+                }
+                logout();
+                // showFormMessage(text, 'error');
+            });
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        // showFormMessage('An error occurred during login.', 'error');
+    });
+}
+
+export { login, signup, fetchProfileData };
