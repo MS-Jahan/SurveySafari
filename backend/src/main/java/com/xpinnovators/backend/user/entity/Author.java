@@ -23,5 +23,10 @@ public class Author {
     private User user;
 
     // Getters and setters
+    public Author() {
+    }
 
+    public Author(Long id) {
+        this.id = id;
+    }
 }

@@ -54,7 +54,7 @@ public class SurveyService {
             throw new ForbiddenException("Only authors can create surveys");
         }
 
-        Survey survey = surveyDTO.toEntity(); // Use the toEntity method from SurveyDTO
+        Survey survey = surveyDTO.toEntity(); // Ensure this method correctly maps fields
         survey.setAuthor(user.getAuthor());
         survey.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         survey.setStatus("draft");
@@ -65,21 +65,19 @@ public class SurveyService {
 
     // Generate a unique share link for the survey
     private String generateUniqueShareLink() {
-        // You can implement your logic here for generating share links
-        // For example, using UUID:
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString(); // Ensure this meets your requirements
     }
 
     // Get all surveys with pagination
     public Page<SurveyDTO> getAllSurveys(Pageable pageable) {
         return surveyRepository.findAll(pageable)
-                .map(survey -> new SurveyDTO(survey));
+                .map(SurveyDTO::new);
     }
 
     // Get surveys by author with pagination
     public Page<SurveyDTO> getSurveysByAuthor(Long authorId, Pageable pageable) {
         return surveyRepository.findByAuthorId(authorId, pageable)
-                .map(survey -> new SurveyDTO(survey));
+                .map(SurveyDTO::new);
     }
 
     // Get survey by ID
@@ -94,7 +92,6 @@ public class SurveyService {
         Survey survey = surveyRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Survey", "id", id));
 
-        // Check if the author owns the survey
         if (!survey.getAuthor().getUser().getUsername().equals(authentication.getName())) {
             throw new ForbiddenException("You are not authorized to update this survey.");
         }
@@ -102,7 +99,7 @@ public class SurveyService {
         // Update the survey
         survey.setTitle(surveyDTO.getTitle());
         survey.setDescription(surveyDTO.getDescription());
-        // ... update other fields
+        // Update other fields as needed
 
         Survey updatedSurvey = surveyRepository.save(survey);
         return new SurveyDTO(updatedSurvey);
@@ -113,7 +110,6 @@ public class SurveyService {
         Survey survey = surveyRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Survey", "id", id));
 
-        // Check if the author owns the survey
         if (!survey.getAuthor().getUser().getUsername().equals(authentication.getName())) {
             throw new ForbiddenException("You are not authorized to delete this survey.");
         }
@@ -123,7 +119,7 @@ public class SurveyService {
     // Get public surveys with pagination
     public Page<SurveyDTO> getPublicSurveys(Pageable pageable) {
         return surveyRepository.findByStatus("published", pageable)
-                .map(survey -> new SurveyDTO(survey));
+                .map(SurveyDTO::new);
     }
 
     // Record survey attendance
@@ -169,7 +165,7 @@ public class SurveyService {
             Response response = new Response();
             response.setAttendance(attendance);
             response.setSurvey(survey);
-            response.setResponseData(responseDTO.getResponseData()); // Assuming you have a getResponseData method in ResponseDTO
+            response.setResponseData(responseDTO.getResponseData()); // Ensure this field is correctly mapped
             responseRepository.save(response);
         }
 
