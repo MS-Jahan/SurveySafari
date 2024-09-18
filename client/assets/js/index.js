@@ -13,6 +13,7 @@ import { loadAuthorSurveyArchiveData } from './page/author_survey_archive.js';
 import { loadAuthorSurveyResponseData } from './page/author_survey_response.js';
 import { loadExplorerProfile } from "./page/explorer_profile.js";
 import { logout } from './apis/auth/auth_utility.js';
+import { initSaveSurveyListener } from './page/author_survey.js';
 
 
 
@@ -127,6 +128,7 @@ function setUpAuthorSurvey() {
     setUpNavbar(authorNavBlocks, false);
     setUpFooter(2);
     setUpSignOutModal(signOutLink["author"]);
+    initSaveSurveyListener();
 }
 
 function setUpAuthorUpgradeSubscription() {

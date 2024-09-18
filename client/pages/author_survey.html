@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
                     <div class="d-flex justify-content-center justify-content-md-end justify-content-lg-end gap-1">
-                        <a href="explorer_survey_view.html" type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        <a target="_blank" href="explorer_survey_view.html" type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom"
                             title="Preview" style="background-color: #79AC78;">
                             <i class="bi bi-eye-fill h3"></i>
                         </a>
@@ -71,19 +71,19 @@
             <hr>
             <div class="row">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label h5"><i class="bi bi-bookmark"></i> Survey
+                    <label for="survey_title" class="form-label h5"><i class="bi bi-bookmark"></i> Survey
                         Title</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Untitled">
+                    <input type="text" class="form-control" id="survey_title" placeholder="Untitled">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label h5"><i class="bi bi-blockquote-left"></i>
+                    <label for="survey_description" class="form-label h5"><i class="bi bi-blockquote-left"></i>
                         Example textarea</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    <textarea class="form-control" id="survey_description" rows="3"
                         placeholder="..."></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="formFile" class="form-label h5"><i class="bi bi-card-image"></i> Survey Banner</label>
-                    <input class="form-control" type="file" id="formFile" accept="image/*">
+                    <label for="survey_banner" class="form-label h5"><i class="bi bi-card-image"></i> Survey Banner</label>
+                    <input class="form-control" type="file" id="survey_banner" accept="image/*">
                 </div>
                 <!-- <div class="mb-3">
                     <label for="customRange1" class="form-label h5"><i class="bi bi-coin"></i> Coin: 100</label>
@@ -96,7 +96,7 @@
                     </a>
                     <div class="collapse" id="tags">
                         <div class="card card-body" style="background-color: #79AC78;">
-                            <select class="form-select" multiple aria-label="multiple select example">
+                            <select id="survey_tags" class="form-select" multiple aria-label="multiple select example">
                                 <option value="0" selected>Zero</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -137,7 +137,7 @@
         </div>
         <div class="row py-3">
             <div class="col-12 text-center">
-                <a href="#" class="btn btn-lg btn-success"><i class="bi bi-floppy2-fill h3"></i> Save Survey</a>
+                <a id="save_survey_btn" href="#" class="btn btn-lg btn-success"><i class="bi bi-floppy2-fill h3"></i> Save Survey</a>
             </div>
         </div>
     </main>
@@ -201,6 +201,7 @@
     <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
     <script type="module" src="../assets/js/utility/tooltip.js"></script>
     <script type="module" src="../assets/js/formBuilder/authorSurvey.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../assets/js/app.js"></script>
     <script>
         document.getElementById('copyLinkBtn').addEventListener('click', function() {
