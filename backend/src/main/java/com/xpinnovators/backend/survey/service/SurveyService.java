@@ -105,7 +105,7 @@ public class SurveyService {
                     return new SurveyDTO(survey);
                 });
         } else {
-            return surveyRepository.findByStatusAndAuthorUserUsername("published", username, pageable)
+            return surveyRepository.findByStatusAndAuthorUserUsername("public", username, pageable)
                 .map(survey -> {
                     survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
                     return new SurveyDTO(survey);
@@ -124,7 +124,7 @@ public class SurveyService {
                         return new SurveyDTO(survey);
                     });
         } else { // User is not an author, show only public surveys by that author
-            return surveyRepository.findByStatusAndAuthorUserUsername("published", user.getUsername(), pageable)
+            return surveyRepository.findByStatusAndAuthorUserUsername("public", user.getUsername(), pageable)
                     .map(survey -> {
                         survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
                         return new SurveyDTO(survey);
@@ -191,7 +191,7 @@ public class SurveyService {
 
     // Get public surveys with pagination
     public Page<SurveyDTO> getPublicSurveys(Pageable pageable) {
-        return surveyRepository.findByStatus("published", pageable)
+        return surveyRepository.findByStatus("public", pageable)
                 .map(SurveyDTO::new);
     }
 
@@ -248,6 +248,24 @@ public class SurveyService {
         explorer.setCoin(explorer.getCoin() + coinsEarned);
         explorer.setPoint(explorer.getPoint() + pointsEarned);
         explorerRepository.save(explorer);
+    }
+
+    public Page<SurveyDTO> getSurveysByAuthorAndStatus(Authentication authentication, String status, Pageable pageable) {
+        User user = userRepository.findByUsername(authentication.getName());
+
+        if (user.getAuthor() != null) { // User is an author
+            return surveyRepository.findByAuthorIdAndStatus(user.getAuthor().getId(), status, pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        } else { // User is not an author, show only public surveys by that author
+            return surveyRepository.findByStatusAndAuthorUserUsername(status, user.getUsername(), pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        }
     }
 
     // Filter surveys by tags (example implementation)

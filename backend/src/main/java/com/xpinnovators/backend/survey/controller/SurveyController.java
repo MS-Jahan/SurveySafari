@@ -51,8 +51,17 @@ public class SurveyController {
 
     // Get surveys by author
     @GetMapping("/author")
-    public ResponseEntity<Page<SurveyDTO>> getSurveysByCurrentAuthor(Pageable pageable, Authentication authentication) {
-        Page<SurveyDTO> surveys = surveyService.getSurveysForAuthor(pageable, authentication);
+    public ResponseEntity<Page<SurveyDTO>> getSurveysByCurrentAuthor(
+            @RequestParam(required = false) String status,
+            Pageable pageable,
+            Authentication authentication) {
+
+        Page<SurveyDTO> surveys;
+        if (status != null && !status.isEmpty() && status.split(",").length == 1) {
+            surveys = surveyService.getSurveysByAuthorAndStatus(authentication, status, pageable);
+        } else {
+            surveys = surveyService.getSurveysForAuthor(pageable, authentication);
+        }
         return ResponseEntity.ok(surveys);
     }
 
