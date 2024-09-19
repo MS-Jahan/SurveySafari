@@ -6,6 +6,7 @@ import com.xpinnovators.backend.survey.dto.AttendanceDTO;
 import com.xpinnovators.backend.survey.dto.ResponseDTO;
 import com.xpinnovators.backend.survey.dto.SurveyDTO;
 import com.xpinnovators.backend.survey.entity.Survey;
+import com.xpinnovators.backend.survey.entity.SurveyStatus;
 import com.xpinnovators.backend.survey.repository.SurveyRepository;
 import com.xpinnovators.backend.user.entity.User;
 import com.xpinnovators.backend.user.repository.UserRepository;
@@ -23,7 +24,9 @@ import com.xpinnovators.backend.user.repository.ExplorerRepository;
 
 import javax.validation.Valid;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -54,10 +57,17 @@ public class SurveyService {
             throw new ForbiddenException("Only authors can create surveys");
         }
 
+        boolean isValidStatus = Arrays.stream(SurveyStatus.values())
+                .anyMatch(status -> status.toString().equalsIgnoreCase(surveyDTO.getStatus()));
+
+        if (!isValidStatus) {
+            throw new IllegalArgumentException("Invalid survey status. Status must be either 'public' or 'private'.");
+        }
+
         Survey survey = surveyDTO.toEntity(); // Ensure this method correctly maps fields
         survey.setAuthor(user.getAuthor());
         survey.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        survey.setStatus("draft");
+        survey.setStatus(String.valueOf(SurveyStatus.PRIVATE)); // Default status
         survey.setShareLink(generateUniqueShareLink());
         Survey savedSurvey = surveyRepository.save(survey);
         return new SurveyDTO(savedSurvey);
@@ -75,9 +85,51 @@ public class SurveyService {
     }
 
     // Get surveys by author with pagination
-    public Page<SurveyDTO> getSurveysByAuthor(Long authorId, Pageable pageable) {
-        return surveyRepository.findByAuthorId(authorId, pageable)
-                .map(SurveyDTO::new);
+    public Page<SurveyDTO> getSurveysByAuthor(Long authorId, Pageable pageable, Authentication authentication) {
+        // get authenticated username
+        String username = authentication.getName();
+
+        // check if the user is an author
+        User user = userRepository.findByUsername(username);
+        boolean isAuthor;
+        // User is the author
+        // User is an author, but not the author of the survey
+        if (user.getAuthor() == null) { // User is not an author
+            isAuthor = false;
+        } else isAuthor = Objects.equals(user.getAuthor().getId(), authorId);
+
+        if (isAuthor) {
+            return surveyRepository.findByAuthorId(authorId, pageable)
+                .map(survey -> {
+                    survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                    return new SurveyDTO(survey);
+                });
+        } else {
+            return surveyRepository.findByStatusAndAuthorUserUsername("published", username, pageable)
+                .map(survey -> {
+                    survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                    return new SurveyDTO(survey);
+                });
+        }
+    }
+
+    // Get surveys by author, or public surveys if not the author
+    public Page<SurveyDTO> getSurveysForAuthor(Pageable pageable, Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName());
+
+        if (user.getAuthor() != null) { // User is an author
+            return surveyRepository.findByAuthorId(user.getAuthor().getId(), pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        } else { // User is not an author, show only public surveys by that author
+            return surveyRepository.findByStatusAndAuthorUserUsername("published", user.getUsername(), pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        }
     }
 
     // Get survey by ID
@@ -96,10 +148,31 @@ public class SurveyService {
             throw new ForbiddenException("You are not authorized to update this survey.");
         }
 
-        // Update the survey
-        survey.setTitle(surveyDTO.getTitle());
-        survey.setDescription(surveyDTO.getDescription());
-        // Update other fields as needed
+        // Update the survey fields based on the fields in the request
+        // update the title if exists in the request
+        if (surveyDTO.getTitle() != null) {
+            survey.setTitle(surveyDTO.getTitle());
+        }
+        // update the description if exists in the request
+        if (surveyDTO.getDescription() != null) {
+            survey.setDescription(surveyDTO.getDescription());
+        }
+        // update the content if exists in the request
+        if (surveyDTO.getContent() != null) {
+            survey.setContent(surveyDTO.getContent());
+        }
+        // update the status if exists in the request
+        if (surveyDTO.getStatus() != null) {
+            // Validate the status
+            // survey.setStatus(SurveyStatus.fromValue(surveyDTO.getStatus().toString()));
+            boolean isValidStatus = Arrays.stream(SurveyStatus.values())
+                    .anyMatch(status -> status.toString().equalsIgnoreCase(surveyDTO.getStatus()));
+
+            if (!isValidStatus) {
+                throw new IllegalArgumentException("Invalid survey status. Status must be either 'public' or 'private'.");
+            }
+            survey.setStatus(surveyDTO.getStatus());
+        }
 
         Survey updatedSurvey = surveyRepository.save(survey);
         return new SurveyDTO(updatedSurvey);
@@ -176,4 +249,18 @@ public class SurveyService {
         explorer.setPoint(explorer.getPoint() + pointsEarned);
         explorerRepository.save(explorer);
     }
+
+    // Filter surveys by tags (example implementation)
+//    public Page<SurveyDTO> getSurveysByTags(List<String> tags, Pageable pageable, Authentication authentication) {
+//        // Implement your filtering logic here (e.g., using Spring Data JPA Specifications
+//        // or a custom SQL query if needed)
+//
+//        // Example: using a simple string search
+//        String tagString = String.join(",", tags); // Convert list to comma-separated string
+//        return surveyRepository.findAll(pageable) // Adjust this query as needed for your filtering logic
+//                .map(survey -> {
+//                    survey.setResponseCount(responseRepository.getSurveysByTags(tagString)); // Calculate and set response count
+//                    return new SurveyDTO(survey);
+//                });
+//    }
 }

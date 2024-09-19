@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,17 +31,23 @@ public class Survey {
     private Author author;
 
     private Timestamp createdAt;
+//    @Enumerated(EnumType.STRING)
     @Column(length = 10)
     private String status;
     @Column(length = 120)
     private String shareLink;
     @Column(length = 120)
     private String googleSheetLink;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", length = 65530)
     private String content;
+    @Transient // This annotation ensures that the field is not persisted in the database.
+    private long responseCount;
+    @Column(name = "tags") // Add this column if not already present
+    private String tags;
 
     @PrePersist
     protected void onCreate() {
         createdAt = new Timestamp(System.currentTimeMillis());
     }
+
 }

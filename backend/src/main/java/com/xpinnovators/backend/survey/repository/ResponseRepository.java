@@ -6,5 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ResponseRepository extends JpaRepository<Response, Long> {
+    long countBySurveyId(Long surveyId);
+    // long getSurveysByTags(String tagString);
+
     // You can add custom query methods here if needed
 }

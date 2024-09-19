@@ -42,10 +42,17 @@ public class SurveyController {
         return ResponseEntity.ok(surveys);
     }
 
-    // Get surveys by author
+    // Get surveys by author id
     @GetMapping("/author/{authorId}")
-    public ResponseEntity<Page<SurveyDTO>> getSurveysByAuthor(@PathVariable Long authorId, Pageable pageable) {
-        Page<SurveyDTO> surveys = surveyService.getSurveysByAuthor(authorId, pageable);
+    public ResponseEntity<Page<SurveyDTO>> getSurveysByAuthor(@PathVariable Long authorId, Pageable pageable, Authentication authentication) {
+        Page<SurveyDTO> surveys = surveyService.getSurveysByAuthor(authorId, pageable, authentication);
+        return ResponseEntity.ok(surveys);
+    }
+
+    // Get surveys by author
+    @GetMapping("/author")
+    public ResponseEntity<Page<SurveyDTO>> getSurveysByCurrentAuthor(Pageable pageable, Authentication authentication) {
+        Page<SurveyDTO> surveys = surveyService.getSurveysForAuthor(pageable, authentication);
         return ResponseEntity.ok(surveys);
     }
 
