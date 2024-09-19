@@ -25,10 +25,16 @@ const testSurveyData = [
     }
 ];
 
-async function fetchAuthorSurveys(page = 0, size = 10) { // Adjust default page size as needed
+async function fetchAuthorSurveys(page = 0, size = 10, status=null) { // Adjust default page size as needed
     try {
+        let request_url = `${API_HOST}/api/surveys/author?page=${page}&size=${size}`;
+        
+        if (status) {
+            request_url += `&status=${status}`;
+        }
+
         // 1. Fetch survey data from backend 
-        const response = await fetch(`${API_HOST}/api/surveys/author?page=${page}&size=${size}`, {
+        const response = await fetch(request_url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,7 +58,7 @@ async function fetchAuthorSurveys(page = 0, size = 10) { // Adjust default page 
     }
 }
 
-async function displaySurveys(page = 0, size = 10) {
+async function displaySurveys(page = 0, size = 10, status="private,public") {
     const surveyContainer = document.getElementById('survey_container');
     const paginationContainer = document.getElementById('pagination-container'); // Assuming you'll add a pagination container in your HTML
     if (!surveyContainer || !paginationContainer) {
@@ -65,7 +71,7 @@ async function displaySurveys(page = 0, size = 10) {
 
 
     // 1. Fetch the surveys
-    const surveys = await fetchAuthorSurveys(page, size);
+    const surveys = await fetchAuthorSurveys(page, size, status);
 
     // 2. Check if we got any surveys
     if (surveys.content.length === 0) {
@@ -179,9 +185,77 @@ function __load_surveys() {
     });
 }
 
+function toggleSurveyStatusFilter(e) {
+    console.log("inside toggleSurveyStatusFilter", e.target.id);
+    const public_filter = document.getElementById('filter-public');
+    const private_filter = document.getElementById('filter-private');
+
+    // Toggle the clicked filter
+    if (e.target.id === 'filter-public') {
+        public_filter.setAttribute("data-include", public_filter.getAttribute("data-include") === "1" ? "0" : "1");
+    } else if (e.target.id === 'filter-private') {
+        private_filter.setAttribute("data-include", private_filter.getAttribute("data-include") === "1" ? "0" : "1");
+    }
+
+    // Update button classes based on their state
+    public_filter.classList.toggle("btn-success", public_filter.getAttribute("data-include") === "1");
+    public_filter.classList.toggle("btn-secondary", public_filter.getAttribute("data-include") === "0");
+
+    private_filter.classList.toggle("btn-success", private_filter.getAttribute("data-include") === "1");
+    private_filter.classList.toggle("btn-secondary", private_filter.getAttribute("data-include") === "0");
+
+    // Determine the status to display based on the filter states
+    let status = [];
+    if (public_filter.getAttribute("data-include") === "1") {
+        status.push('public');
+    }
+    if (private_filter.getAttribute("data-include") === "1") {
+        status.push('private');
+    }
+
+    // If both are off, turn on the other filter
+    if (status.length === 0) {
+        if (e.target.id === 'filter-public') {
+            private_filter.setAttribute("data-include", "1");
+            private_filter.classList.replace("btn-secondary", "btn-success");
+            status.push('private');
+        } else if (e.target.id === 'filter-private') {
+            public_filter.setAttribute("data-include", "1");
+            public_filter.classList.replace("btn-secondary", "btn-success");
+            status.push('public');
+        }
+    }
+
+    // Display surveys based on the determined status
+    displaySurveys(0, 10, status.join(','));
+}
+
+function initToggleSurveyStatusFilter(){
+    // document.addEventListener('DOMContentLoaded', (event) => {
+        console.log("inside initToggleSurveyStatusFilter");
+        const filterPublic = document.getElementById('filter-public');
+        const filterPrivate = document.getElementById('filter-private');
+    
+        if (filterPublic) {
+            filterPublic.addEventListener('click', function(e) {
+                console.log("inside filterPublic");
+                toggleSurveyStatusFilter(e);
+            });
+        }
+    
+        if (filterPrivate) {
+            filterPrivate.addEventListener('click', function(e) {
+                console.log("inside filterPrivate");
+                toggleSurveyStatusFilter(e);
+            });
+        }
+    // });
+}
+
 function loadAuthorSurveyArchiveData() {
     // __load_surveys();
     displaySurveys();
+    initToggleSurveyStatusFilter();
 }
 
 export { loadAuthorSurveyArchiveData, displaySurveys };
