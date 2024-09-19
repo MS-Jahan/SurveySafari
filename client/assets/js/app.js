@@ -29,10 +29,35 @@ import setFont from './font/fonts.js';
 
 window.API_HOST = 'http://localhost:8080';
 
+
+// Load a single script and call the callback after loading
+function loadExternalScript(src, callback, errorCallback) {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = callback;
+    script.onerror = function() {
+        console.error('Failed to load script:', src);
+        if (errorCallback) errorCallback(); // Handle error case
+    };
+    document.head.appendChild(script);
+}
+
+// Load multiple scripts sequentially
+function loadScriptsSequentially(scripts, callback, errorCallback) {
+    if (scripts.length === 0) {
+        if (callback) callback();
+        return;
+    }
+
+    const [firstScript, ...remainingScripts] = scripts;
+    loadExternalScript(firstScript, () => {
+        loadScriptsSequentially(remainingScripts, callback, errorCallback);
+    }, errorCallback);
+}
+
+// The main function to initialize the app
 function initApp() {
     const page = document.body.id;
-
-
 
     if (['index', 'login', 'signup', 'forgot_password', 'reset_password'].includes(page)) {
         console.log('Setting default font');
@@ -71,4 +96,20 @@ function initApp() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', initApp);
+// document.addEventListener('DOMContentLoaded', initApp);
+
+// Define a list of scripts to load
+const scriptsToLoad = [
+    'https://cdn.jsdelivr.net/npm/sweetalert2@11',
+];
+
+// Error handling function if scripts fail to load
+function handleScriptLoadError() {
+    console.warn('Some scripts failed to load. Default behavior may apply.');
+    initApp(); // Initialize the app with default behavior
+}
+
+// Load scripts sequentially and initialize the app after they all load
+document.addEventListener('DOMContentLoaded', () => {
+    loadScriptsSequentially(scriptsToLoad, initApp, handleScriptLoadError);
+});
