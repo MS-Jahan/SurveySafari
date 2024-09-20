@@ -2,6 +2,7 @@
 
 import createAuthorSurveyCard from '../components/author_survey_card.js';
 import { fetchProfileData } from '../apis/auth/auth_utility.js';
+import { fetchAuthorSurveys } from '../apis/survey.js';
 
 const testSurveyData = [
     {
@@ -46,26 +47,46 @@ function __loadPublicSurveys() {
         return;
     }
 
-    testSurveyData1.forEach(surveyData => {
-        const surveyCard = createAuthorSurveyCard(surveyData);
-        surveyContainer.appendChild(surveyCard);
-    });
+    fetchAuthorSurveys(0, 10, "public").then(data => {
+        const surveyData = data.content;
 
-    if (testSurveyData1.length === 0) {
-        const noSurveyCard = document.createElement('div');
-        noSurveyCard.classList.add('card-body', 'text-center', 'p-3');
-        noSurveyCard.innerHTML = `<h5 class="card-title">No Surveys Found</h5>`;
-        surveyContainer.appendChild(noSurveyCard);
-    }
+        surveyData.forEach(survey => {
+            const surveyCard = createAuthorSurveyCard({
+                id: survey.id, // Assuming survey ID is available
+                title: survey.title,
+                responses: survey.responseCount, // Replace with actual response count from API
+                tags: survey.tags, // Assuming tags is a list of strings
+                desc: survey.description,
+                status: survey.status, // Assuming status is a string (e.g., "private", "public")
+                postedTime: survey.postedAt, // Calculate time elapsed since survey.createdAt
+                link: `author_survey_responses.html?id=${survey.id}`, // Assuming query parameter to pass survey ID
+                privateLink: `#`, // Replace with the link to change survey visibility
+                deleteLink: '#'  // Replace with the link to delete the survey
+            });
+            surveyContainer.appendChild(surveyCard);
+        });
+
+        if (surveyData.length === 0) {
+            const noSurveyCard = document.createElement('div');
+            noSurveyCard.classList.add('card-body', 'text-center', 'p-3');
+            noSurveyCard.innerHTML = `<h5 class="card-title">No Surveys Found</h5>`;
+            surveyContainer.appendChild(noSurveyCard);
+        }
+    });
 }
 
 function __setProfileData(){
     fetchProfileData().then(data => {
         // check if data is json type
-        try {
-            data = JSON.parse(data);
+        try {            
+            // check if data is json type
+            if (typeof data === 'string') {
+                data = JSON.parse(data);
+            } else {
+                data = data;
+            }
         } catch (e) {
-            console.error("Invalid data received from server");
+            console.error("Invalid data received from server!", e);
             return;
         }
 

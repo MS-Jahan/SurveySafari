@@ -1,6 +1,7 @@
 // assets/js/page/author_survey_archive.js
 
 import createAuthorSurveyCard from '../components/author_survey_card.js';
+import { fetchAuthorSurveys } from '../apis/survey.js';
 
 const testSurveyData = [
     {
@@ -25,40 +26,7 @@ const testSurveyData = [
     }
 ];
 
-async function fetchAuthorSurveys(page = 0, size = 10, status=null) { // Adjust default page size as needed
-    try {
-        let request_url = `${API_HOST}/api/surveys/author?page=${page}&size=${size}`;
-        
-        if (status) {
-            request_url += `&status=${status}`;
-        }
-
-        // 1. Fetch survey data from backend 
-        const response = await fetch(request_url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer ' + jwt  // Add JWT from localStorage or cookies 
-            },
-            credentials: 'include', // If using cookies for authentication
-        });
-
-        // 2. Error Handling
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        // 3. Parse the response
-        const surveyData = await response.json();
-        return surveyData;
-
-    } catch (error) {
-        console.error('Error fetching surveys:', error);
-        return []; // Return an empty array or handle the error appropriately
-    }
-}
-
-async function displaySurveys(page = 0, size = 10, status="private,public") {
+async function displaySurveys(page = 0, size = 10, status="private,public", search=null) {
     const surveyContainer = document.getElementById('survey_container');
     const paginationContainer = document.getElementById('pagination-container'); // Assuming you'll add a pagination container in your HTML
     if (!surveyContainer || !paginationContainer) {
@@ -71,7 +39,7 @@ async function displaySurveys(page = 0, size = 10, status="private,public") {
 
 
     // 1. Fetch the surveys
-    const surveys = await fetchAuthorSurveys(page, size, status);
+    const surveys = await fetchAuthorSurveys(page, size, status, search);
 
     // 2. Check if we got any surveys
     if (surveys.content.length === 0) {
@@ -120,7 +88,7 @@ async function displaySurveys(page = 0, size = 10, status="private,public") {
     prevPageLink.textContent = '<<';
     prevPageLink.addEventListener('click', () => {
         if (surveys.number > 0) {
-            displaySurveys(surveys.number - 1, size);
+            displaySurveys(surveys.number - 1, size, getStatusFilter(), getSearchQuery());
         }
     });
     prevPageItem.appendChild(prevPageLink);
@@ -136,7 +104,7 @@ async function displaySurveys(page = 0, size = 10, status="private,public") {
         pageLink.textContent = i + 1;
         pageLink.style.backgroundColor = '#79AC78';
         pageLink.addEventListener('click', () => {
-            displaySurveys(i, size);
+            displaySurveys(i, size, getStatusFilter(), getSearchQuery());
         });
 
         if (i === surveys.number) {
@@ -158,7 +126,7 @@ async function displaySurveys(page = 0, size = 10, status="private,public") {
     nextPageLink.textContent = '>>';
     nextPageLink.addEventListener('click', () => {
         if (surveys.number < surveys.totalPages - 1) {
-            displaySurveys(surveys.number + 1, size);
+            displaySurveys(surveys.number + 1, size, getStatusFilter(), getSearchQuery());
         }
     });
     nextPageItem.appendChild(nextPageLink);
@@ -227,7 +195,7 @@ function toggleSurveyStatusFilter(e) {
     }
 
     // Display surveys based on the determined status
-    displaySurveys(0, 10, status.join(','));
+    displaySurveys(0, 10, getStatusFilter(), getSearchQuery());
 }
 
 function initToggleSurveyStatusFilter(){
@@ -252,10 +220,46 @@ function initToggleSurveyStatusFilter(){
     // });
 }
 
+function initializeSearch() {
+    const searchInput = document.getElementById('survey-search-form');
+    
+    if (searchInput === null) {
+        console.error('Search input not found');
+        return;
+    }
+
+    // on change event, call displaySurveys with the search query
+    searchInput.addEventListener('change', function(e) {
+        displaySurveys(0, 10, getStatusFilter(), getSearchQuery());
+    });
+}
+
+function getStatusFilter() {
+    const public_filter = document.getElementById('filter-public');
+    const private_filter = document.getElementById('filter-private');
+
+    let status = [];
+    if (public_filter.getAttribute("data-include") === "1") {
+        status.push('public');
+    }
+
+    if (private_filter.getAttribute("data-include") === "1") {
+        status.push('private');
+    }
+
+    return status.join(',');
+}
+
+function getSearchQuery() {
+    const searchInput = document.getElementById('survey-search-form');
+    return searchInput.value;
+}
+
 function loadAuthorSurveyArchiveData() {
     // __load_surveys();
     displaySurveys();
     initToggleSurveyStatusFilter();
+    initializeSearch();
 }
 
 export { loadAuthorSurveyArchiveData, displaySurveys };

@@ -37,6 +37,7 @@ function createSurvey(data) {
     });
 }
 
+// function to toggle survey privacy
 function toggleSurveyPrivacy(surveyId, privacy) {
     // send a put request to toggle survey privacy at /api/surveys/:id/
     fetch(`${window.API_HOST}/api/surveys/${surveyId}`, {
@@ -52,7 +53,12 @@ function toggleSurveyPrivacy(surveyId, privacy) {
             Swal.fire({ "title": "Survey Privacy Updated", "text": "Survey privacy updated successfully.", "icon": "success", "showConfirmButton": false, "timer": 3000 });
             // Reload the surveys after 3 seconds
             setTimeout(() => {
-                displaySurveys();
+                try{
+                    displaySurveys(0, 10, getStatusFilter(), getSearchQuery());
+                } catch (e) {
+                    console.error("Error reloading surveys.", e);
+                }
+                
             }, 1000);
         } else {
             res.text().then(text => {
@@ -72,6 +78,7 @@ function toggleSurveyPrivacy(surveyId, privacy) {
     });
 }
 
+// function to delete a survey
 function deleteSurvey(surveyId) {
     // show a sweet alert confirmation dialog
     Swal.fire({
@@ -97,7 +104,7 @@ function deleteSurvey(surveyId) {
                     Swal.fire({ "title": "Survey Deleted", "text": "Survey deleted successfully.", "icon": "success", "showConfirmButton": false, "timer": 3000 });
                     // Reload the surveys after 3 seconds
                     setTimeout(() => {
-                        displaySurveys();
+                        displaySurveys(0, 10, getStatusFilter(), getSearchQuery());
                     }, 1000);
                 } else {
                     res.text().then(text => {
@@ -118,4 +125,42 @@ function deleteSurvey(surveyId) {
     });
 }
 
-export { createSurvey, toggleSurveyPrivacy, deleteSurvey };
+// function to fetch author surveys
+async function fetchAuthorSurveys(page = 0, size = 10, status=null, search=null) { // Adjust default page size as needed
+    try {
+        let request_url = `${API_HOST}/api/surveys/author?page=${page}&size=${size}`;
+        
+        if (status) {
+            request_url += `&status=${status}`;
+        }
+
+        if(search) {
+            request_url += `&search=${search}`;
+        }
+
+        // 1. Fetch survey data from backend 
+        const response = await fetch(request_url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer ' + jwt  // Add JWT from localStorage or cookies 
+            },
+            credentials: 'include', // If using cookies for authentication
+        });
+
+        // 2. Error Handling
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        // 3. Parse the response
+        const surveyData = await response.json();
+        return surveyData;
+
+    } catch (error) {
+        console.error('Error fetching surveys:', error);
+        return []; // Return an empty array or handle the error appropriately
+    }
+}
+
+export { createSurvey, toggleSurveyPrivacy, deleteSurvey, fetchAuthorSurveys };
