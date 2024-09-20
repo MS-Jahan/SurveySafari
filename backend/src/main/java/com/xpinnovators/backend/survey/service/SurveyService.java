@@ -44,10 +44,50 @@ public class SurveyService {
     @Autowired
     private ExplorerRepository explorerRepository;
 
+    @Autowired
     public SurveyService(SurveyRepository surveyRepository, UserRepository userRepository) {
         this.surveyRepository = surveyRepository;
         this.userRepository = userRepository;
     }
+
+    // Get surveys by author and status with pagination
+    public Page<SurveyDTO> getSurveysByCurrentAuthor(String status, String search, Pageable pageable, Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName());
+        Long authorId = user.getAuthor() != null ? user.getAuthor().getId() : null;
+
+        boolean countStatus = status != null && !status.isEmpty() && status.split(",").length == 1;
+
+        if (authorId != null) {
+            if (countStatus && search != null && !search.isEmpty()) {
+                return surveyRepository.findByAuthorIdAndStatusAndTitleContainingIgnoreCase(authorId, status, search, pageable)
+                        .map(SurveyDTO::new);
+            } else if (countStatus) {
+                return surveyRepository.findByAuthorIdAndStatus(authorId, status, pageable)
+                        .map(SurveyDTO::new);
+            } else if (search != null && !search.isEmpty()) {
+                return surveyRepository.findByAuthorIdAndTitleContainingIgnoreCase(authorId, search, pageable)
+                        .map(SurveyDTO::new);
+            } else {
+                return surveyRepository.findByAuthorId(authorId, pageable)
+                        .map(SurveyDTO::new);
+            }
+        } else {
+            if (countStatus && search != null && !search.isEmpty()) {
+                return surveyRepository.findByStatusAndAuthorUserUsernameAndTitleContainingIgnoreCase(status, user.getUsername(), search, pageable)
+                        .map(SurveyDTO::new);
+            } else if (countStatus) {
+                return surveyRepository.findByStatusAndAuthorUserUsername(status, user.getUsername(), pageable)
+                        .map(SurveyDTO::new);
+            } else if (search != null && !search.isEmpty()) {
+                return surveyRepository.findByStatusAndAuthorUserUsernameAndTitleContainingIgnoreCase("public", user.getUsername(), search, pageable)
+                        .map(SurveyDTO::new);
+            } else {
+                return surveyRepository.findByStatusAndAuthorUserUsername("public", user.getUsername(), pageable)
+                        .map(SurveyDTO::new);
+            }
+        }
+    }
+
 
     // Create a new survey (Author only)
     public SurveyDTO createSurvey(SurveyDTO surveyDTO, Authentication authentication) {
@@ -261,6 +301,42 @@ public class SurveyService {
                     });
         } else { // User is not an author, show only public surveys by that author
             return surveyRepository.findByStatusAndAuthorUserUsername(status, user.getUsername(), pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        }
+    }
+
+    public Page<SurveyDTO> getSurveysByAuthorStatusAndTitle(Authentication authentication, String status, String search, Pageable pageable) {
+        User user = userRepository.findByUsername(authentication.getName());
+
+        if (user.getAuthor() != null) { // User is an author
+            return surveyRepository.findByAuthorIdAndStatusAndTitleContainingIgnoreCase(user.getAuthor().getId(), status, search, pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        } else { // User is not an author, show only public surveys by that author
+            return surveyRepository.findByStatusAndAuthorUserUsernameAndTitleContainingIgnoreCase(status, user.getUsername(), search, pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        }
+    }
+
+    public Page<SurveyDTO> getSurveysForAuthor(String search, Pageable pageable, Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName());
+
+        if (user.getAuthor() != null) { // User is an author
+            return surveyRepository.findByAuthorIdAndTitle(user.getAuthor().getId(), search, pageable)
+                    .map(survey -> {
+                        survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
+                        return new SurveyDTO(survey);
+                    });
+        } else { // User is not an author, show only public surveys by that author
+            return surveyRepository.findByStatusAndAuthorUserUsernameAndTitle("public", user.getUsername(), search, pageable)
                     .map(survey -> {
                         survey.setResponseCount(responseRepository.countBySurveyId(survey.getId())); // Calculate and set response count
                         return new SurveyDTO(survey);
