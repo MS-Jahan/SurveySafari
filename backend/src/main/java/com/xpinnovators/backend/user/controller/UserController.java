@@ -1,6 +1,7 @@
 package com.xpinnovators.backend.user.controller;
 
 import com.xpinnovators.backend.exception.ResourceNotFoundException;
+import com.xpinnovators.backend.user.dto.SocialLinkDTO;
 import com.xpinnovators.backend.user.dto.UserDTO;
 import com.xpinnovators.backend.user.entity.User;
 import com.xpinnovators.backend.user.service.UserService;
@@ -15,6 +16,7 @@ import com.xpinnovators.backend.user.dto.ExplorerDTO;
 import com.xpinnovators.backend.user.entity.Explorer;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users") // Updated route
@@ -61,5 +63,16 @@ public class UserController {
     public ResponseEntity<Page<ExplorerDTO>> getLeaderboard(Pageable pageable) {
         Page<ExplorerDTO> leaderboard = userService.getLeaderboard(pageable);
         return ResponseEntity.ok(leaderboard);
+    }
+
+    // Update social links for the logged-in Explorer
+    @PutMapping("/social-links")
+    @PreAuthorize("hasRole('EXPLORER')")
+    public ResponseEntity<List<SocialLinkDTO>> updateSocialLinks(
+            @Valid @RequestBody List<SocialLinkDTO> socialLinkDTOs,
+            Authentication authentication
+    ) {
+        List<SocialLinkDTO> updatedSocialLinks = userService.updateSocialLinks(socialLinkDTOs, authentication);
+        return ResponseEntity.ok(updatedSocialLinks);
     }
 }
