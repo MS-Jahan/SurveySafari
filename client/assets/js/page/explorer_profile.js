@@ -1,6 +1,8 @@
 // assets/js/page/explorer_profile.js
 import profileCards from "../profileItems/cards.js"
 import createExplorerItemCard from "../components/explorer_item_card.js"
+import { fetchProfileData } from '../apis/auth/auth_utility.js';
+import social_links_item from "../components/social_links_item.js";
 
 function __attachProfileCard(profileData, itemKey) {
     const cardContainer = document.getElementById('profile_card_container');
@@ -105,17 +107,58 @@ function __loadExplorerItems(profileData, attachedProfileCard) {
     
 }
 
-function loadExplorerProfile() {
-    var attachedProfileCard = "CloudCard";
-    var testProfileData = {
-        userName: "Jone Doe",
-        profileImgUrl: "https://bootdey.com/img/Content/avatar/avatar7.png",
-        title: "expert",
-        bio: "This is Test Profile Bio"
+function __loadExplorerPersonalInfo(data) {
+    document.getElementById('explorer_name').innerText = data.name;
+    document.getElementById('explorer_institute').innerText = data.institute? data.institute : "<No Institute>";
+    document.getElementById('explorer_email').innerText = data.email? data.email : "<No Institute>";
+    document.getElementById('explorer_phone').innerText = data.explorer.phone? data.explorer.phone : "<No Phone>";
+    document.getElementById('explorer_address').innerText = data.address? data.address : "<No Address>";
+}
+
+function __loadExplorerProfileStats(data) {
+    document.getElementById('explorer_rank').innerText = data.explorer.explorerRank? data.explorer.explorerRank : "Unranked";
+    document.getElementById('explorer_coin').innerText = data.explorer.coin;
+    document.getElementById('explorer_point').innerText = data.explorer.point;
+}
+
+function __loadSocialLinks(data) {
+    document.getElementById('social-links').innerHTML = "";
+
+    // check if data.explorer.socialLinks is empty
+    if (data.explorer.socialLinks.length == 0) {
+        // add a message to the user
+        document.getElementById('social-links').innerHTML = `
+            <div class="alert" role="alert">
+                No social links found!
+            </div>
+        `;
+        return;
     }
 
-    __attachProfileCard(testProfileData, attachedProfileCard);
-    __loadExplorerItems(testProfileData, attachedProfileCard);
+    for(let i = 0; i < data.explorer.socialLinks.length; i++) {
+        const socialLink = data.explorer.socialLinks[i];
+        document.getElementById('social-links').innerHTML += social_links_item(socialLink.platform, socialLink.value);
+    }
+
 }
+
+function loadExplorerProfile() {
+    var attachedProfileCard = "CloudCard";
+    fetchProfileData().then(data => {
+        var profileData = {
+            userName: data.username,
+            profileImgUrl: "https://bootdey.com/img/Content/avatar/avatar7.png",
+            title: data.explorer.title? data.explorer.title : "",
+            bio: data.explorer.bio? data.explorer.bio : "",
+        }
+        __attachProfileCard(profileData, attachedProfileCard);
+        __loadExplorerItems(profileData, attachedProfileCard);
+        __loadExplorerPersonalInfo(data);
+        __loadExplorerProfileStats(data);
+        __loadSocialLinks(data);
+    });
+}
+
+
 
 export { loadExplorerProfile };

@@ -137,7 +137,7 @@ async function displaySurveys(page = 0, size = 10, status="private,public", sear
 }
 
 function __load_surveys() {
-    var trandingSurveys = testSurveyData;
+    var trendingSurveys = testSurveyData;
     var trendingSurveyContainer = document.getElementById('survey_container');
 
     if (!trendingSurveyContainer) {
@@ -145,7 +145,7 @@ function __load_surveys() {
         return;
     }
 
-    trandingSurveys.forEach(surveyData => {
+    trendingSurveys.forEach(surveyData => {
         const card = createAuthorSurveyCard(surveyData);
         if (card) {
             trendingSurveyContainer.appendChild(card);

@@ -71,7 +71,7 @@ function __loadPopularSurveys() {
 }
 
 function __loadSurveys() {
-    var trandingSurveys = testSurveyData;
+    var trendingSurveys = testSurveyData;
     var trendingSurveyContainer = document.getElementById('survey_container');
 
     if (!trendingSurveyContainer) {
@@ -79,7 +79,7 @@ function __loadSurveys() {
         return;
     }
 
-    trandingSurveys.forEach(surveyData => {
+    trendingSurveys.forEach(surveyData => {
         const card = createExplorerSurveyCard(surveyData);
         if (card) {
             trendingSurveyContainer.appendChild(card);

@@ -2,6 +2,7 @@
 
 import createExplorerSurveyCard from '../components/explorer_survey_card.js';
 import createItemToken from '../components/item_token.js';
+import { fetchProfileData } from '../apis/auth/auth_utility.js';
 
 const testSurveyData = [
     {
@@ -63,9 +64,9 @@ const testPopularItemData = [
     },
 ];
 
-function __loadTrandingSurveys() {
+function __loadTrendingSurveys() {
     // will get it by api call later
-    var trandingSurveys = testSurveyData;
+    var trendingSurveys = testSurveyData;
     var trendingSurveyContainer = document.getElementById('trending_survey_container');
 
     if (!trendingSurveyContainer) {
@@ -73,7 +74,7 @@ function __loadTrandingSurveys() {
         return;
     }
 
-    trandingSurveys.forEach(surveyData => {
+    trendingSurveys.forEach(surveyData => {
         const card = createExplorerSurveyCard(surveyData);
         if (card) {
             trendingSurveyContainer.appendChild(card);
@@ -99,10 +100,22 @@ function __loadPopularItems() {
     });
 }
 
+function __setProfileData() {
+    fetchProfileData().then(data => {
+        console.log(data);
+        document.getElementById('explorer_name').innerText = data.name;
+        document.getElementById('explorer_title').innerText = data.explorer.title;
+        document.getElementById('explorer_rank').innerText = data.explorer.explorerRank? data.explorer.explorerRank : "Unranked";
+        document.getElementById('explorer_coin').innerText = data.explorer.coin;
+        document.getElementById('explorer_point').innerText = data.explorer.point;
+    });
+}
+
 function loadExplorerHomeData() {
     console.log("loading explorer home data ...");
-    __loadTrandingSurveys();
+    __loadTrendingSurveys();
     __loadPopularItems();
+    __setProfileData();
 
 }
 
