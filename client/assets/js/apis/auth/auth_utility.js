@@ -1,5 +1,7 @@
 // assets/js/apis/auth/login.js
 
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "./firebase.js";
+
 // validate email
 function validateEmail(email) {
     let re = /\S+@\S+\.\S+/;
@@ -27,6 +29,30 @@ function showFormMessage(message, type) {
     }, 5000);
 }
 
+async function fetchJwtFromBackend(firebaseUid, firebaseToken) {
+    const response = await fetch(`${API_HOST}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${firebaseToken}` // Use the Firebase access token
+        },
+        credentials: 'include',
+        body: JSON.stringify({ firebaseUid: firebaseUid })
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data; // Assuming your backend returns { token: '...' }
+    } else {
+        const text = await response.text();
+        if (text.trim() == "") {
+            text = "An error occurred during login.";
+        }
+        showFormMessage(text, 'error');
+        logout();
+    }
+}
+
 // login function
 function login(e) {
     e.preventDefault();
@@ -46,49 +72,40 @@ function login(e) {
         return;
     }
 
-    let data = {
-        email: email,
-        password: password
-    }
+    showFormMessage("Logging in...", 'info');
+    signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            // Now, exchange the Firebase ID token and get the user json and check the response status
+            fetchJwtFromBackend(user.uid, user.accessToken)
+                .then((data) => {
+                    // check userType
+                    console.log(data);
+                    let userType = data.userType;
+                    setTimeout(() => {
+                        window.location.href = userType === 'author' ? '/pages/author_dashboard.html' : '/pages/explorer_home.html';
+                    }, 1000);
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // Handle Firebase login errors
+                    // show error message
+                    showFormMessage(errorMessage, 'error');
+                    logout();
+                });  
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = errorCode + " - " + error.message;
+            // Handle Firebase login errors
+            showFormMessage(errorMessage, 'error');
+            logout();
+        });
 
-    // Send fetch post to login endpoint and check if 200
-    fetch(`${API_HOST}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(data)
-    }).then(response => {
-        if (response.status === 200) {
-            response.json().then(data => {
-                console.log(data);
-                // get userType
-                let userType = data.userType;
-
-                setTimeout(() => {
-                    window.location.href = userType === 'author' ? '/pages/author_dashboard.html' : '/pages/explorer_home.html';
-                }, 3000);
-            });
-        } else {
-            response.text().then(text => {
-                console.log(text);
-                if(text.trim() == ""){
-                    text = "An error occurred during login.";
-                }
-                showFormMessage(text, 'error');
-                logout();
-            });
-        }
-    }).catch(error => {
-        console.error('Error:', error);
-        showFormMessage('An error occurred during login.', 'error');
-        logout();
-    });
 }
 
 // signup function
-function signup(e) {
+async function signup(e) {
     e.preventDefault();
 
     const firstName = document.getElementById('form3Example1').value.trim();
@@ -98,68 +115,75 @@ function signup(e) {
     const password = document.getElementById('form3Example4').value;
     const confirmPassword = document.getElementById('form3Example6').value;
     let role = "";
-    try{
+
+    try {
         role = document.querySelector('input[name="userType"]:checked').value;
-    } catch(e){
+    } catch (e) {
         showFormMessage('Please select a role', 'error');
         return;
     }
-    
 
-    // Password matching validation
-    if (password !== confirmPassword) {
-        showFormMessage('Passwords do not match', 'error');
-        return;
-    }
-
-    // Validate email
-    if (!validateEmail(email)) {
-        showFormMessage('Please enter a valid email address', 'error');
-        return;
-    }
-
-    // Check if any of the fields are empty
+    // Input validation:
     if (firstName === "" || lastName === "" || username === "" || email === "" || password === "" || confirmPassword === "" || role === "") {
         showFormMessage('Please fill in all fields', 'error');
         return;
     }
 
-
-    let data = {
-        name: `${firstName} ${lastName}`,  // Full name
-        email: email,     // Email
-        username: username,  // Username
-        password: password,  // Password
-        userType: role  // Role (userType in backend)
+    if (password !== confirmPassword) {
+        showFormMessage('Passwords do not match', 'error');
+        return;
     }
 
-    fetch(`${API_HOST}/api/auth/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }).then(res => {
-        if (res.status === 200) {
+    if (!validateEmail(email)) {
+        showFormMessage('Please enter a valid email address', 'error');
+        return;
+    }
+
+    showFormMessage('Creating user...', 'info');
+
+    try {
+        // Create user in Firebase:
+        const userCredential = await createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        const data = {
+            name: `${firstName} ${lastName}`,
+            email: email,
+            username: username,
+            userType: role,
+            firebaseId: user.uid
+        };
+
+        const response = await fetch(`${API_HOST}/api/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.accessToken}` // Include the Firebase ID token
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.status === 200) {
             showFormMessage('User created successfully. Redirecting to login page...', 'success');
             // Redirect to login page after 3 seconds
             setTimeout(() => {
                 window.location.href = 'login.html';
             }, 3000);
         } else {
-            res.text().then(text => {
-                if(text.trim() == ""){
+            response.text().then(text => {
+                if (text.trim() == "") {
                     text = "An error occurred during signup.";
                 }
                 showFormMessage(text, 'error');
             });
         }
-    }).catch(err => {
+    } catch(err) {
         console.error('Error:', err);
         showFormMessage('An error occurred during signup.', 'error');
-    });
+    }
 }
 
+// logout function
 async function logout() {
     // fetch logout from /api/auth/logout and redirect to login page
     return fetch(`${API_HOST}/api/auth/logout`, {
@@ -176,14 +200,17 @@ async function logout() {
             return response.text().then(text => {
                 console.log(text);
                 if (text.trim() == "") {
-                    text = "An error occurred logging out.";                     
+                    text = "An error occurred logging out.";
                 }
                 // showFormMessage(text, 'error');
             });
         }
         setTimeout(() => {
-            window.location.href = '/pages/login.html';
-         }, 3000);
+            // if /pages/login.html not in url, redirect to login page
+            if (!window.location.href.includes('/pages/login.html')){
+                window.location.href = '/pages/login.html';
+            }
+        }, 1000);
     }).catch(error => {
         console.error('Error:', error);
         // showFormMessage('An error occurred during login.', 'error');
@@ -200,13 +227,23 @@ async function fetchProfileData() {
         credentials: 'include'
     }).then(response => {
         if (response.status === 200) {
-            return response.json();
+            let data = response.json();
+            data.then(user => {
+                const userType = user.userType;
+                const currentUrl = window.location.href;
+
+                if ((currentUrl.includes('/author_') && userType !== 'author') || 
+                    (currentUrl.includes('/explorer_') && userType !== 'explorer')) {
+                    window.location.href = '/';
+                }
+            });
+            return data;
         } else {
-            logout();
+            // logout();
             return response.text().then(text => {
                 console.log(text);
                 if (text.trim() == "") {
-                    text = "An error occurred authenticating user. Logging out.";                     
+                    text = "An error occurred authenticating user. Logging out.";
                 }
                 // showFormMessage(text, 'error');
             });
@@ -214,7 +251,7 @@ async function fetchProfileData() {
     }).catch(error => {
         console.error('Error:', error);
         // showFormMessage('An error occurred during login.', 'error');
-        logout();
+        // logout();
     });
 }
 
