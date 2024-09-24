@@ -1,0 +1,99 @@
+//    @Transactional
+//    @PostMapping("/register")
+//    public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result) {
+//        if (result.hasErrors()) {
+//            Map<String, String> errors = new HashMap<>();
+//            result.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+//            return ResponseEntity.badRequest().body(errors);
+//        }
+//
+//        if (userRepository.findByUsername(user.getUsername()) != null) {
+//            return ResponseEntity.badRequest().body("Username already exists");
+//        }
+//
+//        if (userRepository.findByEmail(user.getEmail()) != null) {
+//            return ResponseEntity.badRequest().body("Email already exists");
+//        }
+//
+//        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+//            return ResponseEntity.badRequest().body("Password cannot be empty");
+//        }
+//
+//        String userType = user.getUserType();
+//        if (userType == null || userType.isEmpty()) {
+//            return ResponseEntity.badRequest().body("User type cannot be null or empty");
+//        }
+//
+//        // check if name is empty
+//        if (user.getName() == null || user.getName().isEmpty()) {
+//            return ResponseEntity.badRequest().body("Name cannot be empty");
+//        }
+//
+//        // check if email is empty
+//        if (user.getEmail() == null || user.getEmail().isEmpty()) {
+//            return ResponseEntity.badRequest().body("Email cannot be empty");
+//        }
+//
+//        try {
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//
+//            // Create Firebase user
+//            UserRecord firebaseUser = firebaseUserService.createUser(user.getEmail(), user.getPassword());
+//            firebaseUserService.setCustomClaims(firebaseUser.getUid(), user.getUserType());
+//            user.setFirebaseId(firebaseUser.getUid());
+//
+//            switch (userType.toLowerCase()) {
+//                case "explorer":
+//                    Explorer explorer = new Explorer();
+//                    // Populate Explorer fields from user or request data if needed
+//                    explorer = explorerRepository.save(explorer);
+//                    user.setEntityId(explorer.getId());
+//                    user.setExplorer(explorer);
+//                    break;
+//
+//                case "author":
+//                    Author author = new Author();
+//                    // Populate Author fields from user or request data if needed
+//                    author = authorRepository.save(author);
+//                    user.setEntityId(author.getId());
+//                    user.setAuthor(author);
+//                    break;
+//
+////                case "admin":
+////                    Admin admin = new Admin();
+////                    admin = adminRepository.save(admin); // Ensure the Admin entity has valid data if required
+////                    if (admin.getId() == null) {
+////                        return ResponseEntity.badRequest().body("Failed to save Admin entity.");
+////                    }
+////                    user.setEntityId(admin.getId());
+////                    user.setAdmin(admin);
+////                    break;
+//
+//                default:
+//                    return ResponseEntity.badRequest().body("Invalid user type");
+//            }
+//            user.setUserType(userType.toLowerCase());
+//            userRepository.save(user);
+//            return ResponseEntity.ok("User registered successfully");
+//        } catch (FirebaseAuthException e) {
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().body("Firebase user registration failed: " + e.getMessage());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().body("User registration failed");
+//        }
+//    }
+
+
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody User loginUser) {
+//        User user = userRepository.findByEmail(loginUser.getEmail());
+//        if (user != null && passwordEncoder.matches(loginUser.getPassword(), user.getPassword())) {
+//            String token = jwtUtil.generateToken(user.getUsername());
+//            // return all user info except password in the body and set the token in the cookie
+//            user.setPassword(null);
+//            return ResponseEntity.ok().header("Set-Cookie", "token=" + token + "; Path=/; Expires=Thu, 01 Jan 2099 00:00:00 GMT; HttpOnly; SameSite=None; Secure").body(user);
+//            //  HttpOnly; Path=/; SameSite=None; Secure
+//        }
+//        return ResponseEntity.badRequest().body("Invalid username or password");
+//    }

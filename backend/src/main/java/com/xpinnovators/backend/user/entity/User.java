@@ -23,8 +23,11 @@ public class User {
     @Column(name = "user_type", nullable = false, updatable = false)
     private String userType;
 
-    @Column(name = "entity_id", nullable = false, unique = true)
+    @Column(name = "entity_id", nullable = false)
     private Long entityId;
+
+    @Column(name = "firebase_id", nullable = false, unique = true)
+    private String firebaseId;
 
     @Column(name = "name", nullable = false)
     @NotEmpty(message = "Name is required")
@@ -38,9 +41,9 @@ public class User {
     @NotEmpty(message = "Username is required")
     private String username;
 
-    @Column(name = "password", nullable = false)
-    @NotEmpty(message = "Password is required")
-    private String password;
+//    @Column(name = "password", nullable = false)
+//    @NotEmpty(message = "Password is required")
+//    private String password;
 
     @JsonManagedReference
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
